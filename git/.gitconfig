@@ -29,7 +29,7 @@
 	remote = red
 [color "diff"]
 	meta = yellow bold
-	frag = magneta bold
+	frag = magenta bold
 	old = red bold
 	new = green bold
 	whitespace = red reverse
@@ -59,7 +59,7 @@
 	cmd = commit -v
 	cmda = commit -v --amend
 	l = log --graph --oneline --all
-	ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %Cgreen[%cr] %C(bold blue)<%an>%Creset'
+	ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s : %Cgreen[%cr] %C(yellow)%as%Creset %C(bold blue)<%an>%Creset'
 	br = branch -v
 	create-branch = switch -c
 	rename-branch = branch -m

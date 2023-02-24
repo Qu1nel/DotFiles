@@ -38,7 +38,7 @@ cmda = commit -v --amend
 
 # for log
 l = log --graph --oneline --all
-ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %Cgreen[%cr] %C(bold blue)<%an>%Creset'
+ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s : %Cgreen[%cr] %C(yellow)%as%Creset %C(bold blue)<%an>%Creset'
 
 
 # for branch

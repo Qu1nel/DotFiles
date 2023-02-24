@@ -1,0 +1,53 @@
+# add content in stage area
+a = add
+
+# remove file from disk and index
+rm = rm -f
+
+# rename files
+rename = mv
+
+# restore files
+restore-all = checkout .
+
+# unstage files
+unstage = restore --staged
+unstage-all = reset HEAD
+
+# abbreviations
+co = checkout
+sw = switch
+
+# show status
+s = status
+ss = status --short
+
+# another commands
+who = shortlog -s --  # Show authors of the contribution 
+visual = !gitk  # Open visual version a git
+aliases = !git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort  # show all aliases
+show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
+where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' -S
+delete-commit = reset --hard HEAD^
+
+# for commit
+cm = commit
+cma = commit --amend
+cmd = commit -v
+cmda = commit -v --amend
+
+# for log
+l = log --graph --oneline --all
+ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %Cgreen[%cr] %C(bold blue)<%an>%Creset'
+
+
+# for branch
+br = branch -v
+create-branch = switch -c
+rename-branch = branch -m
+delete-branch = branch -D
+move-branch = branch -f
+
+# for diff
+totldf = diff HEAD  # Show diff without last cmt and work directory
+dfstage = diff --staged

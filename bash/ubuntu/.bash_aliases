@@ -8,3 +8,5 @@ mcd () { mkdir -pv "$1" && cd "$1"; }	# mcd:	Makes new Dir and jumps indide
 alias ls='exa -F --icons'		# Preferred 'ls' implemention
 alias ll='ls -bghHiSl -T -L 2'		# ll:	'ls' modification for files
 alias lsd='ls -l -D -T -L 3'		# lsd:	'ls' modification for folders
+
+alias cat='bat --paging=never'		# cat:	'bat' modification for printing contents

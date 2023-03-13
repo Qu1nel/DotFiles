@@ -11,17 +11,18 @@ NAME = os.getenv("NAME")
 EMAIL = os.getenv("EMAIL")
 NICK = os.getenv("NICK")
 
-if HOME is None:
-    raise ValueError("The enviroment variable \"HOME\" is missing!")
+check_variables: dict[str, bool] = {
+    "HOME": HOME is None,
+    "NAME": NAME is None,
+    "EMAIL": EMAIL is None,
+    "NICK": NICK is None
+}
 
-if NAME is None:
-    raise ValueError("The enviroment variable \"NAME\" is missing!")
-
-if EMAIL is None:
-    raise ValueError("The enviroment variable \"EMAIL\" is missing!")
-
-if NICK is None:
-    raise ValueError("The enviroment variable \"NICK\" is missing!")
+if any(values := tuple(check_variables.values())):
+    postfix = "'s" if values.count(True) > 1 else ""
+    error_vars = tuple(var for var in check_variables if check_variables[var])
+    info_error = f"The enviroment variable{postfix} {', '.join(error_vars)} is missing!"
+    raise ValueError(info_error)
 
 FULL_PATH_TO_CONFIG = os.path.join(HOME, TARGET_FILE_NAME)
 

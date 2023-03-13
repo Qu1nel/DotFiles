@@ -66,6 +66,7 @@ if ! shopt -oq posix; then
 fi
 
 # LOAD MAIN CONFIG
+mkdir -p "$HOME/.dotfiles/bash/"
 if [ -f "$HOME/.dotfiles/bash/.bash_profile" ]; then
     source "$HOME/.dotfiles/bash/.bash_profile"
 fi

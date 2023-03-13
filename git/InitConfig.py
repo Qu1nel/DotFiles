@@ -7,17 +7,26 @@ from functools import partial
 TARGET_FILE_NAME = '.gitconfig'
 ALIASES_FILE_PATH = 'aliases'
 HOME = os.getenv("HOME")
+NAME = os.getenv("NAME")
+EMAIL = os.getenv("EMAIL")
+NICK = os.getenv("NICK")
 
-if HOME is None:
-    raise ValueError("The enviroment variable \"HOME\" is missing!")
+if NAME is None:
+    raise ValueError("The enviroment variable \"NAME\" is missing!")
+
+if EMAIL is None:
+    raise ValueError("The enviroment variable \"EMAIL\" is missing!")
+
+if NICK is None:
+    raise ValueError("The enviroment variable \"NICK\" is missing!")
 
 FULL_PATH_TO_CONFIG = os.path.join(HOME, TARGET_FILE_NAME)
 
 DATA: dict[str, dict[str, dict[str, str] | Optional[str] | bool]] = {
     "user": {
-        "name": os.getenv("NAME"),
-        "email": os.getenv("EMAIL"),
-        "username": os.getenv("NICK")
+        "name": NAME,
+        "email": EMAIL, 
+        "username": NICK
     },
     "init": {
         "defaultBranch": "main"

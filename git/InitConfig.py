@@ -38,7 +38,7 @@ DATA: dict[str, dict[str, dict[str, str] | Optional[str] | bool]] = {
         "prune": True
     },
     "core": {
-        "editor": "nvim",
+        "editor": "$EDITOR",
         "whitespace": "fix,-indent-with-non-tab,trailing-space,cr-at-eol",
         "quotepath": False
     },

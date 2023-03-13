@@ -1,4 +1,3 @@
-#!/c/pythons/Python311/python311.exe
 import os
 from typing import Optional, IO
 from functools import partial

@@ -11,6 +11,9 @@ NAME = os.getenv("NAME")
 EMAIL = os.getenv("EMAIL")
 NICK = os.getenv("NICK")
 
+if HOME is None:
+    raise ValueError("The enviroment variable \"HOME\" is missing!")
+
 if NAME is None:
     raise ValueError("The enviroment variable \"NAME\" is missing!")
 

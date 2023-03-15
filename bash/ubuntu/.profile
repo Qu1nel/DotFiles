@@ -15,3 +15,8 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# set PATH so in includes my .files for another configs
+if [ -d "$HOME/.dotfiles/bat" ]; then
+    PATH="$HOME/.dotfiles/bat:$PATH"
+fi

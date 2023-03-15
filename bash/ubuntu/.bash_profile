@@ -46,6 +46,8 @@ color_my_prompt
 #   Set Paths
 #   ----------------------------------------------------
     export EDITOR="/usr/bin/vi"  # TODO: change to nvim in future 
+    
+    export BAT_CONFIG_PATH="$HOME/.dotfiles/bat/bat.conf"  # For bat tools
 
 
 #   -----------------------------

@@ -1,7 +1,7 @@
 [user]
-	name = None
-	email = None
-	username = None
+	name =
+	email =
+	username =
 [init]
 	defaultBranch = main
 [pull]
@@ -9,7 +9,7 @@
 [fetch]
 	prune = true
 [core]
-	editor = nvim
+	editor = $EDITOR
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	quotepath = false
 [credential]
@@ -58,6 +58,7 @@
 	cma = commit --amend
 	cmd = commit -v
 	cmda = commit -v --amend
+	shows = "!f() { git show \"$1\" | bat -l rs; }; f"
 	l = log --graph --oneline --all
 	ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s : %Cgreen[%cr] %C(yellow)%as%Creset %C(bold blue)<%an>%Creset'
 	br = branch -v

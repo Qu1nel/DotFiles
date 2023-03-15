@@ -35,6 +35,7 @@ cm = commit
 cma = commit --amend
 cmd = commit -v
 cmda = commit -v --amend
+shows = "!f() { git show \"$1\" | bat -l rs; }; f"
 
 # for log
 l = log --graph --oneline --all

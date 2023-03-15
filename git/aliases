@@ -52,3 +52,4 @@ move-branch = branch -f
 # for diff
 totldf = diff HEAD  # Show diff without last cmt and work directory
 dfstage = diff --staged
+diffs = !git diff --name-only --relative --diff-filter=d | xargs bat --diff

@@ -66,7 +66,9 @@ if ! shopt -oq posix; then
 fi
 
 # LOAD MAIN CONFIG
-mkdir -p "$HOME/.dotfiles/bash/"
 if [ -f "$HOME/.dotfiles/bash/.bash_profile" ]; then
     source "$HOME/.dotfiles/bash/.bash_profile"
 fi
+export PYENV_ROOT="$HOME/.dotfilles/pyenv/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

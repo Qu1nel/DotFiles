@@ -45,7 +45,6 @@ call plug#end()
 
 " }}}
 
-
 " MAPPINGS --------------------------------------------------------------- {{{
 
 inoremap kj <ESC>
@@ -64,6 +63,9 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
@@ -80,11 +82,13 @@ augroup END
 " 'zR' to open all folds
 " 'zM' to close all folds
 
-" If the current file type is HTML, set indentation to 2 spaces.
+" If the current file type is HTML, set indentation to 2 spaces, match pairs < >
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype html setlocal msp+=<:>
+
+autocmd Filetype c,cpp,java setlocal mps+==:;
 
 " }}}
-
 
 " STATUS LINE ------------------------------------------------------------ {{{
 
@@ -93,17 +97,10 @@ set showmode                " Show the mode you are on the last line.
 " Clear status line when vimrc is reloaded.
 set statusline=
 
-" Status line left side.
-set statusline+=\ %F\ %M\ %Y\ %R
-
-" Use a divider to separate the left side from the right side.
-set statusline+=%=
-
 " Status line right side.
-set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
 
 " Show the status on the second to last line.
 set laststatus=2
 
 " }}}
-

@@ -13,7 +13,9 @@ echo ""
 
 normalPath=$(dirname $0)
 
-python3 "$normalPath/src/InitConfig.py"
+if ! command python3 "$normalPath/src/InitConfig.py"; then
+    exit
+fi
 
 if [ -v "$GIT_CONFIG_GLOBAL" ]; then
     cp -vi "$normalPath/commit_template_message.txt" "$HOME"

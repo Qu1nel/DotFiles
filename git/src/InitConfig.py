@@ -1,23 +1,15 @@
 # -*- coding: utf-8 -*-
-import os
 import sys
 from functools import partial
 from pathlib import Path, PurePath
 from typing import Final, TextIO
 
 from exceptions import CantReadConfigGit, NotValidUserInfoVariables
-from utils import get_env_variables, read_git_config_as_dict
+from utils import get_env_variables, get_template_path, read_git_config_as_dict
 
 PATH_TO_GIT_CONFIG: Final[Path] = Path(__file__).parent.with_name(".gitconfig")
 PATH_TO_ALIASES_FILE: Final[Path] = Path(__file__).parent.with_name("aliases")
-NAME_TEMPLATE_FILE: Final[str] = "commit_template_message.txt"
-
-if GIT_CONFIG_GLOBAL := os.getenv("GIT_CONFIG_GLOBAL"):
-    template_path = Path(GIT_CONFIG_GLOBAL).with_name(NAME_TEMPLATE_FILE)
-else:
-    template_path = Path().home().with_name(NAME_TEMPLATE_FILE)
-
-TEMPLATE_PATH: Final[Path] = template_path
+TEMPLATE_PATH: Final[Path] = get_template_path("commit_template_message.txt")
 
 try:
     # get variables from setup.sh

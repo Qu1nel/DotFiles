@@ -30,7 +30,6 @@ def read_git_config_as_dict() -> dict[str, Parameters]:
         ) as git_config_toml:
             data = toml.load(git_config_toml)
     except (IOError, toml.TomlDecodeError) as exc:
-        print(exc)
         raise CantReadConfigGit("Cannot read a config file.", sub_error=exc) from None
 
     return data
@@ -61,3 +60,21 @@ def get_env_variables() -> Sequence[str]:
         )
 
     return (NAME, EMAIL, NICKNAME)
+
+
+def get_template_path(name_template_file: str) -> Path:
+    """Get path git template file.
+
+    Depending on the presence of the GIT_CONFIG_GLOBAL variable, the path to the
+    file is configured <name_template_file>.
+
+    Args:
+        name_template_file (str): The file name of template.
+
+    Returns:
+        Path: a complete path to template git commit message.
+    """
+    if GIT_CONFIG_GLOBAL := os.getenv("GIT_CONFIG_GLOBAL"):
+        return Path(GIT_CONFIG_GLOBAL).with_name(name_template_file)
+    else:
+        return Path().home().with_name(name_template_file)

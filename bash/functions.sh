@@ -8,7 +8,7 @@
 
 #   extract: Extract most know archives with one command.
 #   ----------------------------------------------------
-    extract () {  # TODO add check for each app
+    extract () {
         if [ -f $1 ]; then
             case $1 in
                 *.tar.bz2)	tar xjf $1	    ;;

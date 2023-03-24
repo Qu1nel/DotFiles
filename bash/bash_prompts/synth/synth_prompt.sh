@@ -703,9 +703,9 @@ synth_shell_prompt() {
 
 
 	## LOAD USER CONFIGURATION
-	local user_config_file="$HOME/.config/bash_config/bash_prompts/synth/settings/synth.config"
-	local root_config_file="$HOME/.config/bash_config/bash_prompts/synth/settings/synth.root.config"
-	local sys_config_file="$HOME/.config/bash_config/bash_prompts/synth/settings/synth.config.default"
+	local user_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.config"
+	local root_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.root.config"
+	local sys_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.config.default"
 
 	if   [ -f $user_config_file ]; then
 		source $user_config_file

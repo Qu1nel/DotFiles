@@ -25,3 +25,4 @@ function color_my_prompt {
 # Enable my prompt
 color_my_prompt
 unset color_my_prompt
+

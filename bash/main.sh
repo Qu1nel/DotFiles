@@ -10,32 +10,32 @@
 #   ---------------------------------------------------------------------------
 
     # If "paths" is exists, include the paths located in the 'paths.sh' file.
-    if [ -f "$HOME/.config/bash_config/paths.sh" ]; then
-        source "$HOME/.config/bash_config/paths.sh"
+    if [ -f "$BASH_CONFIG_ROOT/paths.sh" ]; then
+        source "$BASH_CONFIG_ROOT/paths.sh"
     fi
 
 #   Set aliases
 #   ---------------------------------------------------------------------------
 
     # If "aliases" is exists, include the paths located in the 'aliases.sh' file.
-    if [ -f "$HOME/.config/bash_config/aliases.sh" ]; then
-        source "$HOME/.config/bash_config/aliases.sh"
+    if [ -f "$BASH_CONFIG_ROOT/aliases.sh" ]; then
+        source "$BASH_CONFIG_ROOT/aliases.sh"
     fi
 
 #   Define function
 #   ---------------------------------------------------------------------------
 
     # If "functions" is exists, include the paths located in the 'functions.sh' file.
-    if [ -f "$HOME/.config/bash_config/functions.sh" ]; then
-        source "$HOME/.config/bash_config/functions.sh"
+    if [ -f "$BASH_CONFIG_ROOT/functions.sh" ]; then
+        source "$BASH_CONFIG_ROOT/functions.sh"
     fi
 
 #   Choice bash prompt
 #   ---------------------------------------------------------------------------
 
     # If "prompt" is exists, include the paths located in the 'prompt.sh' file.
-    if [ -f "$HOME/.config/bash_config/prompt.sh" ]; then
-        source "$HOME/.config/bash_config/prompt.sh"
+    if [ -f "$BASH_CONFIG_ROOT/prompt.sh" ]; then
+        source "$BASH_CONFIG_ROOT/prompt.sh"
     fi
 
 #   Enable welcome tools

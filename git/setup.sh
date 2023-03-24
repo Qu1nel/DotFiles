@@ -14,7 +14,7 @@ echo ""
 normalPath=$(dirname $0)
 
 if ! command python3 "$normalPath/src/InitConfig.py"; then
-    exit
+    exit 1
 fi
 
 if [ -v "$GIT_CONFIG_GLOBAL" ]; then

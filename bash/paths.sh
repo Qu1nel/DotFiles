@@ -5,6 +5,7 @@
 ##
 ##  ===========================================================================
 
+
 #   Vars
 #   ---------------------------------------------------------------------------
 
@@ -15,6 +16,8 @@
     if [ -d "$HOME/.local/bin" ] ; then
         PATH="$HOME/.local/bin:$PATH"
     fi
+
+    export EDITOR=nvim
 
 #   Paths
 #   ---------------------------------------------------------------------------
@@ -33,5 +36,7 @@
 
 #   Command history
 #   ---------------------------------------------------------------------------
-    HISTTIMEFORMAT="%Y-%m-%d %T " # For showing time in history bash command.
+    export HISTFILESIZE=10000
+    export HISTSIZE=500
+    export HISTTIMEFORMAT="%Y-%m-%d %T " # For showing time in history bash command.
 

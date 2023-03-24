@@ -6,7 +6,7 @@
 ##
 ##  ===========================================================================
 
-SELECTED_PROMT="SYNTH"  # Can be: CUSTOM, SYNTH
+SELECTED_PROMT="POWERLINE"  # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
 
 case "$SELECTED_PROMT" in
     "CUSTOM")
@@ -14,6 +14,24 @@ case "$SELECTED_PROMT" in
     ;;
     "SYNTH")
         source "$BASH_CONFIG_ROOT/bash_prompts/synth/synth_prompt.sh"
+    ;;
+    "STARSHIP")
+        # Install Starship: curl -sS https://starship.rs/install.sh | sh
+        # Prerequisites: A NerdFont
+        eval "$(starship init bash)"
+    ;;
+    "POWERLINE")
+        # git clone https://github.com/b-ryan/powerline-shell
+        # cd powerline-shell
+        # sudo python3 setup.py install 
+
+        function _update_ps1() {
+            PS1=$(powerline-shell $?)
+        }
+
+        if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+            PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+        fi
     ;;
     *)
         source "$BASH_CONFIG_ROOT/bash_prompts/default/default_prompt.sh"

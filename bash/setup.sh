@@ -6,28 +6,20 @@
 ##
 ##  ============================================================================
 
-BASH_CONFIG_FOLDER="bash_config"  # The name of the folder that will be located in .config
+# The name of the folder that will be located in .config
+BASH_CONFIG_FOLDER="bash_config"
 MARK_HEADER="Bash configuration by Qu1nel"
 
-# TODO
-# BASH_CONFIG_FOLDER the path for configuration bash shell and more.
-if [ "$XDG_CONFIG_HOME" ]; then
-    CONFIG_HOME=$(echo $XDG_CONFIG_HOME | sed -r 's/'${HOME//\//\\/}'//')
-    BASH_CONFIG_ROOT="\$HOME$CONFIG_HOME/$BASH_CONFIG_FOLDER"
-else
-    BASH_CONFIG_ROOT="\$HOME/.config/$BASH_CONFIG_FOLDER"
-fi
-# TODO
+BASH_CONFIG_ROOT="$HOME/.config/$BASH_CONFIG_FOLDER"
 
 ##  ============================================================================
 
-# Make folder for bash configuration
 mkdir -p "$BASH_CONFIG_ROOT"
 
-# If .bashrc is not in the home directory, make it.
+
 BASHRC_PATH="$HOME/.bashrc"
 if [ ! -f "$BASHRC_PATH" ]; then
-    cp "/etc/skel/.bashrc" "$BASHRC_PATH"
+    cp "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
 fi
 
 # TODO -----------------------------------------------------------* TODO
@@ -37,7 +29,7 @@ cp "$cwd/paths.sh" "$HOME/.config/bash_config"
 cp "$cwd/aliases.sh" "$HOME/.config/bash_config"
 cp "$cwd/functions.sh" "$HOME/.config/bash_config"
 cp "$cwd/prompt.sh" "$HOME/.config/bash_config"
-cp -r "$cwd/prompts/" "$HOME/.config/bash_config"
+cp -r "$cwd/bash_prompts/" "$HOME/.config/bash_config"
 cp "$cwd/main.sh" "$HOME/.config/bash_config"
 # TODO -----------------------------------------------------------* TODO
 

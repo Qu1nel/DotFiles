@@ -33,6 +33,9 @@
     export PYENV_ROOT="$HOME/.config/pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
+    
+    # Make starship config file location
+    export STARSHIP_CONFIG="$BASH_CONFIG_ROOT/bash_prompts/starship/settings/starship.toml"
 
 #   Command history
 #   ---------------------------------------------------------------------------

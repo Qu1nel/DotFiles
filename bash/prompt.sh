@@ -6,7 +6,7 @@
 ##
 ##  ===========================================================================
 
-SELECTED_PROMT="POWERLINE"  # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
+SELECTED_PROMT="STARSHIP"  # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
 
 case "$SELECTED_PROMT" in
     "CUSTOM")
@@ -16,9 +16,7 @@ case "$SELECTED_PROMT" in
         source "$BASH_CONFIG_ROOT/bash_prompts/synth/synth_prompt.sh"
     ;;
     "STARSHIP")
-        # Install Starship: curl -sS https://starship.rs/install.sh | sh
-        # Prerequisites: A NerdFont
-        eval "$(starship init bash)"
+        source "$BASH_CONFIG_ROOT/bash_prompts/starship/starship_prompt.sh"
     ;;
     "POWERLINE")
         # git clone https://github.com/b-ryan/powerline-shell

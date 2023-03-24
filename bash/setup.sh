@@ -16,25 +16,28 @@ BASH_CONFIG_ROOT="$HOME/.config/$BASH_CONFIG_FOLDER"
 
 mkdir -p "$BASH_CONFIG_ROOT"
 
-
 BASHRC_PATH="$HOME/.bashrc"
 if [ ! -f "$BASHRC_PATH" ]; then
     cp "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
 fi
 
-# TODO -----------------------------------------------------------* TODO
-cwd=$(dirname "$0")
+CONFIG_CONTENT=(
+    "paths.sh"
+    "aliases.sh"
+    "functions.sh"
+    "prompt.sh"
+    "main.sh"
+    "bash_prompts/"
+)
 
-cp "$cwd/paths.sh" "$HOME/.config/bash_config"
-cp "$cwd/aliases.sh" "$HOME/.config/bash_config"
-cp "$cwd/functions.sh" "$HOME/.config/bash_config"
-cp "$cwd/prompt.sh" "$HOME/.config/bash_config"
-cp -r "$cwd/bash_prompts/" "$HOME/.config/bash_config"
-cp "$cwd/main.sh" "$HOME/.config/bash_config"
-# TODO -----------------------------------------------------------* TODO
+normalPath=$(dirname "$0")
 
+# Copy the configuration files to the config folder.
+for file in ${CONFIG_CONTENT[@]}; do
+    cp -r "$normalPath/$file" "$BASH_CONFIG_ROOT"
+done
 
-# DATA is the code that will be in .bashrc
+# DATA is the code that will be in '.bashrc'.
 DATA=(
     ""
     "##  $MARK_HEADER"
@@ -45,15 +48,19 @@ DATA=(
     'fi'
 )
 
-lenthData=${#DATA[@]}
+# Line number start of the configuration start line.
 startLineCode=$(($(grep -n "$MARK_HEADER" "$BASHRC_PATH" | sed 's/:.*//g')-1))
+lenthData=${#DATA[@]}
 
+# Deleting configuration startup lines from the file '.bashrc'.
 if [ $startLineCode ]; then
     for i in $(seq 1 $lenthData); do
         sed -i "${startLineCode}d" "$BASHRC_PATH"
     done
 fi
 
+# Writing the configuration startup to a file '.bashrc'.
 for idx_code in ${!DATA[@]}; do
     echo "${DATA[$idx_code]}" >> "$BASHRC_PATH"
 done
+

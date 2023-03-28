@@ -13,12 +13,12 @@
     alias mv='mv -iv'
     alias mkdir='mkdir -pv'
     alias ~='cd ~'
-    alias rmd="/bin/rm --recursive --force --verbose"
-    alias bd='cd "$OLDPWD"'
-    alias ping="ping -c 10"
     alias sudo='\sudo '
+    alias rm='/bin/rm --verbose'
+    alias rmd="/bin/rm --recursive --force --verbose"
+    alias ping="ping -c 10"
     alias da='date "+%Y-%m-%d %A %T %Z"'
-    alias ebrc="nvim ~/.bashrc"
+    alias bashrcconfig="nvim ~/.bashrc"
 
 #   cd
 #   ---------------------------------------------------------------------------

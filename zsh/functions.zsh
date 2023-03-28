@@ -49,3 +49,14 @@
         grep -IiHrn --color=always "$1" . | less -r
     }
 
+#   find_largest_files: Find the largest files in a directory.
+#   ----------------------------------------------------
+    find_largest_files() {
+        du -h -x -s -- * | sort -r -h | head -20
+    }
+
+#   hg: history and grep <command>
+#   ----------------------------------------------------
+    hg() {
+        history | grep "$1";
+    }

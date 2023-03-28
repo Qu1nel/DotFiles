@@ -13,12 +13,12 @@
     alias mv='mv -iv'
     alias mkdir='mkdir -pv'
     alias ~='cd ~'
-    alias rmd="/bin/rm --recursive --force --verbose"
-    alias bd='cd "$OLDPWD"'
-    alias ping="ping -c 10"
     alias sudo='\sudo '
+    alias rm='/bin/rm --verbose'
+    alias rmd="/bin/rm --recursive --force --verbose"
+    alias ping="ping -c 10"
     alias da='date "+%Y-%m-%d %A %T %Z"'
-    alias ebrc="nvim ~/.bashrc"
+    alias bashrcconfig="nvim ~/.bashrc"
 
 #   cd
 #   ---------------------------------------------------------------------------
@@ -55,7 +55,7 @@
 #   ---------------------------------------------------------------------------
     
     alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
-    alias checkcommand="type -t"
+    alias checkcommand="type"
     alias rebootsafe="sudo shutdown -r now"
     alias rebootforce="sudo shutdown -r -n now"
     alias cat='bat --paging=never'		# cat: 'bat' modification for printing contents.

@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 ##  ===========================================================================
 ##
 ##  Paths and variables
@@ -36,9 +37,8 @@
     
 #   Command history
 #   ---------------------------------------------------------------------------
-    export HISTSIZE=10000
-    export SAVEHIST=10000
-    export HISTTIMEFORMAT="%Y-%m-%d %T " # For showing time in history bash command.
+    export HISTSIZE=1000
+    export SAVEHIST=1000
     export HISTFILE="$HOME/.cache/zshhistory"
     setopt appendhistory
 

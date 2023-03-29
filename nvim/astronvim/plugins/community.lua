@@ -18,4 +18,15 @@ return {
     { import = "astrocommunity.motion.mini-move" },
 
     { import = "astrocommunity.media.vim-wakatime" },
+
+    { import = "astrocommunity.pack.markdown" },
+
+    { import = "astrocommunity.markdown-and-latex.glow-nvim" },
+
+    -- :ZenMode :close
+    { import = "astrocommunity.editing-support.zen-mode-nvim" },
+
+    { import = "astrocommunity.editing-support.nvim-ts-rainbow2" },
+
+    { import = "astrocommunity.editing-support.todo-comments-nvim" },
 }

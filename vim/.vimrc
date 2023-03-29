@@ -29,7 +29,7 @@
 "   -------------------------
 
     set nocompatible			" Disable compatibility with vi which can cause unexpected issues.
-    set number	    			" Add numbers to each line on the left-hand side.
+    set number relativenumber	" Add numbers to each line on the left-hand side.
     set scrolloff=13			" Do not let cursor scroll below or above N number of lines when scrolling.
     set history=500             " Set the commands to save in history default number is 20.
 
@@ -37,6 +37,18 @@
 
     set encoding=utf8           " Set UTF-8 as standart encoding and en_US as standart language.
     set ffs=unix,dos,mac        " Use Unix as the standart file type.
+
+    set guioptions=
+    set showtabline=0
+
+    set wrap linebreak nolist
+    set textwidth=120
+    
+    set cursorline
+
+    let &t_SI.="\e[5 q"
+    let &t_SR.="\e[3 q"
+    let &t_EI.="\e[1 q"
 
 "   No sound
 "   -------------------------
@@ -98,9 +110,14 @@
 
     call plug#begin('~/.vim/plugins')
 
+    " If you have nodejs and yarn
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    " else -> Plug 'shime/vim-livedown'
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'morhetz/gruvbox'
+    Plug 'ryanoasis/vim-devicons'
 
     call plug#end()
 
@@ -110,6 +127,7 @@
     " vim-airline
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#keymap#enable = 0
+    let g:airline_section_z = "\ue0a1:%l/%L Col:%c"
     let g:Powerline_symbols='unicode'
     let g:airline_theme='gruvbox'
 
@@ -150,6 +168,11 @@
     " Fast saving
     nmap <C-W> :w!<CR>
 
+    " Markdown preview
+    nmap <leader>l <Plug>MarkdownPreview
+    nmap <leader>s <Plug>MarkdownPreviewStop
+    nmap <leader>p <Plug>MarkdownPreviewToggle
+
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 
@@ -166,7 +189,6 @@
 
     " If the current file type is HTML, set indentation to 2 spaces, match pairs < >
     autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
-    autocmd Filetype html setlocal msp+=<:>
 
     autocmd Filetype c,cpp,java setlocal mps+==:;
     autocmd Filetype make setlocal noexpandtab
@@ -175,7 +197,9 @@
 "   -------------------------
 "   8.  Statusline
 "   -------------------------
-"
+    
+    set guifont=FiraCode\ Nerd\ Font:h16
+
     "Show the mode you are on the last line.
     set showmode
 

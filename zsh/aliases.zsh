@@ -54,7 +54,7 @@
 #   Other
 #   ---------------------------------------------------------------------------
     
-    alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
+    alias cputop="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
     alias checkcommand="type"
     alias rebootsafe="sudo shutdown -r now"
     alias rebootforce="sudo shutdown -r -n now"

@@ -10,7 +10,7 @@ function color_my_prompt {
 	local blue="\[\033[1;34m\]"
 	local __end_color="\[\033[00m\]"
 
-	local __my_promt='~$'
+	local __my_prompt='~$'
 
 	local __time="$yellow [\T]"
 	local __user_and_host="$green\u@\h"

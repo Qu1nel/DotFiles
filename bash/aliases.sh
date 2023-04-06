@@ -32,10 +32,12 @@
 #   ls
 #   ---------------------------------------------------------------------------
 
-    alias ls='exa -F --icons'
-    alias la="ls -a"
-    alias ll='ls -bghHiSl'
-    alias lla="ll -a"
+    alias ls='exa --icons'
+
+    alias l='exa --classify --icons'
+    alias la='exa --all --classify --icons'
+    alias ll='exa -bghiHS --long --group-directories-first'
+    alias lla='ll --all'
 
 #   Disk space and spase used in a folder
 #   ---------------------------------------------------------------------------

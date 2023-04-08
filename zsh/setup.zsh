@@ -16,7 +16,7 @@ ZSHRC_PATH="$HOME/.zshrc"
 
 mkdir -p "$ZSH_CONFIG_ROOT"
 
-normalPath=$(dirname "$0")
+normalPath="$(dirname "$0")"
 
 CONFIG_CONTENT=(
     "paths.zsh"
@@ -30,7 +30,7 @@ for file in ${CONFIG_CONTENT[@]}; do
     cp -v "$normalPath/$file" "$ZSH_CONFIG_ROOT"
 done
 
-# TODO
+# TODO: 
 # echo 'export ZSH_CONFIG_ROOT="$HOME/.config/zsh_config"' >> "$ZSHRC_PATH"
 # echo 'if [ -f "$ZSH_CONFIG_ROOT/main.zsh" ]; then' >> "$ZSHRC_PATH"
 # echo '    source "$ZSH_CONFIG_ROOT/main.zsh"' >> "$ZSHRC_PATH"

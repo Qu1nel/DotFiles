@@ -5,13 +5,13 @@ read -p "Your name: " enterName
 read -p "Your email: " enterEmail
 read -p "Your nickname: " enterNick
 
-export NAME=$enterName
-export EMAIL=$enterEmail
-export NICKNAME=$enterNick
+export NAME="$enterName"
+export EMAIL="$enterEmail"
+export NICKNAME="$enterNick"
 
 echo ""
 
-normalPath=$(dirname $0)
+normalPath="$(dirname $0)"
 
 if ! command python3 "$normalPath/src/InitConfig.py"; then
     exit 1

@@ -17,7 +17,7 @@ BASHRC_PATH="$HOME/.bashrc"
 
 mkdir -p "$BASH_CONFIG_ROOT"
 
-normalPath=$(dirname "$0")
+normalPath="$(dirname "$0")"
 
 if [ ! -f "$BASHRC_PATH" ]; then
     cp "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
@@ -50,7 +50,7 @@ DATA=(
     'fi'
 )
 
-lenthData=${#DATA[@]}
+lenthData="${#DATA[@]}"
 
 # Writing the configuration startup to a file '.bashrc'.
 for idx_code in ${!DATA[@]}; do

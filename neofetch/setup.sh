@@ -2,7 +2,7 @@
 
 USE_CONFIG="BEJKON2"  # 'PAPIRUS', 'CONFIG', 'ACENOSTER', 'BEJKON2'
 
-normalPath=$(dirname $0)
+normalPath="$(dirname $0)"
 
 case $USE_CONFIG in
     "CONFIG")

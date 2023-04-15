@@ -2,10 +2,10 @@
 import sys
 from functools import partial
 from pathlib import Path, PurePath
-from typing import Final, TextIO
+from typing import Final, Sequence, TextIO
 
 from exceptions import CantReadConfigGit, NotValidUserInfoVariables
-from utils import get_env_variables, get_template_path, read_git_config_as_dict
+from utils import Parameters, get_env_variables, get_template_path, read_git_config_as_dict
 
 PATH_TO_GIT_CONFIG: Final[Path] = Path(__file__).parent.with_name(".gitconfig")
 PATH_TO_ALIASES_FILE: Final[Path] = Path(__file__).parent.with_name("aliases")
@@ -13,14 +13,16 @@ TEMPLATE_PATH: Final[Path] = get_template_path("commit_template_message.txt")
 
 try:
     # get variables from setup.sh
-    NAME, EMAIL, NICKNAME = get_env_variables()
+    info: Sequence[str] = get_env_variables()
 except NotValidUserInfoVariables:
     print("Mistake! Git user information variables were not entered is setup.sh")
     sys.exit(-1)
+else:
+    NAME, EMAIL, NICKNAME = info
 
 try:
     # get config from 'git_config.toml'
-    DATA = read_git_config_as_dict()
+    DATA: dict[str, Parameters] = read_git_config_as_dict()
 except CantReadConfigGit:
     print(
         "Mistake! The configuration file cannot be read due to "

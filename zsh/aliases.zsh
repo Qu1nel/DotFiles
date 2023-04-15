@@ -61,4 +61,6 @@
     alias rebootsafe="sudo shutdown -r now"
     alias rebootforce="sudo shutdown -r -n now"
     alias cat='bat --paging=never'		# cat: 'bat' modification for printing contents.
+    alias xcopy='xclip -sel clip'
+    alias xpaste='xclip -sel clip -o'
 

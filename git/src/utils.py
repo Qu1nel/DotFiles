@@ -56,8 +56,8 @@ def get_env_variables() -> Sequence[str]:
             "The variables NAME or EMAIL or NICKNAME have not been initialized "
             "and cannot be used as valid data for the git config."
         )
-
-    return (NAME, EMAIL, NICKNAME)
+    returns = (NAME, EMAIL, NICKNAME)
+    return returns
 
 
 def get_template_path(name_template_file: str) -> Path:

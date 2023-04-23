@@ -6,6 +6,8 @@ My configuration files for my own use  (.vim, .gitconfig, etc)
 - gitconfig
 - bashrc
 - zshrc
----
+- neofetch
 
-_This software in distributive under the __[MIT License](./LICENSE)__, and it also uses those codes that are distributed under the __[MIT License](./LICENSE)__._
+License
+---
+This software in distributive under the __[MIT License](./LICENSE)__, and it also uses those codes that are distributed under the __[MIT License](./LICENSE)__.

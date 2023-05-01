@@ -27,47 +27,42 @@
 ##	-b	background color name or 256bit code
 ##	-e	effect name (e.g. bold, blink, etc.)
 
-
-
 ##==============================================================================
 ##	CODE PARSERS
 ##==============================================================================
 ##------------------------------------------------------------------------------
 
-
 get8bitCode() {
 	CODE=$1
 	case $CODE in
-		default) echo 9                         ;;
-		none) echo 9 							;;
-		black) echo 0 						    ;;
-		red) echo 1 						    ;;
-		green) echo 2 							;;
-		yellow) echo 3 							;;
-		blue) echo 4 							;;
-		magenta|purple|pink) echo 5 			;;
-		cyan) echo 6 							;;
-		light-gray) echo 7 						;;
-		dark-gray) echo 60 						;;
-		light-red) echo 61 						;;
-		light-green) echo 62 					;;
-		light-yellow) echo 63 					;;
-		light-blue) echo 64 					;;
-		light-magenta|light-purple) echo 65 	;;
-		light-cyan) echo 66 					;;
-		white) echo 67 							;;
-		*) echo 0
+	default) echo 9 ;;
+	none) echo 9 ;;
+	black) echo 0 ;;
+	red) echo 1 ;;
+	green) echo 2 ;;
+	yellow) echo 3 ;;
+	blue) echo 4 ;;
+	magenta | purple | pink) echo 5 ;;
+	cyan) echo 6 ;;
+	light-gray) echo 7 ;;
+	dark-gray) echo 60 ;;
+	light-red) echo 61 ;;
+	light-green) echo 62 ;;
+	light-yellow) echo 63 ;;
+	light-blue) echo 64 ;;
+	light-magenta | light-purple) echo 65 ;;
+	light-cyan) echo 66 ;;
+	white) echo 67 ;;
+	*) echo 0 ;;
 	esac
 }
 
-
 ##------------------------------------------------------------------------------
-
 
 getColorCode() {
 	COLOR=$1
 	## Check if color is a 256-color code
-	if [ $COLOR -eq $COLOR ] 2> /dev/null; then
+	if [ $COLOR -eq $COLOR ] 2>/dev/null; then
 		if [ $COLOR -gt 0 -a $COLOR -lt 256 ]; then
 			echo "38;5;$COLOR"
 		else
@@ -81,14 +76,12 @@ getColorCode() {
 	fi
 }
 
-
 ##------------------------------------------------------------------------------
-
 
 getBackgroundCode() {
 	COLOR=$1
 	## Check if color is a 256-color code
-	if [ $COLOR -eq $COLOR ] 2> /dev/null; then
+	if [ $COLOR -eq $COLOR ] 2>/dev/null; then
 		if [ $COLOR -gt 0 -a $COLOR -lt 256 ]; then
 			echo "48;5;$COLOR"
 		else
@@ -102,30 +95,27 @@ getBackgroundCode() {
 	fi
 }
 
-
 ##------------------------------------------------------------------------------
-
 
 getEffectCode() {
 	EFFECT=$1
 	NONE=0
 	case $EFFECT in
-		none) echo $NONE 		;;
-		default) echo $NONE 	;;
-		bold) echo 1 			;;
-		bright) echo 1 			;;
-		dim) echo 2 			;;
-		underline) echo 4 		;;
-		blink) echo 5 			;;
-		reverse) echo 7 		;;
-		hidden) echo 8 			;;
-		strikeout) echo 9 		;;
-		*) echo $NONE
+	none) echo $NONE ;;
+	default) echo $NONE ;;
+	bold) echo 1 ;;
+	bright) echo 1 ;;
+	dim) echo 2 ;;
+	underline) echo 4 ;;
+	blink) echo 5 ;;
+	reverse) echo 7 ;;
+	hidden) echo 8 ;;
+	strikeout) echo 9 ;;
+	*) echo $NONE ;;
 	esac
 }
 
 ##------------------------------------------------------------------------------
-
 
 getFormattingSequence() {
 	START='\e[0;'
@@ -134,11 +124,9 @@ getFormattingSequence() {
 	echo -n "$START$MIDLE$END"
 }
 
-
 ##==============================================================================
 ##	AUX
 ##==============================================================================
-
 
 applyCodeToText() {
 	local RESET=$(getFormattingSequence $(getEffectCode none))
@@ -147,14 +135,11 @@ applyCodeToText() {
 	echo -n "$CODE$TEXT$RESET"
 }
 
-
 ##==============================================================================
 ##	MAIN FUNCTIONS
 ##==============================================================================
 
-
 ##------------------------------------------------------------------------------
-
 
 getFormatCode() {
 	local RESET=$(getFormattingSequence $(getEffectCode none))
@@ -176,10 +161,10 @@ getFormatCode() {
 			TYPE=$1
 			ARGUMENT=$2
 			case $TYPE in
-				-c) CODE=$(getColorCode $ARGUMENT) 				;;
-				-b) CODE=$(getBackgroundCode $ARGUMENT) 	;;
-				-e) CODE=$(getEffectCode $ARGUMENT) 			;;
-				*) CODE=""
+			-c) CODE=$(getColorCode $ARGUMENT) ;;
+			-b) CODE=$(getBackgroundCode $ARGUMENT) ;;
+			-e) CODE=$(getEffectCode $ARGUMENT) ;;
+			*) CODE="" ;;
 			esac
 
 			## ADD CODE SEPARATOR IF NEEDED
@@ -201,9 +186,7 @@ getFormatCode() {
 	fi
 }
 
-
 ##------------------------------------------------------------------------------
-
 
 formatText() {
 	local RESET=$(getFormattingSequence $(getEffectCode none))
@@ -216,7 +199,7 @@ formatText() {
 	elif [ "$#" -eq 1 ]; then
 		TEXT=$1
 		echo -n "${TEXT}${RESET}"
-	
+
 	## ARGUMENTS PROVIDED
 	else
 		TEXT=$1
@@ -225,20 +208,16 @@ formatText() {
 	fi
 }
 
-
 ##------------------------------------------------------------------------------
-
 
 removeColorCodes() {
 	printf "$1" | sed 's/\x1b\[[0-9;]*m//g'
 }
 
-
 ##	FUNCTIONS
 ##==============================================================================
 
 ##------------------------------------------------------------------------------
-
 
 shortenPath() {
 	## GET PARAMETERS
@@ -247,7 +226,7 @@ shortenPath() {
 	local default_max_length=25
 	local trunc_symbol="..."
 
-    ## CHECK PARAMETERS AND INIT
+	## CHECK PARAMETERS AND INIT
 	if [ -z "$path" ]; then
 		echo ""
 		exit
@@ -262,32 +241,32 @@ shortenPath() {
 	## GET PRINT LENGHT
 	## - Get curred directory (last folder in path) to get its length (num characters).
 	## - Determine the actual max length we will use to truncate, choosing between either
-    ##   $max_length, set by the usert, or the length of the current dir,
-    ##   depending on which is greater. This ensures that even if we set a
-    ##   relatively  low $max_length value, the name of the current dir will not
-    ##   be truncated. Store in $print_length
+	##   $max_length, set by the usert, or the length of the current dir,
+	##   depending on which is greater. This ensures that even if we set a
+	##   relatively  low $max_length value, the name of the current dir will not
+	##   be truncated. Store in $print_length
 	local dir=${path##*/}
 	local dir_length=${#dir}
 	local path_length=${#path}
-	local print_length=$(( ( max_length < dir_length ) ? dir_length : max_length ))
+	local print_length=$(((max_length < dir_length) ? dir_length : max_length))
 
-    ## TRUNCATE PATH TO
+	## TRUNCATE PATH TO
 	## - If $path_length > $print_lenght
 	##	- Truncate the path to max_length
 	##	- Clean off path fragments before first '/' (included)
-    ##  - Check if the bit we have removed would have landed at home
-    ##    - If at home, prepend '~' to the clean path
+	##  - Check if the bit we have removed would have landed at home
+	##    - If at home, prepend '~' to the clean path
 	##	  - Else, prepend the "trunc_symbol" to the clean path
 	if [ $path_length -gt $print_length ]; then
-		local offset=$(( $path_length - $print_length ))
+		local offset=$(($path_length - $print_length))
 		local truncated_path=${path:$offset}
 		local clean_path="/${truncated_path#*/}"
-        local removed_path=${path%%"$clean_path"}
-        if [ "$removed_path" == "~" ]; then
-            local short_path="~${clean_path}"
-        else
-		    local short_path=${trunc_symbol}${clean_path}
-        fi
+		local removed_path=${path%%"$clean_path"}
+		if [ "$removed_path" == "~" ]; then
+			local short_path="~${clean_path}"
+		else
+			local short_path=${trunc_symbol}${clean_path}
+		fi
 	else
 		local short_path=$path
 	fi
@@ -295,7 +274,6 @@ shortenPath() {
 	## RETURN FINAL PATH
 	echo $short_path
 }
-
 
 ##==============================================================================
 ## COLORS
@@ -321,7 +299,6 @@ shortenPath() {
 ##   or search something like "bash 256 color codes" on the internet.
 ##
 ##==============================================================================
-
 
 format="USER HOST PWD GIT PYENV TF KUBE"
 font_color_user="white"
@@ -352,26 +329,22 @@ font_color_input="45"
 background_input="none"
 texteffect_input="bold"
 
-
 ##==============================================================================
 ## BEHAVIOR
 ##==============================================================================
 
-
-separator_char='\uE0B0'         # Separation character, '\uE0B0'=triangle
-separator_padding_left=''       #
-separator_padding_right=''      #
-prompt_horizontal_padding=''    #
-prompt_final_padding=''         #
-segment_padding=' '             #
-enable_vertical_padding=true    # Add extra new line over prompt
-max_pwd_char="25"               # Shortens the name of your current path to N
-
+separator_char='\uE0B0'      # Separation character, '\uE0B0'=triangle
+separator_padding_left=''    #
+separator_padding_right=''   #
+prompt_horizontal_padding='' #
+prompt_final_padding=''      #
+segment_padding=' '          #
+enable_vertical_padding=true # Add extra new line over prompt
+max_pwd_char="25"            # Shortens the name of your current path to N
 
 ##==============================================================================
 ## GIT
 ##==============================================================================
-
 
 git_symbol_synced=''
 git_symbol_unpushed=' ▲'
@@ -381,8 +354,7 @@ git_symbol_dirty=' ◔'
 git_symbol_dirty_unpushed=' ◔ △'
 git_symbol_dirty_unpulled=' ◔ ▽'
 git_symbol_dirty_unpushedunpulled=' ◔ ◇'
-git_update_period_minutes=10	# Use -1 to disable automatic updates
-
+git_update_period_minutes=10 # Use -1 to disable automatic updates
 
 ##	DESCRIPTION
 ##
@@ -391,10 +363,9 @@ git_update_period_minutes=10	# Use -1 to disable automatic updates
 ##	maximum 30 characters, which is quite useful when working in deeply
 ##	nested folders.
 
-
 # 	EXTERNAL DEPENDENCIES
 #   ==============================================================================
-    [ "$(type -t include)" != 'function' ]&&{ include(){ { [ -z "$_IR" ]&&_IR="$PWD"&&cd "$(dirname "${BASH_SOURCE[0]}")"&&include "$1"&&cd "$_IR"&&unset _IR;}||{ local d="$PWD"&&cd "$(dirname "$PWD/$1")"&&. "$(basename "$1")"&&cd "$d";}||{ echo "Include failed $PWD->$1"&&exit 1;};};}
+[ "$(type -t include)" != 'function' ] && { include() { { [ -z "$_IR" ] && _IR="$PWD" && cd "$(dirname "${BASH_SOURCE[0]}")" && include "$1" && cd "$_IR" && unset _IR; } || { local d="$PWD" && cd "$(dirname "$PWD/$1")" && . "$(basename "$1")" && cd "$d"; } || { echo "Include failed $PWD->$1" && exit 1; }; }; }
 
 synth_shell_prompt() {
 	##==============================================================================
@@ -419,9 +390,9 @@ synth_shell_prompt() {
 
 	getGitBranch() {
 		# CHECK IF GIT IS INSTALLED ON MACHINE, OTHERWISE SKIP AND RETURN ""
-		if ( which git > /dev/null 2>&1 ); then
+		if (which git >/dev/null 2>&1); then
 			## CHECK IF IN A GIT REPOSITORY, OTHERWISE SKIP
-			local branch=$(git branch 2> /dev/null | sed -n '/^[^*]/d;s/*\s*\(.*\)/\1/p')
+			local branch=$(git branch 2>/dev/null | sed -n '/^[^*]/d;s/*\s*\(.*\)/\1/p')
 
 			if [[ -n "$branch" ]]; then
 				## UPDATE LOCAL GIT BRANCH (i.e., fetch)
@@ -455,9 +426,9 @@ synth_shell_prompt() {
 					## Update if it's time to do so
 					if [ ! -z $git_last_update ]; then
 						local current_timestamp=$(date +%s)
-						local elapsed_minutes=$(((current_timestamp-git_last_update)/60))
+						local elapsed_minutes=$(((current_timestamp - git_last_update) / 60))
 						if [ "$elapsed_minutes" -ge "$SSP_GIT_UPDATE_PERIOD_MINUTES" ]; then
-							git fetch --recurse-submodules > /dev/null 2>&1 &
+							git fetch --recurse-submodules >/dev/null 2>&1 &
 						fi
 					fi
 				fi
@@ -507,22 +478,19 @@ synth_shell_prompt() {
 
 	##------------------------------------------------------------------------------
 
-
 	getTerraform() {
 		## Check if we are in a terraform directory
 		if [ -d .terraform ]; then
 			## Check if the terraform binary is in the path
-			if ( which terraform > /dev/null 2>&1 ); then
+			if (which terraform >/dev/null 2>&1); then
 				## Get the terraform workspace
-				local tf="$(terraform workspace show 2> /dev/null | tr -d '\n')"
+				local tf="$(terraform workspace show 2>/dev/null | tr -d '\n')"
 				echo "$tf"
 			fi
 		fi
 	}
 
-
 	##------------------------------------------------------------------------------
-
 
 	getPyenv() {
 		## Conda environment
@@ -531,31 +499,27 @@ synth_shell_prompt() {
 
 		## Python virtual environment
 		elif [ -n "${VIRTUAL_ENV:-}" ]; then
-        	local regex='PS1=\"\((.*?)\)\s\$\{PS1'
-        	local pyenv=$(cat $VIRTUAL_ENV/bin/activate | perl -n -e"/$regex/ && print \$1" 2> /dev/null)
-        	if [ -z "${pyenv}" ]; then
-            	local pyenv=$(basename ${VIRTUAL_ENV})
-        	fi
+			local regex='PS1=\"\((.*?)\)\s\$\{PS1'
+			local pyenv=$(cat $VIRTUAL_ENV/bin/activate | perl -n -e"/$regex/ && print \$1" 2>/dev/null)
+			if [ -z "${pyenv}" ]; then
+				local pyenv=$(basename ${VIRTUAL_ENV})
+			fi
 			echo "$pyenv"
 		fi
 	}
 
-
 	##------------------------------------------------------------------------------
 
-
 	getKube() {
-		type kubectl &>/dev/null && \
-		type yq &>/dev/null && \
-		echo -n "$(kubectl config view | yq '.contexts[].context.cluster |select(.contexts[].name == .current-context)' | head -n 1)"
+		type kubectl &>/dev/null &&
+			type yq &>/dev/null &&
+			echo -n "$(kubectl config view | yq '.contexts[].context.cluster |select(.contexts[].name == .current-context)' | head -n 1)"
 	}
-
 
 	##------------------------------------------------------------------------------
 	##
 	## Print each word of the propmpt, i.e., a small text acompanied by the
 	## separator character and formated with colors and background.
-
 
 	printSegment() {
 		## GET PARAMETERS
@@ -574,28 +538,24 @@ synth_shell_prompt() {
 		printf "${text_format}${segment_padding}${text}${segment_padding}${separator_padding_left}${separator_format}${separator_char}${separator_padding_right}${no_color}"
 	}
 
-
 	##------------------------------------------------------------------------------
-
 
 	get_colors_for_element() {
 		case $1 in
-			"USER")  echo "${SSP_COLORS_USER[@]}" ;;
-			"HOST")  echo "${SSP_COLORS_HOST[@]}" ;;
-			"PWD")   echo "${SSP_COLORS_PWD[@]}"  ;;
-			"GIT")   echo "${SSP_COLORS_GIT[@]}"  ;;
-			"PYENV") echo "${SSP_COLORS_PYENV[@]}";;
-			"KUBE")  echo "${SSP_COLORS_KUBE[@]}";;
-			"TF")    echo "${SSP_COLORS_TF[@]}"   ;;
-			"CLOCK") echo "${SSP_COLORS_CLOCK[@]}";;
-			"INPUT") echo "${SSP_COLORS_INPUT[@]}";;
-			*)
+		"USER") echo "${SSP_COLORS_USER[@]}" ;;
+		"HOST") echo "${SSP_COLORS_HOST[@]}" ;;
+		"PWD") echo "${SSP_COLORS_PWD[@]}" ;;
+		"GIT") echo "${SSP_COLORS_GIT[@]}" ;;
+		"PYENV") echo "${SSP_COLORS_PYENV[@]}" ;;
+		"KUBE") echo "${SSP_COLORS_KUBE[@]}" ;;
+		"TF") echo "${SSP_COLORS_TF[@]}" ;;
+		"CLOCK") echo "${SSP_COLORS_CLOCK[@]}" ;;
+		"INPUT") echo "${SSP_COLORS_INPUT[@]}" ;;
+		*) ;;
 		esac
 	}
 
-
 	##------------------------------------------------------------------------------
-
 
 	combine_elements() {
 		local first=$1
@@ -604,16 +564,16 @@ synth_shell_prompt() {
 		local colors_second=($(get_colors_for_element $second))
 
 		case $first in
-			"USER")  local text="$user" ;;
-			"HOST")  local text="$host" ;;
-			"PWD")   local text="$path" ;;
-			"GIT")   local text="$git_branch" ;;
-			"PYENV") local text="$pyenv" ;;
-			"KUBE")  local text="$kube" ;;
-			"TF")    local text="$tf" ;;
-			"CLOCK") local text="$clock" ;;
-			"INPUT") local text="" ;;
-			*)       local text="" ;;
+		"USER") local text="$user" ;;
+		"HOST") local text="$host" ;;
+		"PWD") local text="$path" ;;
+		"GIT") local text="$git_branch" ;;
+		"PYENV") local text="$pyenv" ;;
+		"KUBE") local text="$kube" ;;
+		"TF") local text="$tf" ;;
+		"CLOCK") local text="$clock" ;;
+		"INPUT") local text="" ;;
+		*) local text="" ;;
 		esac
 
 		local text_color=${colors_first[0]}
@@ -624,16 +584,14 @@ synth_shell_prompt() {
 		printSegment "$text" "$text_color" "$bg_color" "$next_bg_color" "$text_effect"
 	}
 
-
 	##==============================================================================
 	##	HOOK
 	##==============================================================================
 
-
 	prompt_command_hook() {
 		## GET PARAMETERS
 		## This might be a bit redundant, but it makes it easier to maintain
-		local elements=(${SSP_ELEMENTS[@]})
+		local elements=("${SSP_ELEMENTS[@]}")
 		local user=$USER
 		local host=$HOSTNAME
 		local path="$(shortenPath "$PWD" $SSP_MAX_PWD_CHAR)" # bash-tools::shortenPath
@@ -648,26 +606,27 @@ synth_shell_prompt() {
 		## shown and adapt the variables as needed. This usually implies removing
 		## the appropriate field from the "elements" array if the user set them
 		if [ -z "$git_branch" ]; then
-			elements=( ${elements[@]/"GIT"} ) # Remove GIT from elements to be shown
+			elements=(${elements[@]/"GIT"/}) # Remove GIT from elements to be shown
 		fi
 
 		if [ -z "$pyenv" ]; then
-			elements=( ${elements[@]/"PYENV"} ) # Remove PYENV from elements to be shown
+			elements=("${elements[@]/"PYENV"/}") # Remove PYENV from elements to be shown
 		fi
 		if [ -z "$tf" ]; then
-			elements=( ${elements[@]/"TF"} ) # Remove TF from elements to be shown
+			elements=("${elements[@]/"TF"/}") # Remove TF from elements to be shown
 		fi
 		if [ -z "$kube" ]; then
-			elements=( ${elements[@]/"KUBE"} ) # Remove KUBE from elements to be shown
+			elements=("${elements[@]/"KUBE"/}") # Remove KUBE from elements to be shown
 		fi
 
 		## WINDOW TITLE
 		## Prevent messed up terminal-window titles, must be set in the PS1 variable
 		case $TERM in
-		    xterm*|rxvt*)
-		        SSP_PWD="$path"
-		        local titlebar="\[\033]0;\${USER}@\${HOSTNAME}: \${SSP_PWD}\007\]" ;;
-		    *) local titlebar="" ;;
+		xterm* | rxvt*)
+			SSP_PWD="$path"
+			local titlebar="\[\033]0;\${USER}@\${HOSTNAME}: \${SSP_PWD}\007\]"
+			;;
+		*) local titlebar="" ;;
 		esac
 
 		## CONSTRUCT PROMPT ITERATIVELY
@@ -685,7 +644,7 @@ synth_shell_prompt() {
 			PS1="$PS1$(combine_elements $current $next)"
 		done
 
-		local input_colors=($(get_colors_for_element ${elements[0]}))
+		local input_colors=("$(get_colors_for_element ${elements[0]})")
 		local input_color=${input_colors[0]}
 		local input_bg=${input_colors[1]}
 		local input_effect=${input_colors[2]}
@@ -696,23 +655,24 @@ synth_shell_prompt() {
 		## will then use that variable to prompt the user :)
 	}
 
-
 	##==============================================================================
 	##	MAIN BODY SYNTH SHELL PROMT
 	##==============================================================================
-
 
 	## LOAD USER CONFIGURATION
 	local user_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.config"
 	local root_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.root.config"
 	local sys_config_file="$BASH_CONFIG_ROOT/bash_prompts/synth/settings/synth.config.default"
 
-	if   [ -f $user_config_file ]; then
-		source $user_config_file
-	elif [ -f $root_config_file  -a "$USER" == "root"  ]; then
-		source $root_config_file
-	elif [ -f $sys_config_file ]; then
-		source $sys_config_file
+	if [ -f "$user_config_file" ]; then
+		# shellcheck disable=SC1090
+		source "$user_config_file"
+	elif [ -f "$root_config_file" -a "$USER" == "root" ]; then
+		# shellcheck disable=SC1090
+		source "$root_config_file"
+	elif [ -f "$sys_config_file" ]; then
+		# shellcheck disable=SC1090
+		source "$sys_config_file"
 	fi
 
 	## PADDING
@@ -722,17 +682,17 @@ synth_shell_prompt() {
 		local vertical_padding=""
 	fi
 
-    ## CONFIG FOR "prompt_command_hook()"
-	SSP_ELEMENTS=($format "INPUT") # Append INPUT to elements that have to be shown
-	SSP_COLORS_USER=($font_color_user $background_user $texteffect_user)
-	SSP_COLORS_HOST=($font_color_host $background_host $texteffect_host)
-	SSP_COLORS_PWD=($font_color_pwd $background_pwd $texteffect_pwd)
-	SSP_COLORS_GIT=($font_color_git $background_git $texteffect_git)
-	SSP_COLORS_PYENV=($font_color_pyenv $background_pyenv $texteffect_pyenv)
-	SSP_COLORS_KUBE=($font_color_kube $background_kube $texteffect_kube)
-	SSP_COLORS_TF=($font_color_tf $background_tf $texteffect_tf)
-	SSP_COLORS_CLOCK=($font_color_clock $background_clock $texteffect_clock)
-	SSP_COLORS_INPUT=($font_color_input $background_input $texteffect_input)
+	## CONFIG FOR "prompt_command_hook()"
+	SSP_ELEMENTS=("$format" "INPUT") # Append INPUT to elements that have to be shown
+	SSP_COLORS_USER=("$font_color_user" "$background_user" "$texteffect_user")
+	SSP_COLORS_HOST=("$font_color_host" "$background_host" "$texteffect_host")
+	SSP_COLORS_PWD=("$font_color_pwd" "$background_pwd" "$texteffect_pwd")
+	SSP_COLORS_GIT=("$font_color_git" "$background_git" "$texteffect_git")
+	SSP_COLORS_PYENV=("$font_color_pyenv" "$background_pyenv" "$texteffect_pyenv")
+	SSP_COLORS_KUBE=("$font_color_kube" "$background_kube" "$texteffect_kube")
+	SSP_COLORS_TF=("$font_color_tf" "$background_tf" "$texteffect_tf")
+	SSP_COLORS_CLOCK=("$font_color_clock" "$background_clock" "$texteffect_clock")
+	SSP_COLORS_INPUT=("$font_color_input" "$background_input" "$texteffect_input")
 	SSP_VERTICAL_PADDING=$vertical_padding
 	SSP_MAX_PWD_CHAR=${max_pwd_char:-20}
 	SSP_GIT_SYNCED=$git_symbol_synced
@@ -758,8 +718,7 @@ synth_shell_prompt() {
 
 } # synth_shell_prompt()
 
-
-if [ -n "$( echo $- | grep i )" ]; then
+if "$(echo $- | grep -q i)"; then
 	if [ "${BASH_SOURCE[0]}" == "${0}" ]; then
 		echo -e "Do not run this script, it will do nothing.\nPlease source it instead by running:\n"
 		echo -e "\t. ${BASH_SOURCE[0]}\n"

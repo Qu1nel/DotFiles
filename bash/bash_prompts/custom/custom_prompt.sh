@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=SC2034
 GIT_PS1_SHOWDIRTYSTATE='y'
 GIT_PS1_SHOWUPSTREAM="auto"
 
@@ -17,7 +18,7 @@ function color_my_prompt {
 	local __cur_location="$blue\w"
 	local __git_branch="\$(__git_ps1 [%s])"
 	local __git="$yellow$__git_branch"
-	local __prompt_tail="$purple$__my_promt"
+	local __prompt_tail="$purple$__my_prompt"
 
 	export PS1="$__user_and_host$__end_color: $__cur_location $__git\n$__prompt_tail$__end_color "
 }

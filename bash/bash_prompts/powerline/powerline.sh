@@ -2,7 +2,7 @@
 
 # git clone https://github.com/b-ryan/powerline-shell
 # cd powerline-shell
-# sudo python3 setup.py install 
+# sudo python3 setup.py install
 
 function _update_ps1() {
   PS1=$(powerline-shell $?)

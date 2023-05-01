@@ -6,23 +6,27 @@
 ##
 ##  ===========================================================================
 
-SELECTED_PROMT="STARSHIP"  # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
+SELECTED_PROMT="SYNTH" # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
 
 case "$SELECTED_PROMT" in
-    "CUSTOM")
-        source "$BASH_CONFIG_ROOT/bash_prompts/custom/custom_prompt.sh"
+"CUSTOM")
+    # shellcheck disable=SC1091
+    source "$BASH_CONFIG_ROOT/bash_prompts/custom/custom_prompt.sh"
     ;;
-    "SYNTH")
-        source "$BASH_CONFIG_ROOT/bash_prompts/synth/synth_prompt.sh"
+"SYNTH")
+    # shellcheck disable=SC1091
+    source "$BASH_CONFIG_ROOT/bash_prompts/synth/synth_prompt.sh"
     ;;
-    "STARSHIP")
-        source "$BASH_CONFIG_ROOT/bash_prompts/starship/starship_prompt.sh"
+"STARSHIP")
+    # shellcheck disable=SC1091
+    source "$BASH_CONFIG_ROOT/bash_prompts/starship/starship_prompt.sh"
     ;;
-    "POWERLINE")
-        source "$BASH_CONFIG_ROOT/bash_prompts/powerline/powerline.sh"
+"POWERLINE")
+    # shellcheck disable=SC1091
+    source "$BASH_CONFIG_ROOT/bash_prompts/powerline/powerline.sh"
     ;;
-    *)
-        source "$BASH_CONFIG_ROOT/bash_prompts/default/default_prompt.sh"
+*)
+    # shellcheck disable=SC1091
+    source "$BASH_CONFIG_ROOT/bash_prompts/default/default_prompt.sh"
     ;;
 esac
-

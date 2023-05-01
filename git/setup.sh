@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "Enter information about you for git."
-read -p "Your name: " enterName
-read -p "Your email: " enterEmail
-read -p "Your nickname: " enterNick
+read -rp "Your name: " enterName
+read -rp "Your email: " enterEmail
+read -rp "Your nickname: " enterNick
 
 export NAME="$enterName"
 export EMAIL="$enterEmail"
@@ -22,7 +22,7 @@ if [ -v "$GIT_CONFIG_GLOBAL" ]; then
 
     GIT_CONFIG_PATH="$HOME"
 else
-    configDir=$(dirname $GIT_CONFIG_GLOBAL)
+    configDir=$(dirname "$GIT_CONFIG_GLOBAL")
     mkdir -pv "$configDir"
 
     cp -vi "$normalPath/commit_template_message.txt" "$configDir"

@@ -1,1 +1,1 @@
-return "ayu"  -- gruvbox, ayu, iceberg, vscode
+return "ayu" -- gruvbox, ayu, iceberg, vscode

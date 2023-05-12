@@ -25,8 +25,6 @@ return {
 
     -- :ZenMode :close
     { import = "astrocommunity.editing-support.zen-mode-nvim" },
-
     { import = "astrocommunity.editing-support.nvim-ts-rainbow2" },
-
     { import = "astrocommunity.editing-support.todo-comments-nvim" },
 }

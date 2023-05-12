@@ -5,7 +5,7 @@ url_img="$(wget -O - https://www.reddit.com/r/wallpaper/ |\
     sort | uniq | sort | uniq | sort |\
     shuf -n 1)"
 
-extension=${url_img: -3}
+extension="${url_img: -3}"
 wallpaper="background.$extension"
 
 wget -O "/tmp/$wallpaper" "$url_img"

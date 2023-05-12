@@ -5,8 +5,8 @@ invalid_input() {
     exit 1
 }
 
-[[ "$#" -ge 2 ]] && invalid_input $@
+[[ "$#" -ge 2 ]] && invalid_input "$@"
 
-city=$1
+city="$1"
 
 curl -4 wttr.in/$city

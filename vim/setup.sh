@@ -2,9 +2,9 @@
 
 syntaxVimPath="$HOME/.vim/syntax"
 
-mkdir -p "$syntaxVimPath"
+mkdir -pv "$syntaxVimPath"
 
-normalPath="$(dirname "$0")"
+currentPath="${0%/*}"
 
-cp "$normalPath/syntax/python_fold_indent.vim" "$syntaxVimPath"
-cp "$normalPath/.vimrc" "$HOME"
+# cp "$currentPath/syntax/python_fold_indent.vim" "$syntaxVimPath"
+# cp "$currentPath/.vimrc" "$HOME"

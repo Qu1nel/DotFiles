@@ -17,13 +17,13 @@ BASHRC_PATH="$HOME/.bashrc"
 
 mkdir -p "$BASH_CONFIG_ROOT"
 
-normalPath="$(dirname "$0")"
+currentPath="${0%/*}"
 
 if [ ! -f "$BASHRC_PATH" ]; then
     cp "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
 fi
 
-cp -iv "$normalPath/.bashrc" "$BASHRC_PATH"
+cp -iv "$currentPath/.bashrc" "$BASHRC_PATH"
 
 CONFIG_CONTENT=(
     "paths.sh"
@@ -36,7 +36,7 @@ CONFIG_CONTENT=(
 
 # Copy the configuration files to the config folder.
 for file in "${CONFIG_CONTENT[@]}"; do
-    cp -rv "$normalPath/$file" "$BASH_CONFIG_ROOT"
+    cp -rv "$currentPath/$file" "$BASH_CONFIG_ROOT"
 done
 
 # DATA is the code that will be in '.bashrc'.

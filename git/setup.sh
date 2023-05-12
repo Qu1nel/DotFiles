@@ -11,21 +11,21 @@ export NICKNAME="$enterNick"
 
 echo ""
 
-normalPath="$(dirname $0)"
+currentPath="${0%/*}"
 
-if ! command python3 "$normalPath/src/InitConfig.py"; then
+if ! command python3 "$currentPath/src/InitConfig.py"; then
     exit 1
 fi
 
 if [ -v "$GIT_CONFIG_GLOBAL" ]; then
-    cp -vi "$normalPath/commit_template_message.txt" "$HOME"
+    cp -vi "$currentPath/commit_template_message.txt" "$HOME"
 
     GIT_CONFIG_PATH="$HOME"
 else
     configDir=$(dirname "$GIT_CONFIG_GLOBAL")
     mkdir -pv "$configDir"
 
-    cp -vi "$normalPath/commit_template_message.txt" "$configDir"
+    cp -vi "$currentPath/commit_template_message.txt" "$configDir"
 
     GIT_CONFIG_PATH="$GIT_CONFIG_GLOBAL"
 
@@ -35,4 +35,4 @@ fi
 
 echo ""
 
-cp -vi "$normalPath/.gitconfig" "$GIT_CONFIG_PATH"
+cp -vi "$currentPath/.gitconfig" "$GIT_CONFIG_PATH"

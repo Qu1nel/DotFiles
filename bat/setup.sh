@@ -3,10 +3,10 @@
 currentPath="${0%/*}"
 
 if [ -z "$BAT_CONFIG_PATH" ]; then
-    mkdir -p "$HOME/.config/bat"
+    mkdir -pv "$HOME/.config/bat"
     copyPath="$HOME/.config/bat"
 else
     copyPath="$BAT_CONFIG_PATH"
 fi
 
-cp "$currentPath/config" "$copyPath"
+cp -vi "$currentPath/config" "$copyPath"

@@ -64,6 +64,6 @@
 	rename-branch = branch -m
 	delete-branch = branch -D
 	move-branch = branch -f
-	totldf = diff HEAD
+	dftotal = diff HEAD
 	dfstage = diff --staged
-	diffs = !git diff --name-only --relative --diff-filter=d | xargs bat --diff
+	diffs = "!git diff --name-only --relative --diff-filter=d | xargs bat --diff"

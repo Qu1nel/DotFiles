@@ -24,8 +24,8 @@ ss = status --short
 
 # another commands
 who = shortlog -s --  # Show authors of the contribution 
-visual = !gitk  # Open visual version a git
-aliases = !git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort  # show all aliases
+visual = "!gitk"  # Open visual version a git
+aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"  # show all aliases
 show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
 where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' -S
 delete-commit = reset --hard HEAD^
@@ -50,6 +50,6 @@ delete-branch = branch -D
 move-branch = branch -f
 
 # for diff
-totldf = diff HEAD  # Show diff without last cmt and work directory
+dftotal = diff HEAD  # Show diff without last cmt and work directory
 dfstage = diff --staged
-diffs = !git diff --name-only --relative --diff-filter=d | xargs bat --diff
+diffs = "!git diff --name-only --relative --diff-filter=d | xargs bat --diff"

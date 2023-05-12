@@ -9,7 +9,7 @@ export NAME="$enterName"
 export EMAIL="$enterEmail"
 export NICKNAME="$enterNick"
 
-echo ""
+echo
 
 currentPath="${0%/*}"
 
@@ -22,7 +22,7 @@ if [ -v "$GIT_CONFIG_GLOBAL" ]; then
 
     GIT_CONFIG_PATH="$HOME"
 else
-    configDir=$(dirname "$GIT_CONFIG_GLOBAL")
+    configDir="${GIT_CONFIG_GLOBAL%/*}"
     mkdir -pv "$configDir"
 
     cp -vi "$currentPath/commit_template_message.txt" "$configDir"
@@ -33,6 +33,6 @@ else
     rm -fv "$HOME/commit_template_message.txt"
 fi
 
-echo ""
+echo
 
 cp -vi "$currentPath/.gitconfig" "$GIT_CONFIG_PATH"

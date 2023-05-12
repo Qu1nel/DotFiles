@@ -1,6 +1,6 @@
 
 
-#[<type>](<specifics>) Short commit header
+#[<type>:<specifics>] Short commit header
 
 #------------------------------------------------
 # Summarize the changes in 50 characters or less

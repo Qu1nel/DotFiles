@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Enter information about you for git."
 read -rp "Your name: " enterName

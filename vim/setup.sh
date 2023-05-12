@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 syntaxVimPath="$HOME/.vim/syntax"
 

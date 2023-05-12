@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 USE_CONFIG="BEJKON2"  # 'PAPIRUS', 'CONFIG', 'ACENOSTER', 'BEJKON2'
 

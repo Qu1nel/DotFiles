@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # code below from default .bashrc
 # ------------------------------------------------------------------------------

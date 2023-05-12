@@ -19,6 +19,11 @@
 - clang-format
 - bash scripts (off top)
 
+# Pitfalls
+
+1. To use the config for **[vim](./vim/)**. You need `nodejs` and `yarn` installed!
+   - If you don't want to install `nodejs` or `yarn`. Just uncomment the 115th line in **_[.vimrc](./vim/.vimrc)_**, and comment 114th line.
+
 ## License
 
 This software in distributive under the **[MIT License](./LICENSE)**, and it also uses those codes that are distributed under the **[MIT License](./LICENSE)**.

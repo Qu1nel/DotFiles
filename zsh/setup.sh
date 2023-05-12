@@ -27,7 +27,7 @@ CONFIG_CONTENT=(
 
 # Copy the configuration files to the config folder.
 for file in "${CONFIG_CONTENT[@]}"; do
-    cp -v "$currentPath/$file" "$ZSH_CONFIG_ROOT"
+    cp -vi "$currentPath/$file" "$ZSH_CONFIG_ROOT"
 done
 
 # TODO:

@@ -26,7 +26,7 @@ export EDITOR=nvim
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/gitconfig"
 
 # Make dir for bat configurations and set CONFIG_PATH for bat.
-mkdir -p "$HOME/.config/bat"
+mkdir -pv "$HOME/.config/bat"
 export BAT_CONFIG_PATH="$HOME/.config/bat/config"
 
 # Init PATH for pyenv root.

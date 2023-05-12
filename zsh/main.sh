@@ -27,7 +27,4 @@ if [ -f "$ZSH_CONFIG_ROOT/functions.zsh" ]; then
     source "$ZSH_CONFIG_ROOT/functions.zsh"
 fi
 
-#   Enable welcome tools
-#   ---------------------------------------------------------------------------
-
 neofetch

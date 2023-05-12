@@ -33,7 +33,6 @@ alias .....="cd ../../../../"
 #   ---------------------------------------------------------------------------
 
 alias ls='exa --icons'
-
 alias l='exa --classify --icons'
 alias la='exa --all --classify --icons'
 alias ll='exa -bghiHS --long --group-directories-first'

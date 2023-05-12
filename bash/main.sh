@@ -38,7 +38,4 @@ if [ -f "$BASH_CONFIG_ROOT/prompt.sh" ]; then
     source "$BASH_CONFIG_ROOT/prompt.sh"
 fi
 
-#   Enable welcome tools
-#   ---------------------------------------------------------------------------
-
 neofetch

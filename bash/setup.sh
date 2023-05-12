@@ -15,12 +15,12 @@ BASHRC_PATH="$HOME/.bashrc"
 
 ##  ============================================================================
 
-mkdir -p "$BASH_CONFIG_ROOT"
+mkdir -vp "$BASH_CONFIG_ROOT"
 
 currentPath="${0%/*}"
 
 if [ ! -f "$BASHRC_PATH" ]; then
-    cp "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
+    cp -v "/etc/skel/.bashrc" "$BASHRC_PATH" # If .bashrc is not in the home directory, make it.
 fi
 
 cp -iv "$currentPath/.bashrc" "$BASHRC_PATH"

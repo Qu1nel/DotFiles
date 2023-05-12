@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 ##  ============================================================================
 ##
@@ -7,16 +7,16 @@
 ##  ============================================================================
 
 # The name of the folder that will be located in .config
+ZSHRC_PATH="$HOME/.zshrc"
 ZSH_CONFIG_FOLDER="zsh_config"
 
 export ZSH_CONFIG_ROOT="$HOME/.config/$ZSH_CONFIG_FOLDER"
-ZSHRC_PATH="$HOME/.zshrc"
 
 ##  ============================================================================
 
-mkdir -p "$ZSH_CONFIG_ROOT"
+mkdir -pv "$ZSH_CONFIG_ROOT"
 
-normalPath="$(dirname "$0")"
+currentPath="${0%/*}"
 
 CONFIG_CONTENT=(
     "paths.zsh"
@@ -26,8 +26,8 @@ CONFIG_CONTENT=(
 )
 
 # Copy the configuration files to the config folder.
-for file in ${CONFIG_CONTENT[@]}; do
-    cp -v "$normalPath/$file" "$ZSH_CONFIG_ROOT"
+for file in "${CONFIG_CONTENT[@]}"; do
+    cp -v "$currentPath/$file" "$ZSH_CONFIG_ROOT"
 done
 
 # TODO:

@@ -38,6 +38,7 @@ alias l='exa --classify --icons'
 alias la='exa --all --classify --icons'
 alias ll='exa -bghiHS --long --group-directories-first'
 alias lla='ll --all'
+alias llat='lla -T'
 
 #   Disk space and spase used in a folder
 #   ---------------------------------------------------------------------------

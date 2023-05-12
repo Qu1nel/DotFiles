@@ -19,10 +19,10 @@ mkdir -pv "$ZSH_CONFIG_ROOT"
 currentPath="${0%/*}"
 
 CONFIG_CONTENT=(
-    "paths.zsh"
-    "aliases.zsh"
-    "functions.zsh"
-    "main.zsh"
+    "paths.sh"
+    "aliases.sh"
+    "functions.sh"
+    "main.sh"
 )
 
 # Copy the configuration files to the config folder.

@@ -23,6 +23,9 @@ helper = "cache --timeout 1800"
 [commit]
 template = "$TEMPLATE_PATH"
 
+[merge]
+log = true
+
 [color]
 _ui = "auto"
 _diff = "auto"

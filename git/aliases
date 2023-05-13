@@ -28,10 +28,10 @@ whoami = config user.email
 visual = "!gitk"  # Open visual version a git
 aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"  # show all aliases
 show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
-where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' -S
+where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S 
 delete-commit = reset --hard HEAD^
-find-commit = "!find_commit() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1 }; find_commit"
-irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1))}; irebase"
+findcm = "!find_commit_by_msg() { git log --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --decorate --grep=$1; }; find_commit_by_msg"
+irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1)); }; irebase"
 
 # for commit
 cm = commit

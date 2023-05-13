@@ -16,6 +16,8 @@
 	helper = cache --timeout 1800
 [commit]
 	template = /home/un/.config/git/commit_template_message.txt
+[merge]
+	log = true
 [color]
 	ui = auto
 	diff = auto
@@ -47,11 +49,14 @@
 	s = status
 	ss = status --short
 	who = shortlog -s --
-	visual = !gitk
-	aliases = !git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort
+	whoami = config user.email
+	visual = "!gitk"
+	aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"
 	show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
-	where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' -S
+	where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S
 	delete-commit = reset --hard HEAD^
+	findcm = "!find_commit_by_msg() { git log --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --decorate --grep=$1; }; find_commit_by_msg"
+	irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1)); }; irebase"
 	cm = commit
 	cma = commit --amend
 	cmd = commit -v
@@ -59,7 +64,9 @@
 	shows = "!f() { git show \"$1\" | bat -l rs; }; f"
 	l = log --graph --oneline --all
 	ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s : %Cgreen[%cr] %C(yellow)%as%Creset %C(bold blue)<%an>%Creset'
-	br = branch -v
+	branch = branch -v
+	branches = branch --all
+	remotes = remote -v
 	create-branch = switch -c
 	rename-branch = branch -m
 	delete-branch = branch -D

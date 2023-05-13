@@ -24,11 +24,14 @@ ss = status --short
 
 # another commands
 who = shortlog -s --  # Show authors of the contribution 
+whoami = config user.email
 visual = "!gitk"  # Open visual version a git
 aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"  # show all aliases
 show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
 where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' -S
 delete-commit = reset --hard HEAD^
+find-commit = "!find_commit() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1 }; find_commit"
+irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1))}; irebase"
 
 # for commit
 cm = commit
@@ -41,9 +44,12 @@ shows = "!f() { git show \"$1\" | bat -l rs; }; f"
 l = log --graph --oneline --all
 ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s : %Cgreen[%cr] %C(yellow)%as%Creset %C(bold blue)<%an>%Creset'
 
+# show verbose output about
+branch = branch -v
+branches = branch --all
+remotes = remote -v
 
 # for branch
-br = branch -v
 create-branch = switch -c
 rename-branch = branch -m
 delete-branch = branch -D

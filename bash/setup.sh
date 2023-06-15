@@ -10,7 +10,7 @@
 BASH_CONFIG_FOLDER="bash_config"
 MARK_HEADER="Bash configuration by Qu1nel"
 
-BASH_CONFIG_ROOT="$HOME/.config/$BASH_CONFIG_FOLDER"e
+BASH_CONFIG_ROOT="$HOME/.config/$BASH_CONFIG_FOLDER"
 BASHRC_PATH="$HOME/.bashrc"
 
 ##  ============================================================================

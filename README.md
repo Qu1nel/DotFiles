@@ -17,7 +17,8 @@
 - neofetch
 - bat
 - clang-format
-- bash scripts (off top)
+- bash scripts (offtop)
+- makefiles (templates)
 
 # Pitfalls
 

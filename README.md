@@ -1,8 +1,8 @@
-![neovim-preview](./.github/preview-neovim.png)
+![neovim-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-neovim.png)
 
-![terminal-preview](./.github/preview-terminal-welcom-screen.png)
+![terminal-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-terminal-welcom-screen.png)
 
-![gitflow-preview](./.github/preview-git-flow.png)
+![gitflow-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-git-flow.png)
 
 # Qu1nel's dotfiles
 

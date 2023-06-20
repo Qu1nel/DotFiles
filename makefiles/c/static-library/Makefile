@@ -60,13 +60,12 @@ DIR_DUP     = mkdir -p $(@D)
 # 	RECIPES                                      #
 #------------------------------------------------#
 # all 		- Default goal
-# $(TARGET) - Linking *.o -> binary
+# $(TARGET) - Linking *.o -> library
 # %.o 		- Compilation source files *.c -> *.o
-# build 	- Rebuild binary
+# build 	- Rebuild library
 # re 		- Remake default goal
-# run 		- Run binary file
 # clean 	- Remove *.o and *.d
-# fcrean 	- Remove *.o and *.d + binary
+# fcrean 	- Remove *.o and *.d + library
 
 
 .PHONY: all
@@ -90,11 +89,6 @@ build: $(TARGET)
 re:
 	$(MAKE) fclean
 	$(MAKE) all
-
-.PHONY: run
-run: $(TARGET)
-	$(info Starting $(TARGET))
-	./$(TARGET)
 
 .PHONY: clean
 clean:

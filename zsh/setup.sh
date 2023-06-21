@@ -33,6 +33,6 @@ for file in "${CONFIG_CONTENT[@]}"; do
 done
 
 echo 'export ZSH_CONFIG_ROOT="$HOME/.config/'"$ZSH_CONFIG_FOLDER"'"' >> "$ZSHRC_PATH"
-echo 'if [ -f "$ZSH_CONFIG_ROOT/main.zsh" ]; then' >> "$ZSHRC_PATH"
-echo '    source "$ZSH_CONFIG_ROOT/main.zsh"' >> "$ZSHRC_PATH"
+echo 'if [ -f "$ZSH_CONFIG_ROOT/main.sh" ]; then' >> "$ZSHRC_PATH"
+echo '    source "$ZSH_CONFIG_ROOT/main.sh"' >> "$ZSHRC_PATH"
 echo 'fi' >> "$ZSHRC_PATH"

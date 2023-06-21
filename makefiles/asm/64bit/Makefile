@@ -1,5 +1,5 @@
 # @author Qu1nel (Иван Ковач, "Ivan Kovach")
-###################################  ASM 32bit  ##
+###################################  ASM 64bit  ##
 #
 # This Makefile-template is used for small
 # 64-bit assembly language projects

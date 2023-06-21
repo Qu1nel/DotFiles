@@ -66,6 +66,11 @@ DIR_DUP     = mkdir -p $(@D)
 # re 		- Remake default goal
 # clean 	- Remove *.o and *.d
 # fcrean 	- Remove *.o and *.d + library
+#
+# info-% 	- Rule will execute a make % command
+# 			   with --dry-run
+# print-% 	- That works like print-<rule> will
+# 			   print the value of an arbitrary variable
 
 
 .PHONY: all
@@ -100,6 +105,12 @@ clean:
 fclean: clean
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
+
+info-%:
+	@make --dry-run --always-make $* | grep -v "info"
+
+print-%:
+	@$(info '$*'='$($*)')
 
 
 .SILENT:

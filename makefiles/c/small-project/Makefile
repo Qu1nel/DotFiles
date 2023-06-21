@@ -48,6 +48,11 @@ MAKEFLAGS 	+= --no-print-directory
 # run 		- Run binary file
 # clean 	- Remove *.o
 # fcrean 	- Remove *.o + binary
+#
+# info-% 	- Rule will execute a make % command
+# 			   with --dry-run
+# print-% 	- That works like print-<rule> will
+# 			   print the value of an arbitrary variable
 
 
 .PHONY: all
@@ -78,4 +83,10 @@ clean:
 .PHONY: fclean
 fclean: clean
 	$(RM) $(TARGET)
+
+info-%:
+	@make --dry-run --always-make $* | grep -v "info"
+
+print-%:
+	@$(info '$*'='$($*)')
 

@@ -1,47 +1,98 @@
-# ------------- * Init settings * -------------
-# tools
-CC = nasm
-CFLAGS = -f elf32
-LFLAGS = -m elf_i386
+# @author Qu1nel (Иван Ковач, "Ivan Kovach")
+###################################  ASM 32bit  ##
+#
+# This Makefile-template is used for small
+# 32-bit assembly language projects
 
-# path macros
-BLD_DIRPATH := build
+#------------------------------------------------#
+# 	VARIABLES                                    #
+#------------------------------------------------#
+# TARGET 	- Main purpose, executable file,
+# 			   binary, make result
+#
+# BLD_DIR 	- Build directory
+#
+# CC 		- Compiler
+# CFLAGS 	- Compiler flags
+# CPPFLAGS 	- Preprocessor flags
+# LDFLAGS 	- Linker flags
+#
+# SOURCES 	- Source files
+# OBJECTS 	- Object files
+#
+# RM 		- Force remove
+# MAKEFLAGS - Make flags
+# DIR_DUP 	- Duplicate directory tree
 
-# compile macros
-TARGET := main
-TARGET_EXECUTABLE = $(BLD_DIRPATH)/$(TARGET)
 
-# src & obj files
-SOURCES := $(shell find . -type f -name '*.asm' 2>/dev/null)
-OBJECTS := $(addsuffix .o, $(notdir $(basename $(SOURCES))))
+TARGET 		:= main
 
-# project settings
-PROJECT_NAME := Assebmly 32bit Project
+BLD_DIR     := .build
 
-default: makedirs all
+CC 			:= nasm
+CPPFLAGS 	:= 
+CFLAGS 		:= -f elf32
+LFLAGS 		:= -m elf_i386
 
-# ------------- * Main * -------------
+SOURCES 	:= $(wildcard *.asm)
+OBJECTS     := $(SOURCES:%.asm=$(BLD_DIR)/%.o)
+
+RM 			:= rm -rf
+MAKEFLAGS 	+= --no-print-directory
+DIR_DUP 	= mkdir -p ${@D}
+
+
+#------------------------------------------------#
+# 	RECIPES                                      #
+#------------------------------------------------#
+# all 		- Default goal
+# $(TARGET) - Linking *.o -> binary
+# %.o 		- Compilation source files *.asm -> *.o
+# build 	- Rebuild binary
+# re 		- Remake default goal
+# run 		- Run binary file
+# clean 	- Remove *.o
+# fcrean 	- Remove *.o + binary
+#
+# info-% 	- Rule will execute a make % command
+# 			   with --dry-run
+# print-% 	- That works like print-<rule> will
+# 			   print the value of an arbitrary variable
+
+
 .PHONY: all
-all: $(TARGET_EXECUTABLE)
+all: $(TARGET)
 
-.PHONY: build
-build: $(TARGET_EXECUTABLE)
-
-$(TARGET_EXECUTABLE): $(OBJECTS) 
+$(TARGET): $(OBJECTS) 
 	ld $(LFLAGS) $(OBJECTS) -o $@
 
 $(OBJECTS): $(SOURCES)
-	$(CC) $(CFLAGS) $< -o $@
+	$(DIR_DUP)
+	$(CC) $(CFLAGS) -o $@ $<
 
-.PHONY: clean
-clean:
-	rm -rf $(TARGET_EXECUTABLE) $(OBJECTS)
+.PHONY: build
+build: all
+
+.PHONY: re
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: run
 run:
-	@echo "Starting the project \"$(PROJECT_NAME)\".."
-	@./$(TARGET_EXECUTABLE)
+	./$(TARGET)
 
-.PHONY: makedirs
-makedirs:
-	@mkdir -pv $(BLD_DIRPATH)
+.PHONY: clean
+clean:
+	$(RM) $(OBJECTS)
+
+.PHONY: fclean
+fclean: clean
+	$(RM) $(TARGET)
+
+info-%:
+	@make --dry-run --always-make $* | grep -v "info"
+
+print-%:
+	@$(info '$*'='$($*)')
+

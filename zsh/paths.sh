@@ -34,6 +34,9 @@ export PYENV_ROOT="$HOME/.config/pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Library for C
+export LD_LIBRARY_PATH="/usr/local/lib"
+
 #   Command history
 #   ---------------------------------------------------------------------------
 

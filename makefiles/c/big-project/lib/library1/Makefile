@@ -73,6 +73,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(AR) $(ARFLAGS) $(TARGET) $(OBJECTS)
+	$(shell ranlib $(TARGET))
 	$(info CREATED $@ : $(AR) $(ARFLAGS) $(TARGET) $(OBJECTS))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

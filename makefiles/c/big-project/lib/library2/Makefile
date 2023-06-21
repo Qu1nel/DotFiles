@@ -60,7 +60,7 @@ DIR_DUP     = mkdir -p $(@D)
 # 	RECIPES                                      #
 #------------------------------------------------#
 # all 		- Default goal
-# $(TARGET) - Linking *.o -> library 
+# $(TARGET) - Linking *.o -> library
 # %.o 		- Compilation source files *.c -> *.o
 # build 	- Rebuild library
 # re 		- Remake default goal
@@ -73,6 +73,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(AR) $(ARFLAGS) $(TARGET) $(OBJECTS)
+	$(shell ranlib $(TARGET))
 	$(info CREATED $@ : $(AR) $(ARFLAGS) $(TARGET) $(OBJECTS))
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

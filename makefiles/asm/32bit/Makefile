@@ -15,7 +15,7 @@
 # CC 		- Compiler
 # CFLAGS 	- Compiler flags
 # CPPFLAGS 	- Preprocessor flags
-# LDFLAGS 	- Linker flags
+# LFLAGS 	- Linker flags
 #
 # SOURCES 	- Source files
 # OBJECTS 	- Object files

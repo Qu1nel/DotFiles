@@ -80,7 +80,11 @@ DIR_DUP     = mkdir -p $(@D)
 # run 		- Run program
 # clean 	- Remove *.o and *.d
 # fcrean 	- Remove *.o and *.d + binary
-# info 		- Print the default goal recipe
+#
+# info-% 	- Rule will execute a make % command
+# 			   with --dry-run
+# print-% 	- That works like print-<rule> will
+# 			   print the value of an arbitrary variable
 
 
 .PHONY: all
@@ -125,9 +129,11 @@ fclean: clean
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
 
-.PHONY: info
 info-%:
-	$(MAKE) --dry-run --always-make $* | grep -v "info"
+	@make --dry-run --always-make $* | grep -v "info"
+
+print-%:
+	@$(info '$*'='$($*)')
 
 
 .SILENT:

@@ -47,7 +47,20 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-vi-mode z)  # zsh-wakatime
+plugins=(
+    dotenv
+    extract
+    history
+    sudo
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-vi-mode
+    z
+)
+
+# dotenv default filename
+ZSH_DOTENV_FILE=.env
 
 # zsh-vi-mode keymap
 ZVM_VI_INSERT_ESCAPE_BINDKEY=kj

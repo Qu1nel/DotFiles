@@ -40,7 +40,7 @@ alias ll='exa -bghiHS --long --group-directories-first'
 alias lla='ll --all'
 alias llat='lla -T'
 
-#   ls
+#   git
 #   ---------------------------------------------------------------------------
 
 alias ga='git add'

@@ -39,6 +39,17 @@ alias ll='exa -bghiHS --long --group-directories-first'
 alias lla='ll --all'
 alias llat='lla -T'
 
+#   git
+#   ---------------------------------------------------------------------------
+
+alias ga='git add'
+alias gadd='git add'
+alias gl='git ls'
+alias gitls='git ls'
+alias gs='git s'
+alias gits='git s'
+alias gcmd='git cmd'
+
 #   Disk space and spase used in a folder
 #   ---------------------------------------------------------------------------
 

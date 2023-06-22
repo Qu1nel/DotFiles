@@ -23,11 +23,12 @@ alias bashrcconfig="nvim ~/.bashrc"
 #   cd
 #   ---------------------------------------------------------------------------
 
-alias cd..='cd ..'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....='cd ../../../'
-alias .....="cd ../../../../"
+alias cd..='cd .. && lla'
+alias ..="cd .. && lla"
+alias ...="cd ../.. && lla"
+alias ....='cd ../../../ && lla'
+alias .....="cd ../../../../ && lla"
+alias de="cd ~/Desktop"
 
 #   ls
 #   ---------------------------------------------------------------------------
@@ -38,6 +39,17 @@ alias la='exa --all --classify --icons'
 alias ll='exa -bghiHS --long --group-directories-first'
 alias lla='ll --all'
 alias llat='lla -T'
+
+#   ls
+#   ---------------------------------------------------------------------------
+
+alias ga='git add'
+alias gadd='git add'
+alias gl='git ls'
+alias gitls='git ls'
+alias gs='git s'
+alias gits='git s'
+alias gcmd='git cmd'
 
 #   Disk space and spase used in a folder
 #   ---------------------------------------------------------------------------
@@ -52,6 +64,7 @@ alias mountedinfo="df -hT"
 #   ---------------------------------------------------------------------------
 
 alias openports="netstat -nape --inet"
+alias pg="echo 'Pingign Google' && ping www.google.com"
 
 #   Other
 #   ---------------------------------------------------------------------------

@@ -53,6 +53,7 @@ plugins=(
     history
     sudo
     git
+    web-search
     zsh-syntax-highlighting
     zsh-autosuggestions
     zsh-vi-mode

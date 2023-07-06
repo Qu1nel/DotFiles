@@ -58,7 +58,8 @@ OBJECTS     := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPS 		:= $(OBJECTS:.o=.d)
 
 CC 			:= clang
-CFLAGS 		:= -Wall -Wextra -Werror
+# optimization: -O2 -Os -O3
+CFLAGS 		:= -Wall -Wextra -Werror -O2
 CPPFLAGS 	:= $(addprefix -I,$(INCLD_DIRS)) -MMD -MP
 LDFLAGS 	:= $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS 		:= $(addprefix -l,$(LIBS))

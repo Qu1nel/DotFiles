@@ -26,7 +26,8 @@
 TARGET 		:= main
 
 CC 			:= clang
-CFLAGS 		:= -Wall -Wextra -Werror
+# optimization: -O2 -Os -O3
+CFLAGS 		:= -Wall -Wextra -Werror -O2
 CPPFLAGS 	:= -I .
 LDFLAGS 	:= 
 

@@ -38,7 +38,8 @@ INCLD_DIR 	:= include
 OBJ_DIR     := obj
 
 CC 			:= clang
-CFLAGS 		:= -Wall -Wextra -Werror
+# optimization: -O2 -Os -O3
+CFLAGS 		:= -Wall -Wextra -Werror -O2
 CPPFLAGS 	:= -I $(INCLD_DIR)
 LDFLAGS 	:=
 

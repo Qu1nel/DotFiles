@@ -59,7 +59,9 @@ DEPS 		:= $(OBJECTS:.o=.d)
 
 CC 			:= clang
 # optimization: -O2 -Os -O3
-CFLAGS 		:= -Wall -Wextra -Werror -O2
+# testing: -Werror -Wshadow
+# pedantic mode: -Wpedantic -predantic
+CFLAGS 		:= -Wall -Wextra -Wpedantic -pedantic -O2
 CPPFLAGS 	:= $(addprefix -I,$(INCLD_DIRS)) -MMD -MP
 LDFLAGS 	:= $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS 		:= $(addprefix -l,$(LIBS))

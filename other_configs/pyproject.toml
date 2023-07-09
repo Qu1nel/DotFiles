@@ -5,12 +5,12 @@ version = "Version app"
 readme = "README.md"
 requires-python = ">=3.11"
 
-[project.license]
-file = "LICENSE"
-
 [[project.authors]]
 name = "Author name"
 email = "email"
+
+[project.license]
+file = "LICENSE"
 
 [project.urls]
 Repository = "URL-to-repository"
@@ -65,9 +65,6 @@ ignore = [
   # PGH (pygrep-hooks)
   "PGH003", # Check 'type: ignore' without annotation warn are intended to be suppressed
   "PGH004", # Check 'noqa' without annotation diagnostics are intended to be suppressed
-
-  # For this project
-  "PLW0603", # Using global statemtn to update
 ]
 
 exclude = [
@@ -87,7 +84,7 @@ exclude = [
   ".venv",
   ".env",
   "__pypackages__",
-  "__pychache__",
+  "__pycache__",
   "_build",
   "buck-out",
   "build",

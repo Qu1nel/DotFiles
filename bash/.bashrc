@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 input="$-"
 iatest="${input%%i*}"

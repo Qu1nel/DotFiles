@@ -23,11 +23,12 @@ alias bashrcconfig="nvim ~/.bashrc"
 #   cd
 #   ---------------------------------------------------------------------------
 
-alias cd..='cd ..'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....='cd ../../../'
-alias .....="cd ../../../../"
+alias cd..='cd .. && lla'
+alias ..="cd .. && lla"
+alias ...="cd ../.. && lla"
+alias ....='cd ../../../ && lla'
+alias .....="cd ../../../../ && lla"
+alias de="cd ~/Desktop"
 
 #   ls
 #   ---------------------------------------------------------------------------
@@ -63,14 +64,15 @@ alias mountedinfo="df -hT"
 #   ---------------------------------------------------------------------------
 
 alias openports="netstat -nape --inet"
+alias pg="echo 'Pingign Google' && ping www.google.com"
 
 #   Other
 #   ---------------------------------------------------------------------------
 
 alias cputop="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
-alias checkcommand="type -t"
+alias checkcommand="type"
 alias rebootsafe="sudo shutdown -r now"
 alias rebootforce="sudo shutdown -r -n now"
 alias cat='bat --paging=never' # cat: 'bat' modification for printing contents.
 alias xcopy='xclip -sel clip'
-alias xpast='xclip -sel clip -o'
+alias xpaste='xclip -sel clip -o'

@@ -4,26 +4,21 @@
 
 ![gitflow-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-git-flow.png)
 
-# Qu1nel's dotfiles
+# Qu1nel's DotConfigs
 
 **Warning**: Don’t blindly use my settings unless you know what that entails. Use at your own risk!
 
 # Content
 
-- vim (NeoVim (AstroNvim))
-- git
 - bash
-- zsh
+- gitconfig
+- makefiles
 - neofetch
-- bat
-- clang-format
-- bash scripts (offtop)
-- makefiles (templates)
-
-# Pitfalls
-
-1. To use the config for **[vim](./vim/)**. You need `nodejs` and `yarn` installed!
-   - If you don't want to install `nodejs` or `yarn`. Just uncomment the 115th line in **_[.vimrc](./vim/.vimrc)_**, and comment 114th line.
+- nvim
+- other configs
+- scripts
+- vim
+- zsh
 
 ## License
 

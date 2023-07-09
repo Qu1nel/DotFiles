@@ -66,6 +66,7 @@ DIR_DUP     = mkdir -p $(@D)
 # clean 	- Remove *.o
 # fcrean 	- Remove *.o + binary
 #
+# help 		- Show help about commands
 # info-% 	- Rule will execute a make % command
 # 			   with --dry-run
 # print-% 	- That works like print-<rule> will
@@ -85,27 +86,32 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(info COMPILED $@ : $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<)
 
 .PHONY: build
-build: all
+build: all  ## Compile project
 
 .PHONY: re
-re:
+re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
 
 .PHONY: run
-run: $(TARGET)
+run: $(TARGET)  ## Run executable file
 	$(info Starting $(TARGET))
 	./$(TARGET)
 
 .PHONY: clean
-clean:
+clean:  ## Remove all object files
 	$(info $(RM) $(OBJECTS))
 	$(RM) $(OBJECTS)
 
 .PHONY: fclean
-fclean: clean
+fclean: clean  ## Remove main executable file
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
+
+.DEFAULT_GOAL := help
+.PHONY: help
+help:  ## Show this output, i.e. help to use the commands
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

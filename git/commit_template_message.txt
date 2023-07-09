@@ -1,13 +1,5 @@
 
 
-Files:
-    
-
-Changes:
-    
-
-#[<type>:<specifics>] Short commit header
-
 #------------------------------------------------
 # Summarize the changes in 50 characters or less
 

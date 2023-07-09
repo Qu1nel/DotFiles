@@ -70,6 +70,7 @@ DIR_DUP     = mkdir -p $(@D)
 # clean 	- Remove *.o and *.d
 # fcrean 	- Remove *.o and *.d + library
 #
+# help 		- Show help about commands
 # info-% 	- Rule will execute a make % command
 # 			   with --dry-run
 # print-% 	- That works like print-<rule> will
@@ -92,22 +93,27 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 -include $(DEPS)
 
 .PHONY: build
-build: $(TARGET)
+build: $(TARGET)  ## Compile project
 
 .PHONY: re
-re:
+re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
 
 .PHONY: clean
-clean:
+clean:  ## Remove all object deps files
 	$(info $(RM) $(OBJECTS) $(DEPS))
 	$(RM) $(OBJECTS) $(DEPS)
 
 .PHONY: fclean
-fclean: clean
+fclean: clean  ## Remove main executable file
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
+
+.DEFAULT_GOAL := help
+.PHONY: help
+help:  ## Show this output, i.e. help to use the commands
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

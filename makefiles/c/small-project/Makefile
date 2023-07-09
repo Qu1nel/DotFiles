@@ -52,6 +52,7 @@ MAKEFLAGS 	+= --no-print-directory
 # clean 	- Remove *.o
 # fcrean 	- Remove *.o + binary
 #
+# help 		- Show help about commands
 # info-% 	- Rule will execute a make % command
 # 			   with --dry-run
 # print-% 	- That works like print-<rule> will
@@ -68,24 +69,29 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: build
-build: all
+build: all  ## Compile project
 
 .PHONY: re
-re:
+re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
 
 .PHONY: run
-run:
+run:  ## Run executable file
 	./$(TARGET)
 
 .PHONY: clean
-clean:
+clean:  ## Remove all object files
 	$(RM) $(OBJECTS)
 
 .PHONY: fclean
-fclean: clean
+fclean: clean  ## Remove main executable file
 	$(RM) $(TARGET)
+
+.DEFAULT_GOAL := help
+.PHONY: help
+help:  ## Show this output, i.e. help to use the commands
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

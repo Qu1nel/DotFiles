@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/end bash
 
 # Get the target (input or output) from the filename and exit otherwise
 IFS=''
@@ -118,5 +118,7 @@ while read line; do
         device_icon_name=${BASH_REMATCH[1]}
     fi
 done <<< "$(get_pacmd_section $id properties)"
+
 echo $message
+
 notify-send --icon="$device_icon_name" --expire-time=2000 "$message"

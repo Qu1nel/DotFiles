@@ -18,19 +18,19 @@ if ! command python3 "$currentPath/src/InitConfig.py"; then
 fi
 
 if [ -v "$GIT_CONFIG_GLOBAL" ]; then
-    cp -vi "$currentPath/commit_template_message.txt" "$HOME"
+    cp -vi "$currentPath/commit_template_message" "$HOME"
 
     GIT_CONFIG_PATH="$HOME"
 else
     configDir="${GIT_CONFIG_GLOBAL%/*}"
     mkdir -pv "$configDir"
 
-    cp -vi "$currentPath/commit_template_message.txt" "$configDir"
+    cp -vi "$currentPath/commit_template_message" "$configDir"
 
     GIT_CONFIG_PATH="$GIT_CONFIG_GLOBAL"
 
     rm -fv "$HOME/.gitconfig"
-    rm -fv "$HOME/commit_template_message.txt"
+    rm -fv "$HOME/commit_template_message"
 fi
 
 echo

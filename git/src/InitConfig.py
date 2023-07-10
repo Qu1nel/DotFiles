@@ -5,11 +5,16 @@ from pathlib import Path, PurePath
 from typing import Final, Sequence, TextIO
 
 from exceptions import CantReadConfigGit, NotValidUserInfoVariables
-from utils import Parameters, get_env_variables, get_template_path, read_git_config_as_dict
+from utils import (
+    Parameters,
+    get_env_variables,
+    get_template_path,
+    read_git_config_as_dict,
+)
 
 PATH_TO_GIT_CONFIG: Final[Path] = Path(__file__).parent.with_name(".gitconfig")
 PATH_TO_ALIASES_FILE: Final[Path] = Path(__file__).parent.with_name("aliases")
-TEMPLATE_PATH: Final[Path] = get_template_path("commit_template_message.txt")
+TEMPLATE_PATH: Final[Path] = get_template_path("commit_template_message")
 
 try:
     # get variables from setup.sh

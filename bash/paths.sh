@@ -22,7 +22,7 @@ export EDITOR=nvim
 #   ---------------------------------------------------------------------------
 
 # Make git enviroment.
-export GIT_CONFIG_GLOBAL="$HOME/.config/git/gitconfig"
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
 # Make dir for bat configurations and set CONFIG_PATH for bat.
 mkdir -p "$HOME/.config/bat"

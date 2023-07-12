@@ -18,6 +18,13 @@ keymaps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force save file" }
 -- --*[ Insert mode:
 keymaps.i["kj"] = { "<esc>", desc = "Command mode" }
 -- --*]
+--
+-- --*[ Z mode:
+keymaps.n["<F2>"] = {
+    function() vim.cmd "Z" end,
+    desc = "Z mode",
+}
+-- --*]
 
 -- --*[ Better gg and G:
 keymaps.n["gj"] = { "G", desc = "go to last line" }

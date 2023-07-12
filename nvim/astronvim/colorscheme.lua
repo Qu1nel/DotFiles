@@ -1,1 +1,12 @@
-return "ayu" -- gruvbox, ayu, iceberg, vscode
+return "gruvbox"
+-- Dark:
+--      gruvbox,
+--      ayu,
+--      iceberg,
+--      vscode,
+--      catppuccin,
+--      catppuccin-frappe,
+--      catppuccin-macchiato,
+--      catppuccin-mocha
+-- Light:
+--      catppuccin-latte

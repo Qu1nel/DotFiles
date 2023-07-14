@@ -1,19 +1,27 @@
-﻿---
+---
 AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: 'false'
+AlignConsecutiveAssignments: 'false'
+AlignConsecutiveDeclarations: 'false'
 AlignEscapedNewlines: Left
-AllowShortFunctionsOnASingleLine: Empty
+AlignOperands: 'false'
+AlignTrailingComments: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: 'false'
 AlwaysBreakTemplateDeclarations: 'No'
 BinPackArguments: 'false'
-BreakBeforeBraces: Attach
-BreakBeforeTernaryOperators: 'false'
+BinPackParameters: 'false'
+BreakBeforeBraces: Mozilla
+BreakBeforeTernaryOperators: 'true'
 ColumnLimit: '120'
 CompactNamespaces: 'false'
 FixNamespaceComments: 'true'
 IndentWidth: '4'
-NamespaceIndentation: All
+NamespaceIndentation: Inner
 PointerAlignment: Right
 SortIncludes: 'true'
 SortUsingDeclarations: 'true'

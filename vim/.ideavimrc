@@ -29,8 +29,6 @@ map kj <ESC>
 
 map L $
 map H ^
-map L $
-map H ^
 
 map gh ^
 map gl $
@@ -57,7 +55,5 @@ map <leader>j <Action>(StepOver)
 map <leader>k <Action>(StepInto)
 
 " Tabs
-map <C-h> <Action>(GotoNextSplitter)
-map <leader>c <Action>(CloseTab)
 map <leader>l <Action>(NextTab)
 map <leader>h <Action>(PreviousTab)

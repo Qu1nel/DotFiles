@@ -1,0 +1,63 @@
+"------------------------
+"        Base
+"------------------------
+set idearefactormode=keep
+set clipboard+=unnamed
+set multiple-cursors
+set highlightedyank
+set ideastrictmode
+set relativenumber
+set scrolloff=13
+set commentary
+set ignorecase
+set ideamarks
+set smartcase
+set incsearch
+set ideajoin
+set showmode
+set surround
+set ideaput
+set number
+
+
+"------------------------
+"        Map
+"------------------------
+let mapleader=" "
+
+map kj <ESC>
+
+map L $
+map H ^
+map L $
+map H ^
+
+map gh ^
+map gl $
+
+map gj G
+map gk gg
+
+map yy y$
+
+
+"------------------------
+"    IDE Map Actions
+"------------------------
+" Refactoring
+map <leader>f <Action>(ReformatCode)
+map <leader>r <Action>(RenameElement)
+map <leader>i <Action>(OptimizeImports)
+
+" Debug
+map <leader>d <Action>(Debug)
+map <leader>c <Action>(Stop)
+map <leader>t <Action>(ToggleLineBreakpoint)
+map <leader>j <Action>(StepOver)
+map <leader>k <Action>(StepInto)
+
+" Tabs
+map <C-h> <Action>(GotoNextSplitter)
+map <leader>c <Action>(CloseTab)
+map <leader>l <Action>(NextTab)
+map <leader>h <Action>(PreviousTab)

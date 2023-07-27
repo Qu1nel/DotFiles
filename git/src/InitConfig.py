@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 from functools import partial
 from pathlib import Path, PurePath

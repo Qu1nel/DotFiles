@@ -34,4 +34,4 @@ if [ -f "$BASH_CONFIG_ROOT/prompt.sh" ]; then
     source "$BASH_CONFIG_ROOT/prompt.sh"
 fi
 
-neofetch
+neofetch --ascii_colors 1 --colors 1 1 1 1 7 7

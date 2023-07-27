@@ -6,7 +6,7 @@
 ##
 ##  ===========================================================================
 
-SELECTED_PROMT="SYNTH" # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
+SELECTED_PROMT="POWERLINE" # Can be: CUSTOM, SYNTH, STARSHIP, POWERLINE
 
 case "$SELECTED_PROMT" in
     "CUSTOM")

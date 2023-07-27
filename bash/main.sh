@@ -10,7 +10,6 @@
 #   ---------------------------------------------------------------------------
 
 if [ -f "$BASH_CONFIG_ROOT/paths.sh" ]; then
-    # shellcheck disable=SC1091
     source "$BASH_CONFIG_ROOT/paths.sh"
 fi
 
@@ -18,7 +17,6 @@ fi
 #   ---------------------------------------------------------------------------
 
 if [ -f "$BASH_CONFIG_ROOT/aliases.sh" ]; then
-    # shellcheck disable=SC1091
     source "$BASH_CONFIG_ROOT/aliases.sh"
 fi
 
@@ -26,7 +24,6 @@ fi
 #   ---------------------------------------------------------------------------
 
 if [ -f "$BASH_CONFIG_ROOT/functions.sh" ]; then
-    # shellcheck disable=SC1091
     source "$BASH_CONFIG_ROOT/functions.sh"
 fi
 
@@ -34,7 +31,6 @@ fi
 #   ---------------------------------------------------------------------------
 
 if [ -f "$BASH_CONFIG_ROOT/prompt.sh" ]; then
-    # shellcheck disable=SC1091
     source "$BASH_CONFIG_ROOT/prompt.sh"
 fi
 

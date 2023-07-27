@@ -24,15 +24,6 @@ export EDITOR=nvim
 # Make git enviroment.
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
-# Make dir for bat configurations and set CONFIG_PATH for bat.
-mkdir -p "$HOME/.config/bat"
-export BAT_CONFIG_PATH="$HOME/.config/bat/config"
-
-# Init PATH for pyenv root.
-export PYENV_ROOT="$HOME/.config/pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # Make starship config file location
 export STARSHIP_CONFIG="$BASH_CONFIG_ROOT/bash_prompts/starship/settings/starship.toml"
 

@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 input="$-"
 iatest="${input%%i*}"
@@ -6,16 +6,16 @@ iatest="$((${#iatest} + 1))"
 
 # Source global definitions
 if [ -f "/etc/bashrc" ]; then
-	# shellcheck disable=SC1091
 	source "/etc/bashrc"
+elif [ -f "/etc/bash.bashrc" ]; then
+    source "/etc/bash.bashrc"
 fi
 
 # Enable bash programmable completion features in interactive shells
 if [ -f "/usr/share/bash-completion/bash_completion" ]; then
-	# shellcheck disable=SC1091
 	source "/usr/share/bash-completion/bash_completion"
+
 elif [ -f "/etc/bash_completion" ]; then
-	# shellcheck disable=SC1091
 	source "/etc/bash_completion"
 fi
 
@@ -52,3 +52,4 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+

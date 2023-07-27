@@ -41,7 +41,7 @@
     set guioptions=
     set showtabline=0
 
-    set wrap linebreak nolist
+    set nowrap
     set textwidth=120
     
     set cursorline
@@ -110,14 +110,15 @@
 
     call plug#begin('~/.vim/plugins')
 
-    " If you have nodejs and yarn
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-    " else -> Plug 'shime/vim-livedown'
 
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'morhetz/gruvbox'
     Plug 'ryanoasis/vim-devicons'
+
+    Plug 'wakatime/vim-wakatime'
+
+    Plug 'morhetz/gruvbox'
 
     call plug#end()
 
@@ -145,9 +146,6 @@
     nnoremap <leader>, :nohlsearch<CR>  " Disable highlight search
 
     nnoremap yy y$                      " Yank from cursor to the end of line.
-
-    " Map the F5 for run a Python script inside Vim.
-    nnoremap <F5> :w <CR>:!clear <CR>:!python3 % <CR>
 
     " Navigate the split view easier by pressing CTRL+j, CTRL+k, CTRL+h, CTRL+l.
     nnoremap <C-j> <C-W>j

@@ -12,12 +12,24 @@
 	editor = nvim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	quotepath = false
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only --features=interactive
 [credential]
 	helper = cache --timeout 1800
 [commit]
 	template = /home/un/.config/git/commit_template_message
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = true
+	line-numbers-left-format = ""
+	line-numbers-right-format = "│ "
 [merge]
 	log = true
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
 [color]
 	ui = auto
 	diff = auto
@@ -67,6 +79,7 @@
 	branch = branch -v
 	branches = branch --all
 	remotes = remote -v
+	switchbr = "git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" --pointer=\"\" | xargs git switch"
 	create-branch = switch -c
 	rename-branch = branch -m
 	delete-branch = branch -D

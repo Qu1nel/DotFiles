@@ -48,6 +48,7 @@ ls = log --graph --abbrev-commit --all --pretty=format:'%Cred%h%Creset -%C(yello
 branch = branch -v
 branches = branch --all
 remotes = remote -v
+switchbr = "!git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" --pointer=\"\" | xargs git switch"
 
 # for branch
 create-branch = switch -c

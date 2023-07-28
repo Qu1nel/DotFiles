@@ -2,8 +2,6 @@
 
 ![terminal-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-terminal-welcom-screen.png)
 
-![gitflow-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-git-flow.png)
-
 # Qu1nel's DotConfigs
 
 **Warning**: Don’t blindly use my settings unless you know what that entails. Use at your own risk!

@@ -25,20 +25,12 @@ export EDITOR=nvim
 # Make git enviroment.
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
-# Make dir for bat configurations and set CONFIG_PATH for bat.
-mkdir -pv "$HOME/.config/bat"
-export BAT_CONFIG_PATH="$HOME/.config/bat/config"
-
-# Init PATH for pyenv root.
-export PYENV_ROOT="$HOME/.config/pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# Library for C
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
-
 #   Command history
 #   ---------------------------------------------------------------------------
 
-export HISTFILE="$HOME/.cache/zshhistory"
+export HISTFILE="$ZDOTDIR/.zshhistoryfile"
+export HISTSIZE=5000
+export SAVEHIST=5000
+
 setopt appendhistory
+

@@ -9,22 +9,22 @@
 #   Set paths
 #   ---------------------------------------------------------------------------
 
-if [ -f "$ZSH_CONFIG_ROOT/paths.sh" ]; then
-    source "$ZSH_CONFIG_ROOT/paths.sh"
+if [ -f "$ZDOTDIR/paths.sh" ]; then
+    source "$ZDOTDIR/paths.sh"
 fi
 
 #   Set aliases
 #   ---------------------------------------------------------------------------
 
-if [ -f "$ZSH_CONFIG_ROOT/aliases.sh" ]; then
-    source "$ZSH_CONFIG_ROOT/aliases.sh"
+if [ -f "$ZDOTDIR/aliases.sh" ]; then
+    source "$ZDOTDIR/aliases.sh"
 fi
 
 #   Define function
 #   ---------------------------------------------------------------------------
 
-if [ -f "$ZSH_CONFIG_ROOT/functions.sh" ]; then
-    source "$ZSH_CONFIG_ROOT/functions.sh"
+if [ -f "$ZDOTDIR/functions.sh" ]; then
+    source "$ZDOTDIR/functions.sh"
 fi
 
-neofetch
+neofetch --ascii_colors 1 --colors 1 1 1 1 7 7 

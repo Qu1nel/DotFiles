@@ -1,4 +1,4 @@
-return "gruvbox"
+return "ayu"
 -- Dark:
 --      gruvbox,
 --      ayu,

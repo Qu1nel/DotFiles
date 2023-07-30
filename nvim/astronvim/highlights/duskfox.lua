@@ -1,3 +1,3 @@
-return { -- a table of overrides/changes to the duskfox theme
+return {
     Normal = { bg = "#000000" },
 }

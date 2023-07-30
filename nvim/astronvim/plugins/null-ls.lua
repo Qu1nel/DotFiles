@@ -8,7 +8,15 @@ return {
 
         config.sources = {
             formatting.clang_format.with { extra_args = { "-style=file:/home/un/.clang-format" } },
-            linters.cpplint.with { args = { "--linelength", "120", "--filter=-legal", "$FILENAME" } },
+
+            linters.cpplint.with {
+                args = {
+                    "--linelength",
+                    "120",
+                    "--filter=-legal/copyright,-whitespace/braces,-readability/casting",
+                    "$FILENAME",
+                },
+            },
         }
 
         return config

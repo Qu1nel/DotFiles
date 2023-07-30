@@ -9,6 +9,7 @@ return {
     StatusLine = {},
     NeoTreeNormal = { bg = nil, ctermbg = nil },
     NeoTreeNormalNC = { bg = nil, ctermbg = nil },
+
     require("notify").setup {
         background_colour = "#000000",
     },

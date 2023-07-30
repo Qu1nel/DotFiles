@@ -1,50 +1,42 @@
 local keymaps = { n = {}, i = {}, v = {} }
 
--- --*[ Default:
+-- Default:
 keymaps.n["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" }
--- --*]
 
--- --*[ disable default:
+-- Disable default:
 -- Makes more sense to use "\" as vert split and "|" as split, because I use vert split more often
 keymaps.n["<leader>bb"] = false
 keymaps.n["<leader>bd"] = false
--- --*]
 
--- --*[ Quick command:
+-- Quick command:
 keymaps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 keymaps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force save file" }
--- --*]
 
--- --*[ Insert mode:
+-- Insert mode:
 keymaps.i["kj"] = { "<esc>", desc = "Command mode" }
--- --*]
---
--- --*[ Z mode:
+
+-- Z mode:
 keymaps.n["<F2>"] = {
     function() vim.cmd "Z" end,
     desc = "Z mode",
 }
--- --*]
 
--- --*[ Better gg and G:
+-- Better gg and G:
 keymaps.n["gj"] = { "G", desc = "go to last line" }
 keymaps.n["gk"] = { "gg", desc = "go to first line" }
 keymaps.v["gj"] = { "G", desc = "go to last line" }
 keymaps.v["gk"] = { "gg", desc = "go to first line" }
--- --*]
 
--- --*[ Better gg and G:
+-- Better gg and G:
 keymaps.n["gh"] = { "^", desc = "go to beginning of the line (^)" }
 keymaps.n["gl"] = { "$", desc = "go to end of the line ($)" }
 keymaps.v["gh"] = { "^", desc = "go to beginning of the line (^)" }
 keymaps.v["gl"] = { "$", desc = "go to end of the line ($)" }
--- --*]
 
--- --*[ Buffers keymaps:
--- Close buffers
+-- Close buffers:
 keymaps.n["<leader>c"] = {
     function() require("astronvim.utils.buffer").close() end,
-    desc = " Close current buffer",
+    desc = "Close current buffer",
 }
 keymaps.n["<leader>C"] = {
     function() require("astronvim.utils.buffer").close(0, true) end,
@@ -68,11 +60,11 @@ keymaps.n["<leader>bd"] = {
 }
 
 -- Switch buffers
-keymaps.n["<leader>bl"] = {
+keymaps.n["<tab>"] = {
     function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
     desc = "Next buffer",
 }
-keymaps.n["<leader>bh"] = {
+keymaps.n["<S-tab>"] = {
     function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
     desc = "Rrevious buffer",
 }
@@ -104,6 +96,5 @@ keymaps.n["<leader>bs"] = {
     end,
     desc = "Horisontal file diff pick buffer",
 }
--- --*] # Buffers keymaps
 
 return keymaps

@@ -25,6 +25,9 @@ export EDITOR=nvim
 # Make git enviroment.
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
+# To configure rust
+source "$HOME/.cargo/env"
+
 #   Command history
 #   ---------------------------------------------------------------------------
 

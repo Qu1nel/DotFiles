@@ -27,6 +27,9 @@ export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 # Make starship config file location
 export STARSHIP_CONFIG="$BASH_CONFIG_ROOT/bash_prompts/starship/settings/starship.toml"
 
+# To configure rust
+source "$HOME/.cargo/env"
+
 #   Command history
 #   ---------------------------------------------------------------------------
 export HISTFILESIZE=10000

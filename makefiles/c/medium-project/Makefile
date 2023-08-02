@@ -58,12 +58,12 @@ DIR_DUP     = mkdir -p $(@D)
 # 	RECIPES                                                                                        #
 #--------------------------------------------------------------------------------------------------#
 # all 				- Alias for build                                                              #
-# $(TARGET) 		- Linking *.o + *.a -> executable file                                         #
+# $(TARGET) 		- Linking *.o -> executable file                                               #
 # %.o 		- Compilation source files *.c -> *.o                                                  #
 # build 	- Build this project                                                                   #
 # re 		- Rebuild this project                                                                 #
-# clean 	- Remove all *.o and *.d                                                               #
-# fcrean 	- Remove all *.o and *.d + executable                                                  #
+# clean 	- Remove all *.o                                                                       #
+# fcrean 	- Remove all *.o + executable                                                          #
 #                                                                                                  #
 # help 		- Show help about commands (DEFAULT GOAL)                                              #
 # info-% 	- Rule will execute a make % command with --dry-run                                    #

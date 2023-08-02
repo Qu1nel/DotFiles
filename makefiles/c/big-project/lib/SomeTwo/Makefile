@@ -73,7 +73,7 @@ DIR_DUP     = mkdir -p $(@D)
 # clean 	- Remove all *.o and *.d                                                               #
 # fcrean 	- Remove all *.o and *.d + library                                                     #
 #                                                                                                  #
-# help 		- Show help about commands (DEFAULT GOAL)                                              #
+# help 		- Show help about commands                                                             #
 # info-% 	- Rule will execute a make % command with --dry-run                                    #
 # print-% 	- That works like print-<rule> will print the value of an arbitrary variable           #
 #--------------------------------------------------------------------------------------------------#

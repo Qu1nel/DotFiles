@@ -1,102 +1,93 @@
-# @author Qu1nel (Иван Ковач, "Ivan Kovach")
-######################################  MEDIUM  ##
-#
-# This Makefile-template is used for medium
-# projects which have a source code folder and
-# also assume a "obj" folder which will include
-# object files and folder "include" which will
-# include header files.
+# @author Qu1nel (Иван Ковач, "Ivan Kovach") 2023
+###################################################################  MEDIUM  ##
+##
+## This Makefile-template is used for medium projects which have a source code
+## folder and also assume a "objects" folder which will include object files
+## and folder "include" which will include header files.
+##
+####################################################################  DESC  ##
 
-#------------------------------------------------#
-# 	VARIABLES                                    #
-#------------------------------------------------#
-# TARGET 	- Main purpose, executable file,
-# 			   binary, make result
-#
-# SRC_DIR 	- Source directory
-# INCLD_DIR - Include directory
-# OBJ_DIR 	- Object directory
-#
-# CC 		- Compiler
-# CFLAGS 	- Compiler flags
-# CPPFLAGS 	- Preprocessor flags
-# LDFLAGS 	- Linker flags
-#
-# ALL_SRCS 	- All source code files find
-# SOURCES 	- Source files (with SRC_DIR)
-# OBJECTS 	- Object files
-#
-# RM 		- Force remove
-# MAKEFLAGS - Make flags
-# DIR_DUP 	- Duplicate directory tree
+#----------------------------------------------------------------------------#
+# 	VARIABLES                                                                #
+#----------------------------------------------------------------------------#
+# TARGET 	- Main purpose, executable file                                  #
+#                                                                            #
+# SRC_DIR 	- Source directory                                               #
+# INCLD_DIR - Include directory                                              #
+# OBJ_DIR 	- Object directory                                               #
+#                                                                            #
+# CC 		- Compiler                                                       #
+# CFLAGS 	- Compiler flags                                                 #
+# CPPFLAGS 	- Preprocessor flags                                             #
+# LDFLAGS 	- Linker flags                                                   #
+#                                                                            #
+# OBJECTS 	- Object files                                                   #
+#                                                                            #
+# RM 		- Force remove                                                   #
+# MAKEFLAGS - Make flags                                                     #
+# DIR_DUP 	- Duplicate directory tree                                       #
+#----------------------------------------------------------------------------#
 
 
 TARGET 		:= main
 
+EXTERN_LIBS := 
+
 SRC_DIR     := src
 INCLD_DIR 	:= include
-OBJ_DIR     := obj
+OBJ_DIR     := objects
 
 CC 			:= clang
-# optimization: -O2 -Os -O3
-# testing: -Werror -Wshadow
-# pedantic mode: -Wpedantic -predantic
-CFLAGS 		:= -Wall -Wextra -Wpedantic -pedantic -O2
-CPPFLAGS 	:= -I $(INCLD_DIR)
-LDFLAGS 	:=
+CFLAGS 		:= -std=c17 -Wall -Wextra -Werror -Wshadow -Wvla -Walloca -Wundef -Wfloat-equal \
+			   -Wstrict-prototypes -Wconversion -Wswitch-enum -Wswitch-default -Wimplicit-fallthrough \
+			   -Wunreachable-code -Wformat=2 -Wparentheses -Wmisleading-indentation -Wpedantic -pedantic -O2
 
-ALL_SRCS  	:= $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)
-SOURCES		:= $(ALL_SRCS:$(SRC_DIR)/%=%)
-OBJECTS     := $(SOURCES:%.c=$(OBJ_DIR)/%.o)
+CPPFLAGS 	:= -I$(INCLD_DIR)
+LDFLAGS 	:= $(addprefix -l,$(EXTERN_LIBS))
+
+OBJECTS     := $(patsubst %.c, $(OBJ_DIR)/%.o, $(patsubst $(SRC_DIR)/%, %, $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)))
 
 RM          := rm -f
 MAKEFLAGS 	+= --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
 
 
-#------------------------------------------------#
-# 	RECIPES                                      #
-#------------------------------------------------#
-# all 		- Default goal
-# $(TARGET) - Linking *.o -> binary
-# %.o 		- Compilation source files *.c -> *.o
-# build 	- Rebuild binary
-# re 		- Remake default goal
-# run 		- Run binary file
-# clean 	- Remove *.o
-# fcrean 	- Remove *.o + binary
-#
-# help 		- Show help about commands
-# info-% 	- Rule will execute a make % command
-# 			   with --dry-run
-# print-% 	- That works like print-<rule> will
-# 			   print the value of an arbitrary variable
+#--------------------------------------------------------------------------------------------------#
+# 	RECIPES                                                                                        #
+#--------------------------------------------------------------------------------------------------#
+# all 				- Alias for build                                                              #
+# $(TARGET) 		- Linking *.o + *.a -> executable file                                         #
+# %.o 		- Compilation source files *.c -> *.o                                                  #
+# build 	- Build this project                                                                   #
+# re 		- Rebuild this project                                                                 #
+# clean 	- Remove all *.o and *.d                                                               #
+# fcrean 	- Remove all *.o and *.d + executable                                                  #
+#                                                                                                  #
+# help 		- Show help about commands (DEFAULT GOAL)                                              #
+# info-% 	- Rule will execute a make % command with --dry-run                                    #
+# print-% 	- That works like print-<rule> will print the value of an arbitrary variable           #
+#--------------------------------------------------------------------------------------------------#
 
 
 .PHONY: all
-all: $(TARGET)
+all: build
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $(TARGET)
-	$(info LINKED $@ : $(CC) $(LDFLAGS) $(OBJECTS) -o $(TARGET))
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(info [LINKING] $@ : $(CC) $(OBJECTS) $(LDFLAGS) -o $@)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	$(info COMPILED $@ : $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<)
+	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+	$(info [COMPILED] $@ : $(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS))
 
 .PHONY: build
-build: all  ## Compile project
+build: $(TARGET)  ## Compile project
 
 .PHONY: re
 re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
-
-.PHONY: run
-run: $(TARGET)  ## Run executable file
-	$(info Starting $(TARGET))
-	./$(TARGET)
 
 .PHONY: clean
 clean:  ## Remove all object files
@@ -111,7 +102,7 @@ fclean: clean  ## Remove main executable file
 .DEFAULT_GOAL := help
 .PHONY: help
 help:  ## Show this output, i.e. help to use the commands
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

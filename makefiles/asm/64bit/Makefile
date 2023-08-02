@@ -1,33 +1,33 @@
-# @author Qu1nel (Иван Ковач, "Ivan Kovach")
-###################################  ASM 64bit  ##
-#
-# This Makefile-template is used for small
-# 64-bit assembly language projects
+# @author Qu1nel (Иван Ковач, "Ivan Kovach") 2023
+###############################################################  ASM 32bit  ##
+##
+## This Makefile-template is used for small 64-bit assembly language projects
+##
+####################################################################  DESC  ##
 
-#------------------------------------------------#
-# 	VARIABLES                                    #
-#------------------------------------------------#
-# TARGET 	- Main purpose, executable file,
-# 			   binary, make result
-#
-# BLD_DIR 	- Build directory
-#
-# CC 		- Compiler
-# CFLAGS 	- Compiler flags
-# CPPFLAGS 	- Preprocessor flags
-# LFLAGS 	- Linker flags
-#
-# SOURCES 	- Source files
-# OBJECTS 	- Object files
-#
-# RM 		- Force remove
-# MAKEFLAGS - Make flags
-# DIR_DUP 	- Duplicate directory tree
-
+#----------------------------------------------------------------------------#
+# 	VARIABLES                                                                #
+#----------------------------------------------------------------------------#
+# TARGET 	- Main purpose, executable file                                  #
+#                                                                            #
+# BLD_DIR 	- Build directory                                                #
+#                                                                            #
+# CC 		- Compiler                                                       #
+# CFLAGS 	- Compiler flags                                                 #
+# CPPFLAGS 	- Preprocessor flags                                             #
+# LDFLAGS 	- Linker flags                                                   #
+#                                                                            #
+# SOURCES 	- Source files                                                   #
+# OBJECTS 	- Object files                                                   #
+#                                                                            #
+# RM 		- Force remove                                                   #
+# MAKEFLAGS - Make flags                                                     #
+# DIR_DUP 	- Duplicate directory tree                                       #
+#----------------------------------------------------------------------------#
 
 TARGET 		:= main
 
-BLD_DIR     := .build
+BLD_DIR     := build
 
 CC 			:= nasm
 CPPFLAGS 	:= 
@@ -35,65 +35,60 @@ CFLAGS 		:= -f elf64
 LFLAGS 		:= -m elf_x86_64
 
 SOURCES 	:= $(wildcard *.asm)
-OBJECTS     := $(SOURCES:%.asm=$(BLD_DIR)/%.o)
+OBJECTS     := $(SOURCES:%.asm=%.o)
 
 RM 			:= rm -rf
 MAKEFLAGS 	+= --no-print-directory
 DIR_DUP 	= mkdir -p ${@D}
 
 
-#------------------------------------------------#
-# 	RECIPES                                      #
-#------------------------------------------------#
-# all 		- Default goal
-# $(TARGET) - Linking *.o -> binary
-# %.o 		- Compilation source files *.asm -> *.o
-# build 	- Rebuild binary
-# re 		- Remake default goal
-# run 		- Run binary file
-# clean 	- Remove *.o
-# fcrean 	- Remove *.o + binary
-#
-# info-% 	- Rule will execute a make % command
-# 			   with --dry-run
-# print-% 	- That works like print-<rule> will
-# 			   print the value of an arbitrary variable
+#--------------------------------------------------------------------------------------------------#
+# 	RECIPES                                                                                        #
+#--------------------------------------------------------------------------------------------------#
+# all 				- Alias for build                                                              #
+# $(TARGET) 		- Linking *.o -> executable file                                               #
+# $(OBJECTS) 		- Compilation source files *.asm -> *.o                                        #
+# build 	- Build this project                                                                   #
+# re 		- Rebuild this project                                                                 #
+# clean 	- Remove all *.o                                                                       #
+# fcrean 	- Remove all *.o + executable                                                          #
+#                                                                                                  #
+# help 		- Show help about commands (DEFAULT GOAL)                                              #
+# info-% 	- Rule will execute a make % command with --dry-run                                    #
+# print-% 	- That works like print-<rule> will print the value of an arbitrary variable           #
+#--------------------------------------------------------------------------------------------------#
 
 
 .PHONY: all
-all: $(TARGET)
+all: build
 
 $(TARGET): $(OBJECTS) 
 	ld $(LFLAGS) $(OBJECTS) -o $@
 
 $(OBJECTS): $(SOURCES)
 	$(DIR_DUP)
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $< $(CFLAGS) -o $@
 
 .PHONY: build
-build: all  ## Compile project
+build: $(TARGET)  ## Compile project
 
 .PHONY: re
 re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: run
-run:  ## Run executable file
-	./$(TARGET)
-
 .PHONY: clean
 clean:  ## Remove all object files
 	$(RM) $(OBJECTS)
 
 .PHONY: fclean
-fclean: clean  ## Remove executable file
+fclean: clean  ## Remove all executable files + object files
 	$(RM) $(TARGET)
 
 .DEFAULT_GOAL := help
 .PHONY: help
 help:  ## Show this output, i.e. help to use the commands
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

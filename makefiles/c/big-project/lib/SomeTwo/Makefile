@@ -33,23 +33,25 @@
 # DIR_DUP 	- Duplicate directory tree
 
 
-TARGET 		:= libone.a
+LIBNAME 	:= SomeTwo
+TARGET_NAME := lib$(LIBNAME).a
 
 SRC_DIR     := src
 INCLD_DIR 	:= include
 BUILD_DIR   := .build
+OBJ_DIR 	:= $(BUILD_DIR)/objects
 
-ALL_SRCS  	:= $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)
-SOURCES		:= $(ALL_SRCS:$(SRC_DIR)/%=%)
-OBJECTS     := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+TARGET 		:= $(BUILD_DIR)/$(TARGET_NAME)
+
+OBJECTS     := $(patsubst %.c, $(OBJ_DIR)/%.o, $(patsubst $(SRC_DIR)/%, %, $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)))
 DEPS 		:= $(OBJECTS:.o=.d)
 
 CC 			:= clang
-# optimization: -O2 -Os -O3
-# testing: -Werror -Wshadow
-# pedantic mode: -Wpedantic -predantic
-CFLAGS 		:= -Wall -Wextra -Wpedantic -pedantic -O2
-CPPFLAGS 	:= -MMD -MP -I $(INCLD_DIR)
+CFLAGS 		:= -std=c17 -Wall -Wextra -Werror -Wshadow -Wvla -Walloca -Wundef -Wfloat-equal \
+			   -Wstrict-prototypes -Wconversion -Wswitch-enum -Wswitch-default -Wimplicit-fallthrough \
+			   -Wunreachable-code -Wformat=2 -Wparentheses -Wmisleading-indentation -Wpedantic -pedantic -O2
+
+CPPFLAGS 	:= -I$(INCLD_DIR) -MMD -MP
 LDFLAGS 	:=
 AR 			:= ar
 ARFLAGS 	:= -r -c -s
@@ -77,37 +79,42 @@ DIR_DUP     = mkdir -p $(@D)
 
 
 .PHONY: all
-all: $(TARGET)
+all: build
 
 $(TARGET): $(OBJECTS)
 	$(AR) $(ARFLAGS) $(TARGET) $(OBJECTS)
-	$(shell ranlib $(TARGET))
-	$(info CREATED $@ : $(AR) $(ARFLAGS) $(TARGET) $(OBJECTS))
+	$(info [BUILD] $@ : $(AR) $(ARFLAGS) $(TARGET) $(OBJECTS))
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	$(info COMPILED $@ : $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<)
+	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+	$(info [COMPILED] $@ : $(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS))
 
 -include $(DEPS)
 
 .PHONY: build
-build: $(TARGET)
+build: $(TARGET)  ## Build library
+	$(shell ranlib $(TARGET))
+	$(info [RABLIB] ralib $(TARGET))
 
 .PHONY: re
-re:
+re:  # Rebuild library
 	$(MAKE) fclean
 	$(MAKE) all
 
 .PHONY: clean
-clean:
+clean:  ## Remove all object and dep files
 	$(info $(RM) $(OBJECTS) $(DEPS))
 	$(RM) $(OBJECTS) $(DEPS)
 
 .PHONY: fclean
-fclean: clean
+fclean: clean  ## Remove library + all object files + dep files
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
+
+.PHONY: help
+help:  ## Show this output, i.e. help to use the commands
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

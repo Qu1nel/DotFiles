@@ -9,10 +9,12 @@
 #------------------------------------------------#
 # 	VARIABLES                                    #
 #------------------------------------------------#
-# TARGET 		- Main purpose, static library,
-# 			   		archive, make result
+# TARGET_NAME 	- Name for final result of make
 #
 # LIBS 			- Libraries to be used
+# LBUILD_DIR 	- Dir which include release lib
+# LIBS_TARGET 	- Paths to libs
+#
 # LIBS_TARGET 	- Libraries to be built
 #
 # INCLD_NAME 	- Name for include folder
@@ -21,6 +23,9 @@
 # INCLDS 	 	- All include folder find
 # INCLD_DIRS 	- Include directories (correct format)
 # BUILD_DIR 	- Build directory
+#
+# TARGET 		- Main purpose, static library,
+# 			   		archive, make result
 #
 # CC 			- Compiler
 # CFLAGS 		- Compiler flags
@@ -38,33 +43,38 @@
 # DIR_DUP 		- Duplicate directory tree
 
 
-TARGET 		:= main
+TARGET_NAME	:= main
 
-# NOTE: !!! > EDIT < !!!
-LIBS 		:= one two m
-LIBS_TARGET := lib/library1/libone.a lib/library2/libtwo.a
-# NOTE: !!! ^ EDIT ^ !!!
+LIBS 		:= SomeOne SomeTwo
+EXTERN_LIBS := m
 
-INCLD_NAME 	:= include
+LDIR_NAME 	:= lib
+LBUILD_DIR 	:= .build
+LIBS_TARGET := $(foreach l, $(LIBS), $(LDIR_NAME)/$(l)/$(LBUILD_DIR)/lib$(l).a)
+LIBS_DIRS 	:= $(dir $(LIBS_TARGET))
+
+IDIR_NAME 	:= include
 
 SRC_DIR     := src
-INCLDS 		:= $(shell find . -type d -name '$(INCLD_NAME)' 2>/dev/null)
-INCLD_DIRS 	:= $(INCLDS:./%=%)
 BUILD_DIR   := .build
 
-ALL_SRCS  	:= $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)
-SOURCES		:= $(ALL_SRCS:$(SRC_DIR)/%=%)
-OBJECTS     := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+INCLDS 		:= $(patsubst ./%, %, $(shell find . -type d -name '$(IDIR_NAME)' 2>/dev/null))
+OBJ_DIR 	:= $(BUILD_DIR)/objects
+EXEC_DIR 	:= $(BUILD_DIR)/release
+
+TARGET 		:= $(EXEC_DIR)/$(TARGET_NAME)
+
+OBJECTS     := $(patsubst %.c, $(OBJ_DIR)/%.o, $(patsubst $(SRC_DIR)/%, %, $(shell find $(SRC_DIR) -type f -name '*.c' 2>/dev/null)))
 DEPS 		:= $(OBJECTS:.o=.d)
 
 CC 			:= clang
-# optimization: -O2 -Os -O3
-# testing: -Werror -Wshadow
-# pedantic mode: -Wpedantic -predantic
-CFLAGS 		:= -Wall -Wextra -Wpedantic -pedantic -O2
-CPPFLAGS 	:= $(addprefix -I,$(INCLD_DIRS)) -MMD -MP
+CFLAGS 		:= -std=c17 -Wall -Wextra -Werror -Wshadow -Wvla -Walloca -Wundef -Wfloat-equal \
+			   -Wstrict-prototypes -Wconversion -Wswitch-enum -Wswitch-default -Wimplicit-fallthrough \
+			   -Wunreachable-code -Wformat=2 -Wparentheses -Wmisleading-indentation -Wpedantic -pedantic -O2
+
+CPPFLAGS 	:= $(addprefix -I,$(INCLDS)) -MMD -MP
 LDFLAGS 	:= $(addprefix -L,$(dir $(LIBS_TARGET)))
-LDLIBS 		:= $(addprefix -l,$(LIBS))
+LDLIBS 		:= $(addprefix -l,$(LIBS)) $(addprefix -l,$(EXTERN_LIBS))
 
 RM          := rm -f
 MAKEFLAGS 	+= --silent --no-print-directory
@@ -90,21 +100,23 @@ DIR_DUP     = mkdir -p $(@D)
 # print-% 	- That works like print-<rule> will
 # 			   print the value of an arbitrary variable
 
-
 .PHONY: all
-all: $(TARGET)
+all: build
 
 $(TARGET): $(OBJECTS) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJECTS) $(LDLIBS) -o $@
-	$(info CREATED $@ $(CC) $(LDFLAGS) $(OBJECTS) $(LDLIBS) -o $@)
+	$(DIR_DUP)
+	$(CC) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
+	$(info [LINKING] $@ : $(CC) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@)
 
 $(LIBS_TARGET):
-	$(MAKE) -C $(@D)
+	for d in $(LIBS_DIRS:%$(LBUILD_DIR)/=%); do \
+		$(MAKE) -C $$d; \
+	done
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	$(info COMPILED $@ : $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<)
+	$(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
+	$(info [COMPILED] $@ : $(CC) -c $< -o $@ $(CFLAGS) $(CPPFLAGS))
 
 -include $(DEPS)
 
@@ -116,27 +128,22 @@ re:  ## Recompile project
 	$(MAKE) fclean
 	$(MAKE) all
 
-.PHONY: run
-run: $(TARGET)  ## Run executable file
-	$(info Starting $(TARGET))
-	./$(TARGET)
-
 .PHONY: clean
 clean:  ## Remove all object and dep files
-	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f clean; done
+	for f in $(LIBS_DIRS:%$(LBUILD_DIR)/=%); do $(MAKE) -C $$f clean; done
 	$(info $(RM) $(OBJECTS) $(DEPS))
 	$(RM) $(OBJECTS) $(DEPS)
 
 .PHONY: fclean
-fclean: clean  ## Remove all executable files
-	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f fclean; done
+fclean: clean  ## Remove all executable files + object + dep files
+	for f in $(LIBS_DIRS:%$(LBUILD_DIR)/=%); do $(MAKE) -C $$f fclean; done
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
 
 .DEFAULT_GOAL := help
 .PHONY: help
 help:  ## Show this output, i.e. help to use the commands
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 info-%:
 	@make --dry-run --always-make $* | grep -v "info"

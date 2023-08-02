@@ -12,6 +12,8 @@
 #----------------------------------------------------------------------------#
 # TARGET 	- Main purpose, executable file                                  #
 #                                                                            #
+# EXTERN_LIBS 	- Extern libraries from system (math etc.)                   #
+#                                                                            #
 # SRC_DIR 	- Source directory                                               #
 # INCLD_DIR - Include directory                                              #
 # OBJ_DIR 	- Object directory                                               #
@@ -95,7 +97,7 @@ clean:  ## Remove all object files
 	$(RM) $(OBJECTS)
 
 .PHONY: fclean
-fclean: clean  ## Remove main executable file
+fclean: clean  ## Remove all executable files + object files
 	$(info $(RM) $(TARGET))
 	$(RM) $(TARGET)
 

@@ -20,6 +20,7 @@ cp -iv "$currentPath/.zshrc" "$ZSHRC_PATH"
 cp -iv "$currentPath/.zshenv" "$HOME"
 
 CONFIG_CONTENT=(
+    ".p10k.zsh"
     "paths.sh"
     "aliases.sh"
     "functions.sh"

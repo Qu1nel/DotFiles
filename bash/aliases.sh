@@ -35,7 +35,8 @@ alias de="cd ~/Desktop"
 
 alias ls='exa --icons'
 alias l='exa --classify --icons'
-alias la='exa --all --classify --icons'
+alias la='exa --all --classify --icons --group-directories-first'
+alias lat='la -T'
 alias ll='exa -bghiHS --long --group-directories-first'
 alias lla='ll --all'
 alias llat='lla -T'

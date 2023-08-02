@@ -1,46 +1,49 @@
-# @author Qu1nel (Иван Ковач, "Ivan Kovach")
-#######################################  LARGE  ##
-#
-# This Makefile-template is used for larger
-# projects that use libraries with their own
-# Makefile, as well as a '.build' directory and a
-# directory for header files - 'include'.
+# @author Qu1nel (Иван Ковач, "Ivan Kovach") 2023
+###################################################################  LARGE  ##
+##
+## 	This Makefile-template is used for larger projects that use libraries with
+## 	their own Makefile, as well as a '.build' directory and a directory for
+## 	header files - 'include'.
+##
+####################################################################  DESC  ##
 
-#------------------------------------------------#
-# 	VARIABLES                                    #
-#------------------------------------------------#
-# TARGET_NAME 	- Name for final result of make
-#
-# LIBS 			- Libraries to be used
-# LBUILD_DIR 	- Dir which include release lib
-# LIBS_TARGET 	- Paths to libs
-#
-# LIBS_TARGET 	- Libraries to be built
-#
-# INCLD_NAME 	- Name for include folder
-#
-# SRC_DIR 		- Source directory
-# INCLDS 	 	- All include folder find
-# INCLD_DIRS 	- Include directories (correct format)
-# BUILD_DIR 	- Build directory
-#
-# TARGET 		- Main purpose, static library,
-# 			   		archive, make result
-#
-# CC 			- Compiler
-# CFLAGS 		- Compiler flags
-# CPPFLAGS 		- Preprocessor flags
-# LDFLAGS 		- Linker flags
-# LDLIBS 		- Libraries name
-#
-# ALL_SRCS 		- All source code files find
-# SOURCES 		- Source files (with SRC_DIR)
-# OBJECTS 		- Object files
-# DEPS 			- Dependency files
-#
-# RM 			- Force remove
-# MAKEFLAGS 	- Make flags
-# DIR_DUP 		- Duplicate directory tree
+#----------------------------------------------------------------------------#
+# 	VARIABLES                                                                #
+#----------------------------------------------------------------------------#
+# TARGET_NAME 	- Name for final result of make                              #
+#                                                                            #
+# LIBS 			- Own libraries to be used                                   #
+# EXTERN_LIBS 	- Extern libraries from system (math etc.)                   #
+#                                                                            #
+# LDIR_NAME 	- Name of directory with dependent libraries                 #
+# LBUILD_DIR 	- Directory which include release library                    #
+# LIBS_TARGET 	- Paths to 'lib.a'                                           #
+# LIBS_DIRS 	- Paths to purposeful directory of library                   #
+#                                                                            #
+# IDIR_NAME 	- Name for 'include' folder                                  #
+#                                                                            #
+# SRC_DIR 		- Name for source directory                                  #
+# BUILD_DIR 	- Name for build directory                                   #
+#                                                                            #
+# INCLDS 	 	- All include folder find                                    #
+# OBJ_DIR 		- Name for object files in build directory                   #
+# EXEC_DIR 		- Name folder for executable target                          #
+#                                                                            #
+# TARGET 		- Main target in EXEC_DIR                                    #
+#                                                                            #
+# OBJECTS 		- Object files                                               #
+# DEPS 			- Dependency files                                           #
+#                                                                            #
+# CC 			- Compiler                                                   #
+# CFLAGS 		- Compiler flags                                             #
+# CPPFLAGS 		- Preprocessor flags                                         #
+# LDFLAGS 		- Linker flags                                               #
+# LDLIBS 		- Libraries name                                             #
+#                                                                            #
+# RM 			- Force remove                                               #
+# MAKEFLAGS 	- Make flags                                                 #
+# DIR_DUP 		- Duplicate directory tree                                   #
+#----------------------------------------------------------------------------#
 
 
 TARGET_NAME	:= main
@@ -81,24 +84,23 @@ MAKEFLAGS 	+= --silent --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
 
 
-#------------------------------------------------#
-# 	RECIPES                                      #
-#------------------------------------------------#
-# all 		- Default goal
-# $(TARGET) - Linking *.o -> archive
-# $(LIBS) 	- Build libraries
-# %.o 		- Compilation source files *.c -> *.o
-# build 	- Rebuild archive
-# re 		- Remake default goal
-# run 		- Run program
-# clean 	- Remove *.o and *.d
-# fcrean 	- Remove *.o and *.d + binary
-#
-# help 		- Show help about commands
-# info-% 	- Rule will execute a make % command
-# 			   with --dry-run
-# print-% 	- That works like print-<rule> will
-# 			   print the value of an arbitrary variable
+#--------------------------------------------------------------------------------------------------#
+# 	RECIPES                                                                                        #
+#--------------------------------------------------------------------------------------------------#
+# all 				- Alias for build                                                              #
+# $(TARGET) 		- Linking *.o + *.a -> executable file                                         #
+# $(LIBS_TARGET) 	- Build libraries                                                              #
+# %.o 		- Compilation source files *.c -> *.o                                                  #
+# build 	- Build this project                                                                   #
+# re 		- Rebuild this project                                                                 #
+# clean 	- Remove all *.o and *.d                                                               #
+# fcrean 	- Remove all *.o and *.d + executable                                                  #
+#                                                                                                  #
+# help 		- Show help about commands (DEFAULT GOAL)                                              #
+# info-% 	- Rule will execute a make % command with --dry-run                                    #
+# print-% 	- That works like print-<rule> will print the value of an arbitrary variable           #
+#--------------------------------------------------------------------------------------------------#
+
 
 .PHONY: all
 all: build

@@ -1,36 +1,38 @@
-# @author Qu1nel (Иван Ковач, "Ivan Kovach")
-##############################  Static Library  ##
-#
-# This Makefile template is used for static
-# library projects .a for C, including the
-# '.build' folder and 'include' folder for keep
-# header files.
+# @author Qu1nel (Иван Ковач, "Ivan Kovach") 2023
+##########################################################  Static Library  ##
+##
+## This Makefile template is used for static library projects .a for C,
+## including the '.build' folder and 'include' folder for keep header files.
+##
+####################################################################  DESC  ##
 
-#------------------------------------------------#
-# 	VARIABLES                                    #
-#------------------------------------------------#
-# TARGET 	- Main purpose, static library,
-# 			   archive, make result
-#
-# SRC_DIR 	- Source directory
-# INCLD_DIR - Include directory
-# BUILD_DIR - Build directory
-#
-# CC 		- Compiler
-# CFLAGS 	- Compiler flags
-# CPPFLAGS 	- Preprocessor flags
-# LDFLAGS 	- Linker flags
-# AR 		- Object file archiver
-# ARFLAGS 	- Archiver flags
-#
-# ALL_SRCS 	- All source code files find
-# SOURCES 	- Source files (with SRC_DIR)
-# OBJECTS 	- Object files
-# DEPS 		- Dependency files
-#
-# RM 		- Force remove
-# MAKEFLAGS - Make flags
-# DIR_DUP 	- Duplicate directory tree
+#----------------------------------------------------------------------------#
+# 	VARIABLES                                                                #
+#----------------------------------------------------------------------------#
+# TARGET 		- Name of result static library                              #
+# TARGET_NAME 	- Full-fledged name of static library                        #
+#                                                                            #
+# SRC_DIR 		- Name for source directory                                  #
+# INCLD_DIR 	- Nmae for include directory                                 #
+# BUILD_DIR 	- Name for build directory                                   #
+# OBJ_DIR 		- Name for object files in build directory                   #
+#                                                                            #
+# TARGET 		- Main target in EXEC_DIR                                    #
+#                                                                            #
+# OBJECTS 		- Object files                                               #
+# DEPS 			- Dependency files                                           #
+#                                                                            #
+# CC 			- Compiler                                                   #
+# CFLAGS 		- Compiler flags                                             #
+# CPPFLAGS 		- Preprocessor flags                                         #
+# AR 	 		- Object file archiver                                       #
+# ARFLAGS  		- Archiver flags                                             #
+#                                                                            #
+# RM 			- Force remove                                               #
+# MAKEFLAGS 	- Make flags                                                 #
+# DIR_DUP 		- Duplicate directory tree                                   #
+#----------------------------------------------------------------------------#
+
 
 LIBNAME 	:= SomeOne
 TARGET_NAME := lib$(LIBNAME).a
@@ -60,21 +62,21 @@ MAKEFLAGS 	+= --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
 
 
-#------------------------------------------------#
-# 	RECIPES                                      #
-#------------------------------------------------#
-# all 		- Default goal
-# $(TARGET) - Linking *.o -> library
-# %.o 		- Compilation source files *.c -> *.o
-# build 	- Rebuild library
-# re 		- Remake default goal
-# clean 	- Remove *.o and *.d
-# fcrean 	- Remove *.o and *.d + library
-#
-# info-% 	- Rule will execute a make % command
-# 			   with --dry-run
-# print-% 	- That works like print-<rule> will
-# 			   print the value of an arbitrary variable
+#--------------------------------------------------------------------------------------------------#
+# 	RECIPES                                                                                        #
+#--------------------------------------------------------------------------------------------------#
+# all 		- Alias for build (DEFAULT GOAL)                                                       #
+# $(TARGET)	- Linking *.o + *.a -> static library                                                  #
+# %.o 		- Compilation source files *.c -> *.o                                                  #
+# build 	- Build library                                                                        #
+# re 		- Rebuild library 	                                                                   #
+# clean 	- Remove all *.o and *.d                                                               #
+# fcrean 	- Remove all *.o and *.d + library                                                     #
+#                                                                                                  #
+# help 		- Show help about commands (DEFAULT GOAL)                                              #
+# info-% 	- Rule will execute a make % command with --dry-run                                    #
+# print-% 	- That works like print-<rule> will print the value of an arbitrary variable           #
+#--------------------------------------------------------------------------------------------------#
 
 
 .PHONY: all

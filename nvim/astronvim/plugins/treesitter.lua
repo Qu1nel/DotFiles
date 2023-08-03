@@ -27,6 +27,7 @@ return {
             "make",
             "markdown",
             "passwd",
+            "perl",
             "python",
             "regex",
             "rust",

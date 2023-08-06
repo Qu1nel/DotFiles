@@ -20,4 +20,6 @@
 
 ## License
 
-This software in distributive under the **[MIT License](./LICENSE)**, and it also uses those codes that are distributed under the **[MIT License](./LICENSE)**.
+[MIT](./LICENSE) © [Ivan Kovach](https://github.com/Qu1nel/)
+
+This Project Qu1nel.DotConfigs in distributive under the **[MIT License](./LICENSE)**, and it also uses those codes that are distributed under the **[MIT License](./LICENSE)**.

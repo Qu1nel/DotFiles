@@ -3,6 +3,7 @@ __pycache__
 .build/
 build/
 *.png
+!.github/assets/*.png
 *.jpg
 *.a
 *.o

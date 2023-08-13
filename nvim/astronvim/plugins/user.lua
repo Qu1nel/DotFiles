@@ -1,5 +1,4 @@
 return {
-    "Wansmer/langmapper.nvim",
     "p00f/clangd_extensions.nvim",
 
     {

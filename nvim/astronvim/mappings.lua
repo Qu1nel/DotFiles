@@ -19,7 +19,6 @@ keymaps.n["<C-ы>"] = keymaps.n["<C-s>"]
 
 -- Insert mode:
 keymaps.i["kj"] = { "<esc>", desc = "Command mode" }
-keymaps.i["ло"] = keymaps.i["kj"]
 
 -- Z mode:
 keymaps.n["<F2>"] = {

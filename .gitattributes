@@ -1,4 +1,16 @@
 bash/bash_prompts/* linguist-vendored
+
 zsh/.p10k.zsh linguist-vendored
 
-* text=auto eol=lf
+makefiles/c/big-project/include/* linguist-vendored
+makefiles/c/big-project/src/* linguist-vendored
+
+makefiles/c/big-project/src/lib/SomeOne/* linguist-vendored
+makefiles/c/big-project/src/lib/SomeOne/src/* linguist-vendored
+makefiles/c/big-project/src/lib/SomeOne/include/* linguist-vendored
+
+makefiles/c/big-project/src/lib/SomeTwo/* linguist-vendored
+makefiles/c/big-project/src/lib/SomeTwo/src/* linguist-vendored
+makefiles/c/big-project/src/lib/SomeTwo/include/* linguist-vendored
+
+* text=auto eol=l

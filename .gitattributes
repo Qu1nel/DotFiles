@@ -1,0 +1,4 @@
+bash/bash_prompts/* linguist-vendored
+zsh/.p10k.zsh linguist-vendored
+
+* text=auto eol=lf

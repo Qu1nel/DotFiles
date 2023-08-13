@@ -1,6 +1,6 @@
-![neovim-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-neovim.png)
+![neovim-preview](.github/assets/preview-neovim.png)
 
-![terminal-preview](https://github.com/Qu1nel/DotFiles/blob/github/.github/preview-terminal-welcome-screen.png)
+![terminal-preview](.github/assets/preview-terminal-welcome-screen.png)
 
 # Qu1nel's DotConfigs
 

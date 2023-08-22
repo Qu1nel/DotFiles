@@ -27,4 +27,4 @@ if [ -f "$ZDOTDIR/functions.sh" ]; then
     source "$ZDOTDIR/functions.sh"
 fi
 
-neofetch --ascii_colors 1 --colors 1 1 1 1 7 7 
+neofetch --ascii_colors 1 --colors 1 1 1 1 7 7

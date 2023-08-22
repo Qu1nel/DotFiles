@@ -2,13 +2,14 @@
 
 ![terminal-preview](.github/assets/preview-terminal-welcome-screen.png)
 
-# Qu1nel's DotConfigs
+# Qu1nel's DotFiles
 
 **Warning**: Don’t blindly use my settings unless you know what that entails. Use at your own risk!
 
 # Content
 
 - bash
+- clang
 - gitconfig
 - makefiles
 - neofetch

@@ -32,7 +32,7 @@ extract() {
 #   mcd: Makes new Dir and jumps inside.
 #   ----------------------------------------------------
 mcd() {
-    mkdir -pv "$1" && cd "$1" || exit
+    mkdir -pv "$1" && cd "$1" || exit 1
 }
 
 #   ftext: Searhes for text in all files in the current folder.

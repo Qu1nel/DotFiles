@@ -33,11 +33,11 @@ alias de="cd ~/Desktop"
 #   ls
 #   ---------------------------------------------------------------------------
 
-alias ls='exa --icons'
-alias l='exa --classify --icons'
-alias la='exa --all --classify --icons --group-directories-first'
+alias ls='exa --icons --classify --group-directories-first'
+alias l='ls'
+alias la='ls --all'
 alias lat='la -T'
-alias ll='exa -bghiHS --long --icons --group-directories-first'
+alias ll='ls -bghiHS --long'
 alias lla='ll --all'
 alias llat='lla -T'
 

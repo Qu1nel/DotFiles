@@ -18,6 +18,8 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 export EDITOR=nvim
+export GPG_TTY="$TTY"
+gpgconf --launch gpg-agent
 
 #   Paths
 #   ---------------------------------------------------------------------------
@@ -36,4 +38,3 @@ export HISTSIZE=5000
 export SAVEHIST=5000
 
 setopt appendhistory
-

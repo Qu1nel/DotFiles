@@ -1,61 +1,26 @@
-path 			:= .
+path := .
 
-.DEFAULT_GOAL 	:= help
-MAKEFLAGS 	  	+= --silent --no-print-directory
+.DEFAULT_GOAL := help
+MAKEFLAGS 	  += --silent --no-print-directory
 
-RED				:= \\033[0;31m
-GREEN			:= \\033[1;32m
-YELLOW			:= \\033[1;33m
-BLUE			:= \\033[0;36m
-RESET			:= \\033[0m
+RED			:= \\033[0;31m
+GREEN		:= \\033[1;32m
+YELLOW		:= \\033[1;33m
+BLUE		:= \\033[0;36m
+RESET		:= \\033[0m
 
 
 # Main
 ##############################################################################
 
 
-.PHONY: init
-init: create-venv  ## Initialises the project (creates a virtual environment) and gives further instructions
-	@echo -e "$(GREEN)Now you can activate venv with:"
-	@echo -e
-	@echo -e "$(BLUE)    1. source ./.venv/bin/activate"
-	@echo -e
-	@echo -e "$(GREEN)And install requirements:"
-	@echo -e
-	@echo -e "$(BLUE)    2. make install-requirements"
-	@echo -e
-	@echo -e "$(GREEN)And run this project with:"
-	@echo -e
-	@echo -e "$(BLUE)    3. make run$(RESET)"
-	@echo -e
-
-
-.PHONY: install-requirements
-install-requirements:  ## Install all requirements from 'requirements.txt'
-	@echo -e
-	@echo -e "$(GREEN)Applying requirements.txt..."
-	@echo -e "============================$(RESET)"
-	@echo -e
-	pip install -r requirements.txt
-	@echo -e
-
-
 .PHONY: run
-run:  ## Launch app (run.py)
-	python run.py
+run: update  ## Launch app (run.py)
+	poetry run python run.py
 
-
-.PHONY: create-venv venv env
-create-venv:  ## Create virtual environment for Python
-	@if [ ! -d ".venv/" ]; then \
-		virtualenv .venv --prompt Python-TicTacToe 1>/dev/null; \
-		echo "$(GREEN)    Virtual env created!$(RESET)\n"; \
-	fi
-
-
-# Alias
-venv: create-venv  ## Alias for 'create-venv'
-env: create-venv  ## Alias for 'create-venv'
+.PHONY: update
+update:
+	poetry install
 
 
 # Lint
@@ -78,7 +43,7 @@ ruff:  # Use 'ruff' utility as linter
 	@echo -e "$(BLUE)Applying ruff..."
 	@echo -e "$(GREEN)================$(RESET)"
 	@echo -e
-	ruff check $(path) --fix
+	poetry run ruff check $(path) --fix
 	@echo -e
 
 .PHONY: mypy
@@ -87,7 +52,7 @@ mypy:  # Use 'mypy' utility as linter
 	@echo -e "$(BLUE)Applying mypy..."
 	@echo -e "$(GREEN)================$(RESET)"
 	@echo -e
-	mypy $(path)
+	poetry run mypy $(path)
 	@echo -e
 
 .PHONY: pyright
@@ -96,7 +61,7 @@ pyright:  ## Use 'pyright' utility as linter
 	@echo -e "$(BLUE)Applying pyright..."
 	@echo -e "$(GREEN)===================$(RESET)"
 	@echo -e
-	pyright $(path)
+	poetry run pyright $(path)
 	@echo -e
 
 .PHONY: black
@@ -105,7 +70,7 @@ black:  ## Use 'black' utility as formatter
 	@echo -e "$(BLUE)Applying black..."
 	@echo -e "$(GREEN)=================$(RESET)"
 	@echo -e
-	black $(path)
+	poetry run black $(path)
 	@echo -e
 
 

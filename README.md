@@ -16,6 +16,7 @@
 - nvim
 - other configs
 - scripts
+- tmux
 - vim
 - zsh
 

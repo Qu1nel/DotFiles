@@ -1,9 +1,16 @@
-return "ayu"
+return "gruvbox-baby"
 -- Dark:
 --      gruvbox,
+--      gruvbox-baby,
 --      ayu,
 --      iceberg,
 --      vscode,
+--      nightfox,
+--      tokyonight
+--      tokyonight-night,
+--      tokyonight-storm,
+--      tokyonight-day,
+--      tokyonight-moon,
 --      catppuccin,
 --      catppuccin-frappe,
 --      catppuccin-macchiato,

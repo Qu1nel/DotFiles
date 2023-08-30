@@ -1,20 +1,13 @@
 return {
     "AstroNvim/astrocommunity",
 
-    { import = "astrocommunity.bars-and-lines.smartcolumn-nvim" },
-    {
-        "m4xshen/smartcolumn.nvim",
-        opts = {
-            colorcolumn = "120",
-            disabled_filetypes = { "help", "text", "markdown", "make" },
-        },
-    },
-
-    { import = "astrocommunity.motion.vim-matchup" },
-    { import = "astrocommunity.motion.mini-move" },
-    { import = "astrocommunity.media.vim-wakatime" },
-    { import = "astrocommunity.editing-support.zen-mode-nvim" },
-    { import = "astrocommunity.editing-support.todo-comments-nvim" },
-    { import = "astrocommunity.bars-and-lines.heirline-vscode-winbar" },
-    { import = "astrocommunity.bars-and-lines.lualine-nvim" },
+    -- Themes:
+    { import = "astrocommunity.colorscheme.catppuccin" },
+    { import = "astrocommunity.colorscheme.dracula-nvim" },
+    { import = "astrocommunity.colorscheme.gruvbox-baby" },
+    { import = "astrocommunity.colorscheme.gruvbox-nvim" },
+    { import = "astrocommunity.colorscheme.nightfox-nvim" },
+    { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+    { import = "astrocommunity.colorscheme.vscode-nvim" },
+    { import = "astrocommunity.colorscheme.iceberg-vim" },
 }

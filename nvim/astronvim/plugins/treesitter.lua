@@ -22,6 +22,7 @@ return {
             "ini",
             "java",
             "json",
+            "latex",
             "lua",
             "luadoc",
             "make",

@@ -20,12 +20,6 @@ keymaps.n["<C-ы>"] = keymaps.n["<C-s>"]
 -- Insert mode:
 keymaps.i["kj"] = { "<esc>", desc = "Command mode" }
 
--- Z mode:
-keymaps.n["<F2>"] = {
-    function() vim.cmd "Z" end,
-    desc = "Z mode",
-}
-
 -- Better gg and G:
 keymaps.n["gj"] = { "G", desc = "go to last line" }
 keymaps.n["gk"] = { "gg", desc = "go to first line" }
@@ -119,5 +113,17 @@ keymaps.n["<leader>bs"] = {
 }
 keymaps.n["<leader>им"] = keymaps.n["<leader>bv"]
 keymaps.n["<leader>иы"] = keymaps.n["<leader>bs"]
+
+-- Fine Cmd Line
+keymaps.n[":"] = {
+    function() vim.cmd "FineCmdline" end,
+    desc = "Fine cmd line",
+}
+
+-- Z mode:
+keymaps.n["<F2>"] = {
+    function() vim.cmd "Z" end,
+    desc = "Z mode",
+}
 
 return keymaps

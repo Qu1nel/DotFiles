@@ -15,6 +15,7 @@
 - neofetch
 - nvim
 - other configs
+- ranger
 - scripts
 - tmux
 - vim

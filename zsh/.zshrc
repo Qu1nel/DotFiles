@@ -27,6 +27,7 @@ plugins=(
     history
     sudo
     git
+    poetry
     web-search
     zsh-autosuggestions
     zsh-syntax-highlighting

@@ -1,13 +1,13 @@
 "   ----------------------------------------------------------------------------
 "
-"               
+"
 "               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
 "               ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-"               ██║   ██║██║██╔████╔██║██████╔╝██║     
-"               ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
+"               ██║   ██║██║██╔████╔██║██████╔╝██║
+"               ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║
 "                ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
 "                 ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
-"               
+"
 "
 "   Description:  This file holds all settings for vim configurations
 "
@@ -43,7 +43,7 @@
 
     set nowrap
     set textwidth=120
-    
+
     set cursorline
 
     let &t_SI.="\e[5 q"
@@ -124,7 +124,7 @@
 
 "   Plugin settings
 "   -------------------------
-    
+
     " vim-airline
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#keymap#enable = 0
@@ -195,7 +195,7 @@
 "   -------------------------
 "   8.  Statusline
 "   -------------------------
-    
+
     set guifont=FiraCode\ Nerd\ Font:h16
 
     "Show the mode you are on the last line.
@@ -209,4 +209,3 @@
 
     " Show the status on the second to last line.
     set laststatus=2
-

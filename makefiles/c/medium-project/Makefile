@@ -33,7 +33,7 @@
 
 TARGET 		:= main
 
-EXTERN_LIBS := 
+EXTERN_LIBS :=
 
 SRC_DIR     := src
 INCLD_DIR 	:= include
@@ -114,4 +114,3 @@ print-%:
 
 
 .SILENT:
-

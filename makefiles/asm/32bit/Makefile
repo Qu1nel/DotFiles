@@ -31,7 +31,7 @@ TARGET 		:= main
 BLD_DIR     := build
 
 CC 			:= nasm
-CPPFLAGS 	:= 
+CPPFLAGS 	:=
 CFLAGS 		:= -f elf32
 LFLAGS 		:= -m elf_i386
 
@@ -63,7 +63,7 @@ DIR_DUP 	= mkdir -p ${@D}
 .PHONY: all
 all: build
 
-$(TARGET): $(OBJECTS) 
+$(TARGET): $(OBJECTS)
 	ld $(LFLAGS) $(OBJECTS) -o $@
 
 $(OBJECTS): $(SOURCES)
@@ -96,4 +96,3 @@ info-%:
 
 print-%:
 	@$(info '$*'='$($*)')
-

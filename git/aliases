@@ -23,12 +23,12 @@ s = status
 ss = status --short
 
 # another commands
-who = shortlog -s --  # Show authors of the contribution 
+who = shortlog -s --  # Show authors of the contribution
 whoami = config user.email
 visual = "!gitk"  # Open visual version a git
 aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"  # show all aliases
 show-history-file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
-where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S 
+where-change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S
 delete-commit = reset --hard HEAD^
 findcm = "!find_commit_by_msg() { git log --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --decorate --grep=$1; }; find_commit_by_msg"
 irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1)); }; irebase"

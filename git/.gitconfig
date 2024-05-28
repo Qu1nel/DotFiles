@@ -23,7 +23,7 @@
 	navigate = true
 	line-numbers = true
 	side-by-side = true
-	line-numbers-left-format = 
+	line-numbers-left-format =
 	line-numbers-right-format = "│ "
 [merge]
 	log = true

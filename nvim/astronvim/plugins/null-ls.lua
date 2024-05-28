@@ -14,13 +14,13 @@ return {
                     "--linelength",
                     "120",
                     "--filter="
-                        .. "-legal/copyright,"
-                        .. "-whitespace/braces,"
-                        .. "-readability/casting,"
-                        .. "-readability/alt_tokens,"
-                        .. "-build/include_subdir,"
-                        .. "-runtime/threadsafe_fn,"
-                        .. "-build/include_subdir",
+                    .. "-legal/copyright,"
+                    .. "-whitespace/braces,"
+                    .. "-readability/casting,"
+                    .. "-readability/alt_tokens,"
+                    .. "-build/include_subdir,"
+                    .. "-runtime/threadsafe_fn,"
+                    .. "-build/include_subdir",
                     "$FILENAME",
                 },
             },

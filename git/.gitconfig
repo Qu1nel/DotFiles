@@ -18,12 +18,12 @@
 [credential]
 	helper = cache --timeout 1800
 [commit]
-	template = /home/un/.config/git/commit_template_message
+	template = /home/stolas/.config/git/commit_template_message
 [delta]
 	navigate = true
 	line-numbers = true
 	side-by-side = true
-	line-numbers-left-format = ""
+	line-numbers-left-format = 
 	line-numbers-right-format = "│ "
 [merge]
 	log = true
@@ -79,7 +79,7 @@
 	branch = branch -v
 	branches = branch --all
 	remotes = remote -v
-	switchbr = "git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" --pointer=\"\" | xargs git switch"
+	switchbr = "!git branch --sort=-committerdate | fzf --header \"Checkout Recent Branch\" --preview \"git diff {1} --color=always\" --pointer=\"\" | xargs git switch"
 	create-branch = switch -c
 	rename-branch = branch -m
 	delete-branch = branch -D

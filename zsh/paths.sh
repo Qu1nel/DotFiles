@@ -30,7 +30,9 @@ gpgconf --launch gpg-agent
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
 # To configure rust
-source "$HOME/.cargo/env"
+if [ -d "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
 
 #   Command history
 #   ---------------------------------------------------------------------------

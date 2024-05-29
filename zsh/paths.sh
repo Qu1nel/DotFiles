@@ -18,6 +18,8 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 export EDITOR=nvim
+
+# GPG keys
 export GPG_TTY="$TTY"
 gpgconf --launch gpg-agent
 

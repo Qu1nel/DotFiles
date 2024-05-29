@@ -35,3 +35,9 @@ done
 echo 'if [ -f "$ZDOTDIR/main.sh" ]; then' >> "$ZSHRC_PATH"
 echo '    source "$ZDOTDIR/main.sh"' >> "$ZSHRC_PATH"
 echo 'fi' >> "$ZSHRC_PATH"
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.config/oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
+
+source "./setup_oh_my_zsh.sh"

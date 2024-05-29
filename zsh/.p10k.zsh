@@ -195,7 +195,7 @@
   # OS identifier color.
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=000
   # Custom icon.
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='オペレーティング・システム'
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='シ @qnllnq・'
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.

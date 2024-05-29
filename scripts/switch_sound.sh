@@ -1,4 +1,4 @@
-#!/bin/end bash
+#!/usr/bin/env bash
 
 # Get the target (input or output) from the filename and exit otherwise
 IFS=''

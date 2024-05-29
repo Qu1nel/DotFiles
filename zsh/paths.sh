@@ -34,6 +34,11 @@ if [ -d "$HOME/.cargo/env" ]; then
     source "$HOME/.cargo/env"
 fi
 
+# To configure go
+if [ -d "/usr/local/go/bin" ]; then
+    export PATH="$PATH:/usr/local/go/bin"
+fi
+
 #   Command history
 #   ---------------------------------------------------------------------------
 

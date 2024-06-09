@@ -23,9 +23,6 @@ export EDITOR=nvim
 export GPG_TTY="$TTY"
 gpgconf --launch gpg-agent
 
-#   Paths
-#   ---------------------------------------------------------------------------
-
 # Make git enviroment.
 export GIT_CONFIG_GLOBAL="$HOME/.config/git/.gitconfig"
 
@@ -37,6 +34,27 @@ fi
 # To configure go
 if [ -d "/usr/local/go/bin" ]; then
     export PATH="$PATH:/usr/local/go/bin"
+fi
+
+# To configure ssh-agent
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_agent {
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
 fi
 
 #   Command history

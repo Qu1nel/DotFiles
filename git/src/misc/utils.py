@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
-from typing import Sequence, TypeAlias
+from typing import TypeAlias
+import json
 
-import toml
 from misc.exceptions import CantReadConfigGit, NotValidUserInfoVariables
 
 ValuesParameters: TypeAlias = str | bool | dict[str, str]
@@ -23,18 +23,16 @@ def read_git_config_as_dict() -> dict[str, Parameters]:
             IOError or TomlDecodeError.
     """
     try:
-        path_to_config_for_git = Path(__file__).with_name("git_config.toml")
-        with open(
-            path_to_config_for_git, mode="r", encoding="UTF-8"
-        ) as git_config_toml:
-            data = toml.load(git_config_toml)
-    except (IOError, toml.TomlDecodeError) as exc:
+        path_to_config_for_git = Path(__file__).parent.with_name("config.json")
+        with open(path_to_config_for_git, mode="r", encoding="UTF-8") as config_json:
+            data = json.load(config_json)
+    except (IOError, json.JSONDecodeError) as exc:
         raise CantReadConfigGit("Cannot read a config file.", sub_error=exc) from None
 
     return data
 
 
-def get_env_variables() -> Sequence[str]:
+def get_env_variables() -> tuple[str, str, str]:
     """Get user information variables from 'os.getenv()'.
 
     The function returns a sequence of variables about the user in the form

@@ -8,11 +8,11 @@ rm = rm -f
 rename = mv
 
 # restore files
-restore_all = checkout .
+restore-all = "checkout ."
 
 # unstage files
 unstage = restore --staged
-unstage_all = reset HEAD
+unstage-all = reset HEAD
 
 # shortcut for move tools
 co = checkout
@@ -51,10 +51,10 @@ swbr = "!git branch --sort=-committerdate | fzf --header \"Checkout Recent Branc
 
 # useful shortcut command
 who = shortlog -s --  # Show authors of the contribution
-whoami = config user.email
+whoami = config user.name
 aliases = "!git config --get-regexp 'alias.*' | sed 's/[ ]/ = /' | sort"  # show all aliases
-show_history_file = log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --
-where_change = log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S
+show-history-file = "log --stat --oneline --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n%n%b' --"
+where-change = "log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --date=short --decorate -S"
 rmcm = reset --hard HEAD^  # remove current commit
 findcm = "!find_commit_by_msg() { git log --pretty=format:'%Cred%h%Creset - %C(yellow)%as%Creset %Cgreen[%cr]%Creset %s : %C(bold blue)<%an> <%ae>%Creset%n' --decorate --grep=$1; }; find_commit_by_msg"
 irebase = "!irebase() { git rebase -i HEAD~$(($1 + 1)); }; irebase"

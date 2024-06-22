@@ -69,6 +69,7 @@ alias pg="echo 'Pingign Google' && ping www.google.com"
 #   Other aliases
 #   ---------------------------------------------------------------------------
 
+alias tmux="TERM=screen-256color \tmux"
 alias cputop="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
 alias checkcom="type"
 alias rebootsafe="sudo shutdown -r now"

@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Sequence, TypeAlias
 
 import toml
-from exceptions import CantReadConfigGit, NotValidUserInfoVariables
+from misc.exceptions import CantReadConfigGit, NotValidUserInfoVariables
 
 ValuesParameters: TypeAlias = str | bool | dict[str, str]
 Parameters: TypeAlias = dict[str, dict[str, ValuesParameters]]
@@ -24,7 +24,9 @@ def read_git_config_as_dict() -> dict[str, Parameters]:
     """
     try:
         path_to_config_for_git = Path(__file__).with_name("git_config.toml")
-        with open(path_to_config_for_git, mode="r", encoding="UTF-8") as git_config_toml:
+        with open(
+            path_to_config_for_git, mode="r", encoding="UTF-8"
+        ) as git_config_toml:
             data = toml.load(git_config_toml)
     except (IOError, toml.TomlDecodeError) as exc:
         raise CantReadConfigGit("Cannot read a config file.", sub_error=exc) from None

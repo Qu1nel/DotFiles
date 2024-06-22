@@ -1,0 +1,68 @@
+{
+  "color": {
+    "_branch": "auto",
+    "_diff": "auto",
+    "_status": "auto",
+    "_ui": "auto",
+    "branch": {
+      "current": "green",
+      "local": "yellow",
+      "remote": "red"
+    },
+    "diff": {
+      "frag": "magenta bold",
+      "meta": "yellow bold",
+      "new": "green bold",
+      "old": "red bold",
+      "whitespace": "red reverse"
+    },
+    "status": {
+      "added": "green",
+      "changed": "yellow",
+      "untracked": "red"
+    }
+  },
+  "commit": {
+    "template": "$TEMPLATE_PATH"
+  },
+  "core": {
+    "editor": "nvim",
+    "pager": "delta",
+    "quotepath": false,
+    "whitespace": "fix,-indent-with-non-tab,trailing-space,cr-at-eol"
+  },
+  "credential": {
+    "helper": "cache --timeout 1800"
+  },
+  "delta": {
+    "line-numbers": true,
+    "line-numbers-left-format": "\"\"",
+    "line-numbers-right-format": "\"│ \"",
+    "navigate": true,
+    "side-by-side": true
+  },
+  "diff": {
+    "colorMoved": "default"
+  },
+  "fetch": {
+    "prune": true
+  },
+  "init": {
+    "defaultBranch": "main"
+  },
+  "interactive": {
+    "diffFilter": "delta --color-only --features=interactive"
+  },
+  "merge": {
+    "conflictstyle": "diff3",
+    "log": true
+  },
+  "pull": {
+    "rebase": true
+  },
+  "user": {
+    "email": "$EMAIL",
+    "name": "$NAME",
+    "username": "$NICKNAME"
+  }
+}

@@ -13,19 +13,19 @@ echo
 
 currentPath="${0%/*}"
 
-if ! command python3 "$currentPath/src/InitConfig.py"; then
+if ! command python3 "$currentPath/src/main.py"; then
     exit 1
 fi
 
 if [ -v "$GIT_CONFIG_GLOBAL" ]; then
-    cp -vi "$currentPath/commit_template_message" "$HOME"
+    cp -vi "$currentPath/data/commit_template_message" "$HOME"
 
     GIT_CONFIG_PATH="$HOME"
 else
     configDir="${GIT_CONFIG_GLOBAL%/*}"
     mkdir -pv "$configDir"
 
-    cp -vi "$currentPath/commit_template_message" "$configDir"
+    cp -vi "$currentPath/data/commit_template_message" "$configDir"
 
     GIT_CONFIG_PATH="$GIT_CONFIG_GLOBAL"
 
@@ -35,4 +35,5 @@ fi
 
 echo
 
-cp -vi "$currentPath/.gitconfig" "$GIT_CONFIG_PATH"
+cp -vi "$currentPath/src/.gitconfig" "$GIT_CONFIG_PATH"
+rm "$currentPath/src/.gitconfig"

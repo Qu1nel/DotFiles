@@ -3,16 +3,16 @@ from functools import partial
 from pathlib import Path, PurePath
 from typing import Final, Sequence, TextIO
 
-from exceptions import CantReadConfigGit, NotValidUserInfoVariables
-from utils import (
+from misc.exceptions import CantReadConfigGit, NotValidUserInfoVariables
+from misc.utils import (
     Parameters,
     get_env_variables,
     get_template_path,
     read_git_config_as_dict,
 )
 
-PATH_TO_GIT_CONFIG: Final[Path] = Path(__file__).parent.with_name(".gitconfig")
-PATH_TO_ALIASES_FILE: Final[Path] = Path(__file__).parent.with_name("aliases")
+PATH_TO_GIT_CONFIG: Final[Path] = Path(__file__).with_name(".gitconfig")
+PATH_TO_ALIASES_FILE: Final[Path] = Path(__file__).parent.parent / Path("data/aliases")
 TEMPLATE_PATH: Final[Path] = get_template_path("commit_template_message")
 
 try:
@@ -49,7 +49,7 @@ def create_config_into_file(file: TextIO) -> None:
                 for sub_setting, sub_value in value.items():
                     write_into_config(f"\t{sub_setting} = {sub_value}")
             else:
-                if type(value) is bool:
+                if isinstance(value, bool):
                     valid_value = str(value).lower()
                 elif value.startswith("$"):
                     valid_value = globals().get(value[1:]) or ""

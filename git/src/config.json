@@ -23,7 +23,8 @@
     }
   },
   "commit": {
-    "template": "$TEMPLATE_PATH"
+    "template": "$TEMPLATE_PATH",
+    "gpgsign": true
   },
   "core": {
     "editor": "nvim",
@@ -46,6 +47,9 @@
   },
   "fetch": {
     "prune": true
+  },
+  "gpg": {
+    "program": "gpg"
   },
   "init": {
     "defaultBranch": "main"

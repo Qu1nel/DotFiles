@@ -8,18 +8,16 @@
 
 # Content
 
-- bash
-- clang
-- gitconfig
-- makefiles
-- neofetch
-- nvim
-- other configs
-- ranger
-- scripts
-- tmux
-- vim
-- zsh
+- Clang
+- GitConfig
+- MakeFiles
+- Neofetch
+- Neovim
+- Scripts
+- Other
+- Tmux
+- Vim
+- Zsh
 
 ## License
 

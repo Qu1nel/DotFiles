@@ -4,7 +4,7 @@
 
 # Qu1nel's DotFiles
 
-**Warning**: Don’t blindly use my settings unless you know what that entails. Use at your own risk!
+This config setup has been tested only on my computer, and there is no guarantee that it will work anywhere else. In any case, if you try to install them and encounter any problems, feel free to open a issue or a pull request.
 
 # Content
 

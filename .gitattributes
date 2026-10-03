@@ -7,4 +7,6 @@ makefiles/c/big-project/src/* linguist-vendored
 
 makefiles/c/big-project/src/lib/** linguist-vendored
 
-* text=auto eol=l
+* text=auto eol=lf
+*.ps1 text eol=lf
+.githooks/* text eol=lf

@@ -43,6 +43,10 @@ local function main()
   -- Keep fixtures outside the checkout so Git roots cannot mask standalone LSP failures.
   local dir = vim.fn.tempname() .. " languages space кириллица"
   vim.fn.mkdir(dir, "p")
+  -- Windows TEMP can contain 8.3 aliases; gopls requires the actual directory names.
+  local real_dir, path_error = vim.uv.fs_realpath(dir)
+  check(real_dir ~= nil, "Could not resolve the fixture directory: " .. tostring(path_error))
+  dir = real_dir
   vim.fn.writefile({ 'module example.com/dotfiles-test', '', 'go 1.23' }, dir .. "/go.mod")
   vim.fn.writefile({ "[tool.ruff]" }, dir .. "/pyproject.toml")
   local fixtures = {

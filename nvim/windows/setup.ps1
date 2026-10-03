@@ -404,6 +404,7 @@ try {
     if ($NeovimPath) { $exe = (Get-Command $NeovimPath -ErrorAction Stop).Source }
     Write-Host 'Checking the isolated profile and language diagnostics...'
     Invoke-ProfileCheck $exe $release 'smoke'
+    Invoke-ProfileCheck $exe $release 'starter'
     Invoke-ProfileCheck $exe $release 'languages'
     Write-Json (Join-Path $release 'prepared.json') ([ordered]@{ schema_version=1; release=$releaseId; nvim=$manifest.downloads.neovim.version })
     $result = [pscustomobject]@{ Root=$Root; Release=$release; NeovimPath=$exe; ConfigPath=(Join-Path $release 'config/nvim'); DataPath=(Join-Path $release 'data/nvim-data') }

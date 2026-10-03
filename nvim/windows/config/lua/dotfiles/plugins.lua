@@ -21,6 +21,7 @@ return {
       require("mini.statusline").setup({ use_icons = false })
       require("mini.tabline").setup({ show_icons = false })
       require("mini.misc").setup()
+      require("dotfiles.starter").setup()
     end,
   },
   {

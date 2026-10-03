@@ -99,7 +99,50 @@ Install Python itself when you need to run programs. Go needs a valid module for
 project diagnostics. YAML schema-store downloads are disabled. Highlighting uses
 Neovim's built-in syntax rules.
 
+### Python project environments
+
+Pyright runs locally through the bundled Node.js; Ruff is a standalone binary.
+Their installation is separate from the Python interpreter and packages used by
+your project. This profile does not automatically select a project's `.venv` or
+Poetry environment. With no explicit selection, Pyright uses `python` from the
+inherited PATH and may report imports from another environment as unresolved.
+
+Launch Neovim from the project environment, for example:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+nvim main.py
+# Or, from a managed project's root:
+uv run nvim main.py
+poetry run nvim main.py
+```
+
+Alternatively, for an environment stored at `<project>/.venv`, add this to the
+project's `pyproject.toml` (merge into an existing `[tool.pyright]` table):
+
+```toml
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+```
+
+Restart Neovim after changing environment selection. A Poetry environment outside
+the project needs its actual parent directory and environment name, or launch
+with `poetry run`. Packages need not be installed in the system Python. The
+quality of completion and type checks also depends on the package's annotations
+or type stubs. Ruff checks source code and does not resolve installed packages.
+For an already open Python buffer, select an interpreter explicitly with
+`:LspPyrightSetPythonPath C:/path/project/.venv/Scripts/python.exe`.
+See [Pyright's environment and import resolution documentation](https://github.com/microsoft/pyright/blob/main/docs/import-resolution.md#configuring-your-python-environment).
+
 ## Controls
+
+Starting `nvim` without a file opens the welcome screen with the eyes from the
+legacy configuration. Press `n` for a new file, `f` to find files, `g` to search
+text, `e` for the explorer, or `q` to quit. Arrows and Enter also work.
+`:Welcome` opens it again; save the current buffer first. Opening a file,
+directory or standard input keeps that content visible. The screen uses the
+existing mini.nvim plugin and adds no dependency.
 
 Leader is Space. Completion appears while typing supported code; `Ctrl-Space`
 requests it, `Ctrl-n`/`Ctrl-p` select, `Ctrl-y` accepts and `Ctrl-e` dismisses.

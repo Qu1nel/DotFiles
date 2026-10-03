@@ -9,4 +9,4 @@ else
     echo "Install PowerShell to run the repository checks." >&2
     exit 1
 fi
-exec "$shell" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$root/scripts/check.ps1" -Staged
+exec "$shell" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$root/scripts/windows/check.ps1" -Staged

@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'nvim/**'
-      - 'scripts/*.ps1'
+      - 'scripts/windows/**'
       - 'tests/windows/**'
       - 'tests/nvim/**'
       - '.githooks/**'
@@ -13,7 +13,7 @@ on:
   pull_request:
     paths:
       - 'nvim/**'
-      - 'scripts/*.ps1'
+      - 'scripts/windows/**'
       - 'tests/windows/**'
       - 'tests/nvim/**'
       - '.githooks/**'
@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Prepare the pinned Neovim runtime
         run: |
-          $prepared = @(./nvim/setup.ps1 -PrepareOnly -Root "$env:RUNNER_TEMP/dotfiles-nvim" | Where-Object {
+          $prepared = @(./nvim/windows/setup.ps1 -PrepareOnly -Root "$env:RUNNER_TEMP/dotfiles-nvim" | Where-Object {
             $_ -is [pscustomobject] -and $_.PSObject.Properties['NeovimPath']
           })[-1]
           if (-not $prepared -or -not (Test-Path -LiteralPath $prepared.NeovimPath)) {
@@ -47,7 +47,7 @@ jobs:
       - name: Check source and workflow
         run: |
           $nvim = $env:NVIM_PATH
-          ./scripts/check.ps1 -NvimPath $nvim
+          ./scripts/windows/check.ps1 -NvimPath $nvim
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           ./tests/windows/workflow.Tests.ps1 -NvimPath $nvim
       - name: Check installation

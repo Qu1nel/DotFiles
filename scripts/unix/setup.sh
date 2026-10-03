@@ -11,14 +11,15 @@ SCRIPT_FILES=(
     "publicip.sh"
     "switch_sound.sh"
     "concat_img.sh"
-    "save_github.py"
+    "../common/save_github.py"
     "weather.sh"
     "getwallpaper.sh"
-    "printerrno.pl"
+    "../common/printerrno.pl"
     "show_all_colors_zsh.zsh"
 )
 
 # Copy the scripts files to the bin folder.
 for file in "${SCRIPT_FILES[@]}"; do
-    cp -vi "$currentPath/$file" "$BINDIR/${file%.*}"
+    name="${file##*/}"
+    cp -vi "$currentPath/$file" "$BINDIR/${name%.*}"
 done

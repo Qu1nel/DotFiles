@@ -17,6 +17,11 @@ nvim/windows/cache/
 nvim/windows/state/
 nvim/windows/shada/
 nvim/windows/swap/
+nvim/windows/config/lazy/
+nvim/windows/config/cache/
+nvim/windows/config/state/
+nvim/windows/config/shada/
+nvim/windows/config/swap/
 *.swp
 *.swo
 *.bak

@@ -1,0 +1,11 @@
+{
+  "name": "dotfiles-nvim-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Language tools for the Windows Neovim profile",
+  "dependencies": {
+    "markdownlint-cli2": "0.23.3",
+    "pyright": "1.1.414",
+    "yaml-language-server": "1.24.0"
+  }
+}

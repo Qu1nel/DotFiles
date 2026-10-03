@@ -6,13 +6,13 @@
 
 ## Windows Neovim
 
-The maintained Windows profile provides a right-side file tree, familiar
+The maintained Windows profile provides a left-side file tree, familiar
 AstroNvim controls, syntax highlighting and diagnostics for Python, Go, Markdown,
 YAML and TOML. The PowerShell installer can prepare Neovim and its dependencies
 without Scoop, and supports configuration backups and restore.
 
-See [installation and controls](nvim/README.md) and
-[contribution checks](CONTRIBUTING.md).
+See [installation and controls](nvim/README.md),
+[script organization](scripts/README.md) and [checks](tests/README.md).
 
 The other configurations below are the earlier Unix setup.
 

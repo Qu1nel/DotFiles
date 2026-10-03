@@ -1,0 +1,56 @@
+name: Windows
+
+on:
+  push:
+    paths:
+      - 'nvim/**'
+      - 'scripts/*.ps1'
+      - 'tests/windows/**'
+      - 'tests/nvim/**'
+      - '.githooks/**'
+      - '.gitattributes'
+      - '.github/workflows/windows.yml'
+  pull_request:
+    paths:
+      - 'nvim/**'
+      - 'scripts/*.ps1'
+      - 'tests/windows/**'
+      - 'tests/nvim/**'
+      - '.githooks/**'
+      - '.gitattributes'
+      - '.github/workflows/windows.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Prepare the pinned Neovim runtime
+        run: |
+          $prepared = @(./nvim/setup.ps1 -PrepareOnly -Root "$env:RUNNER_TEMP/dotfiles-nvim" | Where-Object {
+            $_ -is [pscustomobject] -and $_.PSObject.Properties['NeovimPath']
+          })[-1]
+          if (-not $prepared -or -not (Test-Path -LiteralPath $prepared.NeovimPath)) {
+            throw 'Setup did not return a prepared Neovim runtime.'
+          }
+          "NVIM_PATH=$($prepared.NeovimPath)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Check source and workflow
+        run: |
+          $nvim = $env:NVIM_PATH
+          ./scripts/check.ps1 -NvimPath $nvim
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ./tests/windows/workflow.Tests.ps1 -NvimPath $nvim
+      - name: Check installation
+        run: ./tests/windows/install.Tests.ps1
+      - name: Check bootstrap failure cases
+        run: ./tests/windows/setup.Tests.ps1

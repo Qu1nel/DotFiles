@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+if command -v powershell.exe >/dev/null 2>&1; then
+    shell=powershell.exe
+elif command -v pwsh >/dev/null 2>&1; then
+    shell=pwsh
+else
+    echo "Install PowerShell to run the repository checks." >&2
+    exit 1
+fi
+exec "$shell" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$root/scripts/check.ps1" -Staged

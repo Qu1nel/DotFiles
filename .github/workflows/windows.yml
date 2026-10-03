@@ -28,13 +28,16 @@ jobs:
   windows:
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         shell: [powershell, pwsh]
     defaults:
       run:
         shell: ${{ matrix.shell }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Prepare the pinned Neovim runtime
         run: |
           $prepared = @(./nvim/windows/setup.ps1 -PrepareOnly -Root "$env:RUNNER_TEMP/dotfiles-nvim" | Where-Object {
@@ -54,3 +57,14 @@ jobs:
         run: ./tests/windows/install.Tests.ps1
       - name: Check bootstrap failure cases
         run: ./tests/windows/setup.Tests.ps1
+      - name: Collect editor logs on failure
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: editor-logs-${{ matrix.shell }}
+          path: |
+            ${{ runner.temp }}/dotfiles-nvim/**/lsp.log
+            ${{ runner.temp }}/dotfiles-nvim/**/nvim.log
+            ${{ runner.temp }}/dotfiles-nvim/**/log
+          if-no-files-found: ignore
+          retention-days: 7

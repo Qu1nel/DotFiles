@@ -393,7 +393,7 @@ try {
             nvim_version = $manifest.downloads.neovim.version
             runtime_lock_sha256 = (Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash
             plugin_lock_sha256 = (Get-FileHash -LiteralPath (Join-Path $sourceConfig 'lazy-lock.json') -Algorithm SHA256).Hash
-            required_files = @('lazy/lazy.nvim/lua/lazy/init.lua','tools/bin/ruff.exe','tools/bin/gopls.exe','tools/bin/taplo.exe','tools/bin/rg.exe','tools/node/node.exe','tools/go/bin/go.exe','tools/git/cmd/git.exe','tools/npm/node_modules/yaml-language-server/bin/yaml-language-server','tools/npm/node_modules/markdownlint-cli2/markdownlint-cli2-bin.mjs','tools/npm/node_modules/pyright/langserver.index.js')
+            required_files = @('lazy/lazy.nvim/lua/lazy/init.lua','tools/bin/ruff.exe','tools/bin/gopls.exe','tools/bin/taplo.exe','tools/bin/rg.exe','tools/node/node.exe','tools/go/bin/go.exe','tools/git/cmd/git.exe','tools/npm/node_modules/yaml-language-server/bin/yaml-language-server','tools/npm/node_modules/markdownlint-cli/markdownlint.js','tools/npm/node_modules/pyright/langserver.index.js')
         }
         Write-Json (Join-Path $stage 'data/nvim-data/dotfiles-runtime.json') $descriptor
         Write-Json (Join-Path $stage 'bundle.json') ([ordered]@{ schema_version=1; release=$releaseId; files=@(Get-BundleFiles $stage) })

@@ -85,13 +85,16 @@ is Lazy's plugin lock; `tools/package-lock.json` fixes npm dependencies and inte
 hashes. The repository's `tools/` contains manifests, not executables. Installed
 tools live under `nvim-data/tools`.
 
+The Markdown CLI uses an explicit `js-yaml` override to the patched 5.4.1 release.
+Keep it until the CLI's dependency range includes that security fix.
+
 | Files | Diagnostics and completion | Explicit formatter |
 | --- | --- | --- |
 | Python | Ruff linting; Pyright types, navigation and completion | Ruff |
 | Go | gopls with a private Go SDK | gopls |
 | YAML | YAML language server | YAML language server |
 | TOML | Taplo | Taplo |
-| Markdown | markdownlint-cli2 | Not included |
+| Markdown | markdownlint-cli | Not included |
 
 Pyright uses basic type checking for open files, including errors such as
 `print(3 + "34")`. Project configuration and virtual environments refine analysis.

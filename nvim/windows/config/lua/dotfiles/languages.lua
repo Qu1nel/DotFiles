@@ -11,7 +11,7 @@ function M.command(name, args)
   local root = vim.env.DOTFILES_NVIM_TOOLS or (vim.fn.stdpath("data") .. "/tools")
   local npm_scripts = {
     ["yaml-language-server"] = "yaml-language-server/bin/yaml-language-server",
-    ["markdownlint-cli2"] = "markdownlint-cli2/markdownlint-cli2-bin.mjs",
+    ["markdownlint"] = "markdownlint-cli/markdownlint.js",
     ["pyright-langserver"] = "pyright/langserver.index.js",
   }
   local script = npm_scripts[name] and (root .. "/npm/node_modules/" .. npm_scripts[name])
@@ -62,7 +62,15 @@ function M.setup_lsp()
       end
       -- Windows can expose an older PATH through environ() after setenv().
       -- Pass the effective search path to servers that spawn their own tools.
-      vim.lsp.config(name, { cmd = command, cmd_env = environment, settings = settings })
+      local config = { cmd = command, cmd_env = environment, settings = settings }
+      if name == "taplo" then
+        config.root_dir = function(buf, on_dir)
+          local path = vim.api.nvim_buf_get_name(buf)
+          -- Taplo excludes detached documents. Use their directory as a workspace.
+          on_dir(vim.fs.root(path, { ".taplo.toml", "taplo.toml", ".git" }) or vim.fs.dirname(path))
+        end
+      end
+      vim.lsp.config(name, config)
       vim.lsp.enable(name)
     end
   end
@@ -100,12 +108,12 @@ end
 
 function M.setup_lint()
   local lint = require("lint")
-  local command = M.command("markdownlint-cli2", { "-" })
+  local command = M.command("markdownlint", { "--stdin" })
   if not command then return end
-  local definition = lint.linters["markdownlint-cli2"]
+  local definition = lint.linters.markdownlint
   definition.cmd = command[1]
   definition.args = vim.list_slice(command, 2)
-  lint.linters_by_ft = { markdown = { "markdownlint-cli2" } }
+  lint.linters_by_ft = { markdown = { "markdownlint" } }
   vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
     group = vim.api.nvim_create_augroup("DotfilesLint", { clear = true }),
     callback = function(event)

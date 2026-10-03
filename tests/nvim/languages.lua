@@ -3,6 +3,16 @@ local function check(condition, message)
   if not condition then error(message, 2) end
 end
 
+local function diagnostic_summary(buf)
+  local diagnostics = vim.tbl_map(function(diagnostic)
+    return { source = diagnostic.source, severity = diagnostic.severity, code = diagnostic.code, message = diagnostic.message }
+  end, vim.diagnostic.get(buf))
+  local clients = vim.tbl_map(function(client)
+    return { name = client.name, root = client.config.root_dir }
+  end, vim.lsp.get_clients({ bufnr = buf }))
+  return vim.json.encode({ diagnostics = diagnostics, clients = clients })
+end
+
 local function check_python_completion(buf)
   check(#vim.lsp.get_clients({ bufnr = buf, name = "pyright" }) == 1, "Pyright is not attached")
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "" })
@@ -30,7 +40,8 @@ local function check_python_completion(buf)
 end
 
 local function main()
-  local dir = vim.fn.stdpath("cache") .. "/languages space кириллица-" .. vim.uv.hrtime()
+  -- Keep fixtures outside the checkout so Git roots cannot mask standalone LSP failures.
+  local dir = vim.fn.tempname() .. " languages space кириллица"
   vim.fn.mkdir(dir, "p")
   vim.fn.writefile({ 'module example.com/dotfiles-test', '', 'go 1.23' }, dir .. "/go.mod")
   vim.fn.writefile({ "[tool.ruff]" }, dir .. "/pyproject.toml")
@@ -39,8 +50,8 @@ local function main()
     { name = "type-error.py", tool = "pyright", code = "reportOperatorIssue", bad = { 'print(3 + "34")' }, good = { "print(3 + 34)" } },
     { name = "main.go", tool = "gopls", message = "missing", bad = { "package main", "func main() { missing() }" }, good = { "package main", "func main() {}" } },
     { name = "main.yaml", tool = "yamlls", bad = { "name: [" }, good = { "name: value" } },
-    { name = "main.toml", tool = "taplo", bad = { "name = 1", "name = 2" }, good = { "name = 1" } },
-    { name = "main.md", tool = "markdownlint-cli2", bad = { "#Heading" }, good = { "# Heading" } },
+    { name = "main.toml", tool = "taplo", message = "conflicting keys", severity = vim.diagnostic.severity.ERROR, bad = { "name = 1", "name = 2" }, good = { "name = 1" } },
+    { name = "main.md", tool = "markdownlint", bad = { "#Heading" }, good = { "# Heading" } },
   }
   for _, fixture in ipairs(fixtures) do
     local path = dir .. "/" .. fixture.name
@@ -50,13 +61,14 @@ local function main()
     check(vim.wait(45000, function()
       for _, diagnostic in ipairs(vim.diagnostic.get(buf)) do
         if (not fixture.code or diagnostic.code == fixture.code)
+          and (not fixture.severity or diagnostic.severity == fixture.severity)
           and (not fixture.message or diagnostic.message:find(fixture.message, 1, true)) then return true end
       end
       return false
-    end, 50), fixture.tool .. " did not report the intentional error")
+    end, 50), fixture.tool .. " did not report the intentional error: " .. diagnostic_summary(buf))
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, fixture.good)
     vim.cmd.write()
-    check(vim.wait(15000, function() return #vim.diagnostic.get(buf) == 0 end, 50), fixture.tool .. " retained diagnostics after the error was fixed")
+    check(vim.wait(15000, function() return #vim.diagnostic.get(buf) == 0 end, 50), fixture.tool .. " retained diagnostics after the error was fixed: " .. diagnostic_summary(buf))
     if fixture.tool == "ruff" then
       local unformatted = { "value=  1" }
       vim.api.nvim_buf_set_lines(buf, 0, -1, false, unformatted)

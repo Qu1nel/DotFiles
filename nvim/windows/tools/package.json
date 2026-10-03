@@ -4,8 +4,13 @@
   "private": true,
   "description": "Language tools for the Windows Neovim profile",
   "dependencies": {
-    "markdownlint-cli2": "0.23.3",
+    "markdownlint-cli": "0.49.1",
     "pyright": "1.1.414",
     "yaml-language-server": "1.24.0"
+  },
+  "overrides": {
+    "markdownlint-cli": {
+      "js-yaml": "5.4.1"
+    }
   }
 }

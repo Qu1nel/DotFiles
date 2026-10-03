@@ -8,3 +8,17 @@ build/
 *.a
 *.o
 *.d
+
+# Local Neovim runtime and installer output.
+nvim/.runtime/
+nvim/.state/
+nvim/windows/lazy/
+nvim/windows/cache/
+nvim/windows/state/
+nvim/windows/shada/
+nvim/windows/swap/
+*.swp
+*.swo
+*.bak
+*.log
+.nvimlog

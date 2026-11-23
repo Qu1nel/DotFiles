@@ -1,4 +1,4 @@
--- Run after the isolated profile loads: nvim --headless -c "lua dofile('tests/nvim/smoke.lua')"
+-- Run after the isolated profile loads: nvim --headless -c "lua dofile('tests/windows/nvim/smoke.lua')"
 local function check(condition, message)
   if not condition then error(message, 2) end
 end

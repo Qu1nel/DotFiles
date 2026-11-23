@@ -22,6 +22,7 @@ $Root = [IO.Path]::GetFullPath($Root).TrimEnd('\', '/')
 $manifestPath = Join-Path $PSScriptRoot 'runtime-lock.json'
 $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $sourceConfig = Join-Path $PSScriptRoot 'config'
+$profileTests = Join-Path $repo 'tests/windows/nvim'
 
 function Test-Beneath([string] $Path, [string] $Parent) {
     return $Path.StartsWith($Parent.TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)
@@ -276,10 +277,10 @@ function Invoke-ProfileCheck([string] $Executable, [string] $Release, [string] $
     $env:GOCACHE = Join-Path $Root 'cache/go-build'
     $env:GOMODCACHE = Join-Path $Root 'cache/go-mod'
     $env:GOPROXY = 'off'
-    $env:DOTFILES_NVIM_TEST = Join-Path $repo ('tests/nvim/' + $TestName + '.lua')
+    $env:DOTFILES_NVIM_TEST = Join-Path $profileTests ($TestName + '.lua')
     $env:DOTFILES_NVIM_EXPECT_CONFIG = Join-Path $Release 'config/nvim'
     $env:DOTFILES_NVIM_EXPECT_DATA = Join-Path $Release 'data/nvim-data'
-    $env:DOTFILES_NVIM_RUNNER = Join-Path $repo 'tests/nvim/runner.lua'
+    $env:DOTFILES_NVIM_RUNNER = Join-Path $profileTests 'runner.lua'
     $check = 'lua dofile(vim.env.DOTFILES_NVIM_RUNNER)'
     Invoke-EditorCheck $Executable @('--headless', '-i', 'NONE', '-n', '-c', $check)
 }
@@ -329,7 +330,7 @@ try {
     Assert-PlainTree (Join-Path $Root 'cache')
     $fingerprintFiles = @($manifestPath, (Join-Path $PSScriptRoot 'tools/package-lock.json'), (Join-Path $PSScriptRoot 'tools/package.json'), $PSCommandPath)
     $fingerprintFiles += @(Get-ChildItem -LiteralPath $sourceConfig -Recurse -File | Sort-Object FullName | ForEach-Object { $_.FullName })
-    $fingerprintFiles += @(Get-ChildItem -LiteralPath (Join-Path $repo 'tests/nvim') -File | Sort-Object FullName | ForEach-Object { $_.FullName })
+    $fingerprintFiles += @(Get-ChildItem -LiteralPath $profileTests -File | Sort-Object FullName | ForEach-Object { $_.FullName })
     $hashes = ($fingerprintFiles | ForEach-Object { $_.Substring($repo.Length) + ':' + (Get-FileHash -LiteralPath $_ -Algorithm SHA256).Hash }) -join "`n"
     $sha = [Security.Cryptography.SHA256]::Create()
     try { $releaseId = ([BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($hashes)))).Replace('-', '').Substring(0, 16).ToLowerInvariant() }

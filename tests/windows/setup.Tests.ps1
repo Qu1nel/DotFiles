@@ -152,7 +152,7 @@ function Copy-SetupFixture([hashtable]$Fixture) {
     Write-Text (Join-Path $copyRoot 'nvim/windows/config/lazy-lock.json') "{}`n"
     Write-Text (Join-Path $copyRoot 'nvim/windows/tools/package.json') "{}`n"
     Write-Text (Join-Path $copyRoot 'nvim/windows/tools/package-lock.json') "{}`n"
-    Write-Text (Join-Path $copyRoot 'tests/nvim/smoke.lua') "return true`n"
+    Write-Text (Join-Path $copyRoot 'tests/windows/nvim/smoke.lua') "return true`n"
     return $copyScript
 }
 

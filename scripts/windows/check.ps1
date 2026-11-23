@@ -150,7 +150,7 @@ try {
         else {
             $names = $utf8.GetString((Invoke-GitBytes @('ls-files', '--cached', '--others', '--exclude-standard', '-z'))).Split([char]0) | Select-Object -Unique
             foreach ($name in $names) {
-                if ($name -notmatch '^(nvim/windows/|scripts/windows/[^/]+\.ps1$|tests/(windows|nvim)/|\.githooks/|\.github/workflows/windows\.yml$|\.gitattributes$|\.gitignore$|(nvim/|scripts/|tests/)?README\.md$)') { continue }
+                if ($name -notmatch '^(nvim/windows/|scripts/windows/[^/]+\.ps1$|tests/windows/|\.githooks/|\.github/workflows/windows\.yml$|\.gitattributes$|\.gitignore$|(nvim/|scripts/|tests/)?README\.md$)') { continue }
                 $source = Join-Path $Repository $name
                 if (Test-Path -LiteralPath $source -PathType Leaf) {
                     Test-Source $name ([System.IO.File]::ReadAllBytes($source)) $temporaryRoot

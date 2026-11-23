@@ -1,9 +1,9 @@
 # Tests
 
-`nvim/` contains Lua integration checks run inside the actual editor. They cover
+`windows/nvim/` contains Lua integration checks run inside the actual editor. They cover
 the welcome screen, explorer, mappings, unsaved buffers, explicit formatting,
-diagnostics appearing and clearing, and Python completion. They test editor behavior, but currently use
-the Windows profile and tools. Unix compatibility has not been validated.
+diagnostics appearing and clearing, and Python completion with the Windows
+profile and tools.
 
 `windows/` contains PowerShell tests using disposable directories and Git
 repositories. They do not replace the active profile.
@@ -33,7 +33,7 @@ To prepare pinned dependencies and run the editor checks:
 .\nvim\windows\setup.ps1 -PrepareOnly -Root "$PWD\.build\nvim-prepared"
 ```
 
-Preparation invokes `nvim/runner.lua` with `smoke.lua`, `starter.lua` and `languages.lua`;
+Preparation invokes `windows/nvim/runner.lua` with `smoke.lua`, `starter.lua` and `languages.lua`;
 `buffer-picker.lua` is included by smoke. First preparation needs internet; repeats
 verify cached files. Preparation leaves the active profile and persistent PATH
 unchanged. Missing Microsoft runtime is reported; `-InstallVCRuntime` explicitly

@@ -1,5 +1,7 @@
 # DotFiles
 
+[![Windows CI](https://github.com/Qu1nel/DotFiles/actions/workflows/windows.yml/badge.svg?branch=main)](https://github.com/Qu1nel/DotFiles/actions/workflows/windows.yml?query=branch%3Amain)
+
 My configuration files and setup scripts for Windows and Unix. The maintained
 Neovim profile targets Windows 11 x64. The repository also preserves earlier
 shell, editor and terminal configurations.

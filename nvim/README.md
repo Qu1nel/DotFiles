@@ -85,8 +85,9 @@ is Lazy's plugin lock; `tools/package-lock.json` fixes npm dependencies and inte
 hashes. The repository's `tools/` contains manifests, not executables. Installed
 tools live under `nvim-data/tools`.
 
-The Markdown CLI uses an explicit `js-yaml` override to the patched 5.4.1 release.
-Keep it until the CLI's dependency range includes that security fix.
+The Markdown CLI pins KaTeX 0.18.2 through an override scoped to
+`micromark-extension-math`. Remove the override once the extension's dependency
+range includes a patched KaTeX release.
 
 | Files | Diagnostics and completion | Explicit formatter |
 | --- | --- | --- |

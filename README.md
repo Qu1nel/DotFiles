@@ -1,38 +1,32 @@
-![neovim-preview](.github/assets/preview-neovim.png)
+# DotFiles
 
-![terminal-preview](.github/assets/preview-terminal-welcome-screen.png)
-
-# Qu1nel's DotFiles
+My configuration files and setup scripts for Windows and Unix. The maintained
+Neovim profile targets Windows 11 x64. The repository also preserves earlier
+shell, editor and terminal configurations.
 
 ## Windows Neovim
 
-The maintained Windows profile provides a left-side file tree, familiar
-AstroNvim controls, syntax highlighting and diagnostics for Python, Go, Markdown,
-YAML and TOML. The PowerShell installer can prepare Neovim and its dependencies
-without Scoop, and supports configuration backups and restore.
+The profile includes a file tree, AstroNvim-style keybindings, and language tools
+for Python, Go, Markdown, YAML and TOML. Follow the
+[Neovim setup guide](nvim/README.md) to prepare, install or restore the profile.
+The [test guide](tests/README.md) explains how to check it in an isolated profile
+and how to run the Windows checks locally.
 
-See [installation and controls](nvim/README.md),
-[script organization](scripts/README.md) and [checks](tests/README.md).
+## Earlier configurations
 
-The other configurations below are the earlier Unix setup.
+- [Shell and terminal](zsh/): Zsh, [tmux](tmux/) and [Alacritty](tty/alacritty/).
+- [Editor settings](vim/): Vim and [earlier Neovim profiles](nvim/legacy/).
+- [Development tools](git/): Git, [Clang](clang/) and [Makefile examples](makefiles/).
+- [Utility scripts](scripts/README.md): Unix and shared scripts alongside the Windows checks.
 
-This config setup has been tested only on my computer, and there is no guarantee that it will work anywhere else. In any case, if you try to install them and encounter any problems, feel free to open a issue or a pull request.
+These earlier configurations are outside the current Windows test suite.
 
-# Content
+## Screenshots
 
-- Clang
-- GitConfig
-- MakeFiles
-- Neofetch
-- Neovim
-- Scripts
-- Other
-- Tmux
-- Vim
-- Zsh
+![Neovim with the file tree and an open buffer](.github/assets/preview-neovim.png)
+
+![Terminal welcome screen](.github/assets/preview-terminal-welcome-screen.png)
 
 ## License
 
 [MIT](./LICENSE) © [Ivan Kovach](https://github.com/Qu1nel/)
-
-This Project Qu1nel.DotConfigs in distributive under the **[MIT License](./LICENSE)**, and it also uses those codes that are distributed under the **[MIT License](./LICENSE)**.
